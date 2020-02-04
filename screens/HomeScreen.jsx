@@ -14,9 +14,10 @@ import Menu from "../components/Menu";
 import styled from "styled-components";
 import { NotificationIcon } from "../components/Icons";
 import { connect } from "react-redux";
+import Avatar from "../components/Avatar";
 
 function mapStateToProps(state) {
-  return { action: state.action };
+  return { action: state.action, name: state.name };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -89,10 +90,10 @@ class HomeScreen extends React.Component {
                   onPress={this.props.openMenu}
                   style={{ position: "absolute", top: 0, left: 0 }}
                 >
-                  <Avatar source={require("../assets/avatar.jpg")} />
+                  <Avatar />
                 </TouchableOpacity>
                 <Title>Добро пожаловать,</Title>
-                <Name>Username!</Name>
+                <Name>{this.props.name}!</Name>
                 <NotificationIcon
                   style={{
                     position: "absolute",
@@ -135,7 +136,9 @@ class HomeScreen extends React.Component {
                   />
                 ))}
               </ScrollView>
-              <Subtitle>Popular Course</Subtitle>
+
+              <Subtitle>Гиды</Subtitle>
+
               {courses.map((course, index) => (
                 <Course
                   key={index}
@@ -172,14 +175,6 @@ const RootView = styled.View`
   flex: 1;
 `;
 
-const Avatar = styled.Image`
-  width: 44px;
-  height: 44px;
-  background: black;
-  border-radius: 22px;
-  margin-left: 20px;
-`;
-
 const Container = styled.View`
   flex: 1;
   background-color: #f0f3f5;
@@ -209,27 +204,31 @@ const TitleBar = styled.View`
 const logos = [
   {
     image: require("../assets/logo-framerx.png"),
-    text: "Framer X"
+    text: "Ялта"
   },
   {
     image: require("../assets/logo-figma.png"),
-    text: "Figma"
+    text: "Алушта"
   },
   {
     image: require("../assets/logo-studio.png"),
-    text: "Studio"
+    text: "Евпатория"
   },
   {
     image: require("../assets/logo-react.png"),
-    text: "React"
+    text: "Керч"
   },
   {
     image: require("../assets/logo-swift.png"),
-    text: "Swift"
+    text: "Севастополь"
   },
   {
     image: require("../assets/logo-sketch.png"),
-    text: "Sketch"
+    text: "Симферопль"
+  },
+  {
+    image: require("../assets/logo-framerx.png"),
+    text: "Феодосия"
   }
 ];
 
