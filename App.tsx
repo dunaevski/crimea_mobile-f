@@ -3,13 +3,14 @@ import { SafeAreaView, ScrollView } from "react-native";
 import Logo from "./components/Logo";
 import Card from "./components/Card";
 import Course from "./components/Course";
+import Menu from "./components/Menu";
 import styled from "styled-components";
-// import {Ionicons} from '@expo/vector-icons';
 import { NotificationIcon } from "./components/Icons";
 
 export default function App() {
   return (
     <Container>
+      <Menu />
       <SafeAreaView>
         <ScrollView style={{ height: "100%" }}>
           <TitleBar>
