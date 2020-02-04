@@ -2,7 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import { Animated, TouchableOpacity, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import MenuItems from './MenuItems'
+import MenuItems from "./MenuItems";
+import { connect } from "react-redux";
+
+function mapStateToProps(state) {
+  return { action: state.action };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    closeMenu: () =>
+      dispatch({
+        type: "CLOSE_MENU"
+      })
+  };
+}
 
 const screenHeight = Dimensions.get("window").height;
 
@@ -12,15 +26,25 @@ class Menu extends React.Component {
   };
 
   componentDidMount() {
-    Animated.spring(this.state.top, {
-      toValue: 0
-    }).start();
+    this.toggleMenu();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.toggleMenu();
   }
 
   toggleMenu = () => {
-    Animated.spring(this.state.top, {
-      toValue: screenHeight
-    }).start();
+    if (this.props.action == "openMenu") {
+      Animated.spring(this.state.top, {
+        toValue: 54
+      }).start();
+    }
+
+    if (this.props.action == "closeMenu") {
+      Animated.spring(this.state.top, {
+        toValue: screenHeight
+      }).start();
+    }
   };
 
   render() {
@@ -32,7 +56,7 @@ class Menu extends React.Component {
           <Subtitle>Crimea on Your Phone</Subtitle>
         </Cover>
         <TouchableOpacity
-          onPress={this.toggleMenu}
+          onPress={this.props.closeMenu}
           style={{
             position: "absolute",
             top: 120,
@@ -46,21 +70,22 @@ class Menu extends React.Component {
           </CloseView>
         </TouchableOpacity>
         <Content>
-            {items.map((item, index) => (
-                <MenuItems
-                    key={index}x
-                    icon={item.icon}
-                    title={item.title}
-                    text={item.text}
-                />
-            ))}
+          {items.map((item, index) => (
+            <MenuItems
+              key={index}
+              x
+              icon={item.icon}
+              title={item.title}
+              text={item.text}
+            />
+          ))}
         </Content>
       </AnimatedContainer>
     );
   }
 }
 
-export default Menu;
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);
 
 const Container = styled.View`
   position: absolute;
@@ -68,6 +93,8 @@ const Container = styled.View`
   width: 100%;
   height: 100%;
   z-index: 100;
+  border-radius: 10px;
+  overflow: hidden;
 `;
 
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
@@ -113,26 +140,25 @@ const Content = styled.View`
   padding: 50px;
 `;
 
-
 const items = [
-    {
-        icon: "ios-settings",
-        title: "Account",
-        text: "settings"
-    },
-    {
-        icon: "ios-card",
-        title: "Billing",
-        text: "payments"
-    },
-    {
-        icon: "ios-compass",
-        title: "Learn React",
-        text: "start course"
-    },
-    {
-        icon: "ios-exit",
-        title: "Log out",
-        text: "see you soon!"
-    }
+  {
+    icon: "ios-settings",
+    title: "Account",
+    text: "settings"
+  },
+  {
+    icon: "ios-card",
+    title: "Billing",
+    text: "payments"
+  },
+  {
+    icon: "ios-compass",
+    title: "Learn React",
+    text: "start course"
+  },
+  {
+    icon: "ios-exit",
+    title: "Log out",
+    text: "see you soon!"
+  }
 ];

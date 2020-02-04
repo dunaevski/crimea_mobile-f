@@ -20,10 +20,10 @@ const Course = props => (
 export default Course;
 
 const Container = styled.View`
-  width: 335px;
+  width: 90%;
   height: 335px;
   background: white;
-  margin: 10px 20px;
+  margin: 10px 5% 10px 5%;
   border-radius: 14px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 `;
