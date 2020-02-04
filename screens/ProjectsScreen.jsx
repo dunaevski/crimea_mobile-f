@@ -8,7 +8,7 @@ function mapStateToProps(state) {
 
 class ProjectsScreen extends Component {
   static navigationOptions = {
-    header: null
+    headerShown: false
   };
 
   render() {

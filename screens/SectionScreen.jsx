@@ -10,7 +10,7 @@ function mapStateToProps(state) {
 
 class SectionScreen extends Component {
   static navigationOptions = {
-    header: null
+    headerShown: false
   };
 
   componentDidMount() {
