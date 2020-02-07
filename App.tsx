@@ -6,7 +6,7 @@ import AppNavigator from "./navigator/AppNavigator";
 
 const initialState = {
   action: "",
-  name: ""
+  name: "",
 };
 
 const reducer = (state = initialState, action) => {

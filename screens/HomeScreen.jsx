@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   Animated,
   Easing,
-  StatusBar
+  StatusBar,
+  Platform
 } from "react-native";
 import Logo from "../components/Logo";
 import Card from "../components/Card";
@@ -15,6 +16,7 @@ import styled from "styled-components";
 import { NotificationIcon } from "../components/Icons";
 import { connect } from "react-redux";
 import Avatar from "../components/Avatar";
+import mockData from "../mockData";
 
 function mapStateToProps(state) {
   return { action: state.action, name: state.name };
@@ -36,11 +38,17 @@ class HomeScreen extends React.Component {
 
   state = {
     scale: new Animated.Value(1),
-    opacity: new Animated.Value(1)
+    opacity: new Animated.Value(1),
+    loaded: false,
+    data: mockData
   };
 
   componentDidMount() {
     StatusBar.setBarStyle("dark-content", true);
+
+    if (Platform.OS === "android") {
+      StatusBar.setBarStyle("light-content", true);
+    }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -88,7 +96,7 @@ class HomeScreen extends React.Component {
           }}
         >
           <SafeAreaView>
-            <ScrollView style={{ height: "100%" }}>
+            <ScrollView style={{ height: "100%" }} showsVerticalScrollIndicator={false}>
               <TitleBar>
                 <TouchableOpacity
                   onPress={this.props.openMenu}
@@ -117,52 +125,67 @@ class HomeScreen extends React.Component {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
               >
-                {logos.map((logo, index) => (
-                  <Logo key={index} image={logo.image} text={logo.text} />
-                ))}
+                {!this.state.loading ? (
+                  this.state.data.logos.map((logo, index) => (
+                    <Logo key={index} image={logo.image} text={logo.text} />
+                  ))
+                ) : (
+                  <Message>Loading...</Message>
+                )}
               </ScrollView>
 
-              <Subtitle>Популярные места</Subtitle>
+              <Subtitle>{"Популярные места".toUpperCase()}</Subtitle>
 
               <ScrollView
                 horizontal={true}
                 style={{ paddingBottom: 30 }}
                 showsHorizontalScrollIndicator={false}
               >
-                {cards.map((card, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => {
-                      this.props.navigation.push("Section", {
-                        section: card
-                      });
-                    }}
-                  >
-                    <Card
-                      title={card.title}
-                      image={card.image}
-                      caption={card.caption}
-                      logo={card.logo}
-                      subtitle={card.subtitle}
-                    />
-                  </TouchableOpacity>
-                ))}
+                {!this.state.loading ? (
+                  this.state.data.cards.map((card, index) => (
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() => {
+                        this.props.navigation.push("Section", {
+                          section: card
+                        });
+                      }}
+                    >
+                      <Card
+                        title={card.title}
+                        image={card.image}
+                        caption={card.caption}
+                        logo={card.logo}
+                        subtitle={card.subtitle}
+                        content={card.content}
+                      />
+                    </TouchableOpacity>
+                  ))
+                ) : (
+                  <Message>Loading...</Message>
+                )}
               </ScrollView>
 
-              <Subtitle>Гиды</Subtitle>
+              <Subtitle>{"Гиды".toUpperCase()}</Subtitle>
 
-              {courses.map((course, index) => (
-                <Course
-                  key={index}
-                  title={course.title}
-                  subtitle={course.subtitle}
-                  image={course.image}
-                  logo={course.logo}
-                  author={course.author}
-                  avatar={course.avatar}
-                  caption={course.caption}
-                />
-              ))}
+              <CoursesContainer>
+                {!this.state.loading ? (
+                  this.state.data.courses.map((course, index) => (
+                    <Course
+                      key={index}
+                      title={course.title}
+                      subtitle={course.subtitle}
+                      image={course.image}
+                      logo={course.logo}
+                      author={course.author}
+                      avatar={course.avatar}
+                      caption={course.caption}
+                    />
+                  ))
+                ) : (
+                  <Message>Loading...</Message>
+                )}
+              </CoursesContainer>
             </ScrollView>
           </SafeAreaView>
         </AnimatedContainer>
@@ -172,6 +195,19 @@ class HomeScreen extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+
+const Message = styled.Text`
+  margin: 20px;
+  color: #b8bece;
+  font-size: 15px;
+  font-weight: 500;
+`;
+
+const CoursesContainer = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 10px;
+`;
 
 const Subtitle = styled.Text`
   color: #b8bece;
@@ -213,105 +249,3 @@ const TitleBar = styled.View`
   margin-top: 50px;
   padding-left: 80px;
 `;
-
-const logos = [
-  {
-    image: require("../assets/logo-framerx.png"),
-    text: "Ялта"
-  },
-  {
-    image: require("../assets/logo-figma.png"),
-    text: "Алушта"
-  },
-  {
-    image: require("../assets/logo-studio.png"),
-    text: "Евпатория"
-  },
-  {
-    image: require("../assets/logo-react.png"),
-    text: "Керч"
-  },
-  {
-    image: require("../assets/logo-swift.png"),
-    text: "Севастополь"
-  },
-  {
-    image: require("../assets/logo-sketch.png"),
-    text: "Симферопль"
-  },
-  {
-    image: require("../assets/logo-framerx.png"),
-    text: "Феодосия"
-  }
-];
-
-const cards = [
-  {
-    title: "React Native for Designers",
-    image: require("../assets/background11.jpg"),
-    subtitle: "React Native",
-    caption: "1 of 12 sections",
-    logo: require("../assets/logo-react.png")
-  },
-  {
-    title: "Styled Components",
-    image: require("../assets/background12.jpg"),
-    subtitle: "React Native",
-    caption: "2 of 12 sections",
-    logo: require("../assets/logo-react.png")
-  },
-  {
-    title: "Props and Icons",
-    image: require("../assets/background13.jpg"),
-    subtitle: "React Native",
-    caption: "3 of 12 sections",
-    logo: require("../assets/logo-react.png")
-  },
-  {
-    title: "Static Data and Loop",
-    image: require("../assets/background14.jpg"),
-    subtitle: "React Native",
-    caption: "4 of 12 sections",
-    logo: require("../assets/logo-react.png")
-  }
-];
-
-const courses = [
-  {
-    title: "Prototype in InVision Studio",
-    subtitle: "10 sections",
-    image: require("../assets/background13.jpg"),
-    logo: require("../assets/logo-studio.png"),
-    author: "Meng To",
-    avatar: require("../assets/avatar.jpg"),
-    caption: "Design and interactive prototype"
-  },
-  {
-    title: "React for Designers",
-    subtitle: "12 sections",
-    image: require("../assets/background11.jpg"),
-    logo: require("../assets/logo-react.png"),
-    author: "Meng To",
-    avatar: require("../assets/avatar.jpg"),
-    caption: "Learn to design and code a React site"
-  },
-  {
-    title: "Design and Code with Framer X",
-    subtitle: "10 sections",
-    image: require("../assets/background14.jpg"),
-    logo: require("../assets/logo-framerx.png"),
-    author: "Meng To",
-    avatar: require("../assets/avatar.jpg"),
-    caption: "Create powerful design and code components for your app"
-  },
-  {
-    title: "Design System in Figma",
-    subtitle: "10 sections",
-    image: require("../assets/background6.jpg"),
-    logo: require("../assets/logo-figma.png"),
-    author: "Meng To",
-    avatar: require("../assets/avatar.jpg"),
-    caption:
-      "Complete guide to designing a site using a collaborative design tool"
-  }
-];

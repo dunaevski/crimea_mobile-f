@@ -17,8 +17,10 @@
     "react-native-safe-area-context": "^0.6.4",
     "react-native-safe-area-view": "^1.0.0",
     "react-native-screens": "2.0.0-alpha.12",
+    "react-native-showdown": "^0.4.0",
     "react-native-svg": "9.13.2",
     "react-native-web": "~0.11.7",
+    "react-native-webview": "^8.0.6",
     "react-navigation-tabs": "^2.7.0",
     "styled-components": "^5.0.0"
   },
