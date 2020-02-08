@@ -11,12 +11,16 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "CLOSE_MENU":
-      return { action: "closeMenu" };
     case "OPEN_MENU":
       return { action: "openMenu" };
+    case "CLOSE_MENU":
+      return { action: "closeMenu" };
     case "UPDATE_NAME":
       return { name: action.name };
+    case "OPEN_CARD":
+      return { action: "openCard" };
+    case "CLOSE_CARD":
+      return { action: "closeCard" };
     default:
       return state;
   }
