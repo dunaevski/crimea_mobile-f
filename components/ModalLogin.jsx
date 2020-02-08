@@ -10,8 +10,22 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import AnimateIcon from "./AnimateIcon";
+import { connect } from "react-redux";
 
 const screenHeight = Dimensions.get("window").height;
+
+function mapStateToProps(state) {
+  return { action: state.action };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    closeLogin: () =>
+      dispatch({
+        type: "CLOSE_LOGIN"
+      })
+  };
+}
 
 class ModalLogin extends Component {
   state = {
@@ -21,8 +35,41 @@ class ModalLogin extends Component {
     iconPassword: require("../assets/icon-password.png"),
     isSuccessful: false,
     isLoading: false,
-    top: new Animated.Value(screenHeight)
+    top: new Animated.Value(screenHeight),
+    scale: new Animated.Value(1.3),
+    translateY: new Animated.Value(0)
   };
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.action === "openLogin") {
+      Animated.timing(this.state.top, {
+        toValue: 0,
+        duration: 0
+      }).start();
+
+      Animated.spring(this.state.scale, { toValue: 1 }).start();
+      Animated.timing(this.state.translateY, {
+        toValue: 0,
+        duration: 0
+      }).start();
+    }
+
+    if (this.props.action === "closeLogin") {
+      setTimeout(() => {
+        Animated.timing(this.state.top, {
+          toValue: screenHeight,
+          duration: 0
+        }).start();
+
+        Animated.spring(this.state.scale, { toValue: 1.3 }).start();
+      }, 500);
+
+      Animated.timing(this.state.translateY, {
+        toValue: 1000,
+        duration: 500
+      }).start();
+    }
+  }
 
   handleSubmitLogin = () => {
     this.setState({ isLoading: true });
@@ -33,7 +80,12 @@ class ModalLogin extends Component {
         isSuccessful: true
       });
 
-      Alert.alert("Congrats", "You are login!");
+      // Alert.alert("Congrats", "You are login!");
+
+      setTimeout(() => {
+        this.props.closeLogin();
+        this.setState({ isSuccessful: false });
+      }, 1000);
     }, 2000);
   };
 
@@ -53,6 +105,7 @@ class ModalLogin extends Component {
 
   tapBackground = () => {
     Keyboard.dismiss();
+    this.props.closeLogin();
   };
 
   render() {
@@ -69,7 +122,14 @@ class ModalLogin extends Component {
             }}
           />
         </TouchableWithoutFeedback>
-        <Modal>
+        <AnimatedModal
+          style={{
+            transform: [
+              { scale: this.state.scale },
+              { translateY: this.state.translateY }
+            ]
+          }}
+        >
           <Logo source={require("../assets/logo-dc.png")} />
           <Text>Start Taiping. Access Pro Content </Text>
           <TextInput
@@ -95,7 +155,7 @@ class ModalLogin extends Component {
               <ButtonText>Login In</ButtonText>
             </Button>
           </TouchableOpacity>
-        </Modal>
+        </AnimatedModal>
         <AnimateIcon
           isActive={this.state.isSuccessful}
           loop={false}
@@ -111,7 +171,7 @@ class ModalLogin extends Component {
   }
 }
 
-export default ModalLogin;
+export default connect(mapStateToProps, mapDispatchToProps)(ModalLogin);
 
 const Container = styled.View`
   position: absolute;
@@ -134,6 +194,9 @@ const Modal = styled.View`
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   align-items: center;
 `;
+
+const AnimatedModal = Animated.createAnimatedComponent(Modal);
+
 const Logo = styled.Image`
   width: 44px;
   height: 44px;

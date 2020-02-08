@@ -17,7 +17,7 @@ import { NotificationIcon } from "../components/Icons";
 import { connect } from "react-redux";
 import Avatar from "../components/Avatar";
 import mockData from "../mockData";
-import ModalLogin from '../components/ModalLogin';
+import ModalLogin from "../components/ModalLogin";
 
 function mapStateToProps(state) {
   return { action: state.action, name: state.name };
@@ -28,6 +28,10 @@ function mapDispatchToProps(dispatch) {
     openMenu: () =>
       dispatch({
         type: "OPEN_MENU"
+      }),
+    openLogin: () =>
+      dispatch({
+        type: "OPEN_LOGIN"
       })
   };
 }
@@ -97,10 +101,13 @@ class HomeScreen extends React.Component {
           }}
         >
           <SafeAreaView>
-            <ScrollView style={{ height: "100%" }} showsVerticalScrollIndicator={false}>
+            <ScrollView
+              style={{ height: "100%" }}
+              showsVerticalScrollIndicator={false}
+            >
               <TitleBar>
                 <TouchableOpacity
-                  onPress={this.props.openMenu}
+                  onPress={this.props.openLogin}
                   style={{ position: "absolute", top: 0, left: 0 }}
                 >
                   <Avatar />
