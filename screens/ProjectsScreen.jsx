@@ -1,12 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import styled from "styled-components";
 import Project from "../components/Project";
-import { Animated, PanResponder } from "react-native";
-
-function mapStateToProps(state) {
-  return {};
-}
+import { PanResponder, Animated } from "react-native";
 
 class ProjectsScreen extends Component {
   static navigationOptions = {
@@ -18,7 +13,7 @@ class ProjectsScreen extends Component {
     scale: new Animated.Value(0.9),
     translateY: new Animated.Value(44),
     thirdScale: new Animated.Value(0.8),
-    thirdTranslateY: new Animated.Value(-55),
+    thirdTranslateY: new Animated.Value(-50),
     index: 0
   };
 
@@ -148,7 +143,7 @@ class ProjectsScreen extends Component {
   }
 }
 
-export default connect(mapStateToProps)(ProjectsScreen);
+export default ProjectsScreen;
 
 const Container = styled.View`
   flex: 1;
