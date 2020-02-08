@@ -9,16 +9,32 @@ function mapStateToProps(state) {
 }
 
 class ProjectsScreen extends Component {
+  static navigationOptions = {
+    headerShown: false
+  };
+
+  state = {
+    pan: new Animated.ValueXY(),
+    scale: new Animated.Value(0.9),
+    translateY: new Animated.Value(44),
+    thirdScale: new Animated.Value(0.8),
+    thirdTranslateY: new Animated.Value(-55),
+    index: 0
+  };
+
   constructor(props) {
     super(props);
 
     this._panResponder = PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+
       onPanResponderGrant: () => {
         Animated.spring(this.state.scale, { toValue: 1 }).start();
         Animated.spring(this.state.translateY, { toValue: 0 }).start();
-      },
 
-      onMoveShouldSetPanResponder: () => true,
+        Animated.spring(this.state.thirdScale, { toValue: 0.9 }).start();
+        Animated.spring(this.state.thirdTranslateY, { toValue: 44 }).start();
+      },
 
       onPanResponderMove: Animated.event([
         null,
@@ -30,8 +46,15 @@ class ProjectsScreen extends Component {
 
         if (positionY > 200) {
           Animated.timing(this.state.pan, {
-            toValue: { x: this.state.pan.x, y: 1000 }
-          }).start();
+            toValue: { x: 0, y: 1000 }
+          }).start(() => {
+            this.state.pan.setValue({ x: 0, y: 0 });
+            this.state.scale.setValue(0.9);
+            this.state.translateY.setValue(44);
+            this.state.thirdScale.setValue(0.8);
+            this.state.thirdTranslateY.setValue(-50);
+            this.setState({ index: this.getNextIndex(this.state.index) });
+          });
         } else {
           Animated.spring(this.state.pan, {
             toValue: { x: 0, y: 0 }
@@ -39,19 +62,18 @@ class ProjectsScreen extends Component {
 
           Animated.spring(this.state.scale, { toValue: 0.9 }).start();
           Animated.spring(this.state.translateY, { toValue: 44 }).start();
+
+          Animated.spring(this.state.thirdScale, { toValue: 0.8 }).start();
+          Animated.spring(this.state.thirdTranslateY, { toValue: -50 }).start();
         }
       }
     });
   }
 
-  static navigationOptions = {
-    headerShown: false
-  };
-
-  state = {
-    pan: new Animated.ValueXY(),
-    scale: new Animated.Value(0.9),
-    translateY: new Animated.Value(44)
+  getNextIndex = index => {
+    let nextIndex = index + 1;
+    if (nextIndex > projects.length - 1) return 0;
+    return nextIndex;
   };
 
   render() {
@@ -67,10 +89,10 @@ class ProjectsScreen extends Component {
           {...this._panResponder.panHandlers}
         >
           <Project
-            title="PriceTag"
-            image={require("../assets/background5.jpg")}
-            author="Me"
-            text="Избегайте добавления каких-либо побочных эффектов или подписок в этом методе. Вместо этого используйте componentDidMount()."
+            title={projects[this.state.index].title}
+            image={projects[this.state.index].image}
+            author={projects[this.state.index].author}
+            text={projects[this.state.index].text}
           />
         </Animated.View>
 
@@ -91,10 +113,34 @@ class ProjectsScreen extends Component {
           }}
         >
           <Project
-            title={projects[0].title}
-            image={projects[0].image}
-            author={projects[0].author}
-            text={projects[0].text}
+            title={projects[this.getNextIndex(this.state.index)].title}
+            image={projects[this.getNextIndex(this.state.index)].image}
+            author={projects[this.getNextIndex(this.state.index)].author}
+            text={projects[this.getNextIndex(this.state.index)].text}
+          />
+        </Animated.View>
+
+        <Animated.View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: -3,
+            width: "100%",
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            transform: [
+              { scale: this.state.thirdScale },
+              { translateY: this.state.thirdTranslateY }
+            ]
+          }}
+        >
+          <Project
+            title={projects[this.getNextIndex(this.state.index + 1)].title}
+            image={projects[this.getNextIndex(this.state.index + 1)].image}
+            author={projects[this.getNextIndex(this.state.index + 1)].author}
+            text={projects[this.getNextIndex(this.state.index + 1)].text}
           />
         </Animated.View>
       </Container>
