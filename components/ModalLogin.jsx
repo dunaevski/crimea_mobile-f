@@ -3,20 +3,38 @@ import styled from "styled-components";
 import {
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  Alert,
+  Animated,
+  Dimensions
 } from "react-native";
 import { BlurView } from "expo-blur";
+import AnimateIcon from "./AnimateIcon";
+
+const screenHeight = Dimensions.get("window").height;
 
 class ModalLogin extends Component {
   state = {
     email: "",
     password: "",
     iconEmail: require("../assets/icon-email.png"),
-    iconPassword: require("../assets/icon-password.png")
+    iconPassword: require("../assets/icon-password.png"),
+    isSuccessful: false,
+    isLoading: false,
+    top: new Animated.Value(screenHeight)
   };
 
   handleSubmitLogin = () => {
-    alert(this.state.email + this.state.password);
+    this.setState({ isLoading: true });
+
+    setTimeout(() => {
+      this.setState({
+        isLoading: false,
+        isSuccessful: true
+      });
+
+      Alert.alert("Congrats", "You are login!");
+    }, 2000);
   };
 
   focusEmail = () => {
@@ -39,7 +57,7 @@ class ModalLogin extends Component {
 
   render() {
     return (
-      <Container>
+      <AnimatedContainer style={{ top: this.state.top }}>
         <TouchableWithoutFeedback onPress={this.tapBackground}>
           <BlurView
             titnt="default"
@@ -78,7 +96,17 @@ class ModalLogin extends Component {
             </Button>
           </TouchableOpacity>
         </Modal>
-      </Container>
+        <AnimateIcon
+          isActive={this.state.isSuccessful}
+          loop={false}
+          animation={require("../assets/lottie-checked-done")}
+        />
+        <AnimateIcon
+          isActive={this.state.isLoading}
+          loop={true}
+          animation={require("../assets/27-loading")}
+        />
+      </AnimatedContainer>
     );
   }
 }
@@ -95,6 +123,8 @@ const Container = styled.View`
   justify-content: center;
   align-items: center;
 `;
+
+const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 const Modal = styled.View`
   width: 335px;
