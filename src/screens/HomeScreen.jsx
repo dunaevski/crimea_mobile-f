@@ -8,17 +8,17 @@ import {
   StatusBar,
   Platform
 } from "react-native";
-import Logo from "../components/Logo";
-import Card from "../components/Card";
-import Course from "../components/Course";
-import Menu from "../components/Menu";
 import styled from "styled-components";
+import mockData from "/mockData";
 import { connect } from "react-redux";
-import Avatar from "../components/Avatar";
-import mockData from "../mockData";
-import ModalLogin from "../components/ModalLogin";
-import NotificationButton from "../components/NotificationButton";
-import Notifications from "../components/Notifications";
+import Logo from "components/Logo";
+import Card from "components/Card";
+import Course from "components/Course";
+import Menu from "components/Menu";
+import Avatar from "components/Avatar";
+import ModalLogin from "components/ModalLogin";
+import NotificationButton from "components/NotificationButton";
+import Notifications from "components/Notifications";
 
 function mapStateToProps(state) {
   return { action: state.action, name: state.name };

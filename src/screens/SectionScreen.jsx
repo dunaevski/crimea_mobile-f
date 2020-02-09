@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { TouchableOpacity, StatusBar, ScrollView } from "react-native";
 import WebView from "react-native-webview";
-import { PlayIcon } from "../components/Icons";
+import { PlayIcon } from "components/Icons";
 import { Ionicons } from "@expo/vector-icons";
 
 function mapStateToProps(state) {

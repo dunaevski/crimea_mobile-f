@@ -9,7 +9,7 @@ import {
   Dimensions
 } from "react-native";
 import { BlurView } from "expo-blur";
-import AnimateIcon from "./AnimateIcon";
+import AnimateIcon from "components/AnimateIcon";
 import { connect } from "react-redux";
 
 const screenHeight = Dimensions.get("window").height;
@@ -31,8 +31,8 @@ class ModalLogin extends Component {
   state = {
     email: "",
     password: "",
-    iconEmail: require("../assets/icon-email.png"),
-    iconPassword: require("../assets/icon-password.png"),
+    iconEmail: require("assets/icon-email.png"),
+    iconPassword: require("assets/icon-password.png"),
     isSuccessful: false,
     isLoading: false,
     top: new Animated.Value(screenHeight),
@@ -91,15 +91,15 @@ class ModalLogin extends Component {
 
   focusEmail = () => {
     this.setState({
-      iconEmail: require("../assets/icon-email-animated.gif"),
-      iconPassword: require("../assets/icon-password.png")
+      iconEmail: require("assets/icon-email-animated.gif"),
+      iconPassword: require("assets/icon-password.png")
     });
   };
 
   focusPassword = () => {
     this.setState({
-      iconEmail: require("../assets/icon-email.png"),
-      iconPassword: require("../assets/icon-password-animated.gif")
+      iconEmail: require("assets/icon-email.png"),
+      iconPassword: require("assets/icon-password-animated.gif")
     });
   };
 
@@ -130,7 +130,7 @@ class ModalLogin extends Component {
             ]
           }}
         >
-          <Logo source={require("../assets/logo-dc.png")} />
+          <Logo source={require("assets/logo-dc.png")} />
           <Text>Start Taiping. Access Pro Content </Text>
           <TextInput
             placeholder="Email"
@@ -159,12 +159,12 @@ class ModalLogin extends Component {
         <AnimateIcon
           isActive={this.state.isSuccessful}
           loop={false}
-          animation={require("../assets/success")}
+          animation={require("assets/success")}
         />
         <AnimateIcon
           isActive={this.state.isLoading}
           loop={true}
-          animation={require("../assets/loading")}
+          animation={require("assets/loading")}
         />
       </AnimatedContainer>
     );

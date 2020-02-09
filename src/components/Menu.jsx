@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Animated, TouchableOpacity, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import MenuItems from "./MenuItems";
+import MenuItems from "components/MenuItems";
 import { connect } from "react-redux";
 
 const screenWidth = Dimensions.get("window").width;
@@ -62,7 +62,7 @@ class Menu extends React.Component {
     return (
       <AnimatedContainer style={{ top: this.state.top }}>
         <Cover>
-          <Image source={require("../assets/background2.jpg")} />
+          <Image source={require("assets/background2.jpg")} />
           <Title> Username </Title>
           <Subtitle>Crimea on Your Phone</Subtitle>
         </Cover>
