@@ -4,7 +4,6 @@ import HomeScreen from "screens/HomeScreen";
 import SectionScreen from "screens/SectionScreen";
 import TabNavigator from 'navigator/TabNavigator';
 
-
 const AppNavigator = createStackNavigator({
   Home: HomeScreen,
   Section: SectionScreen,
