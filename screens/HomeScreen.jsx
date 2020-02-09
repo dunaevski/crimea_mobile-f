@@ -18,6 +18,8 @@ import { connect } from "react-redux";
 import Avatar from "../components/Avatar";
 import mockData from "../mockData";
 import ModalLogin from "../components/ModalLogin";
+import NotificationButton from "../components/NotificationButton";
+import Notifications from "../components/Notifications";
 
 function mapStateToProps(state) {
   return { action: state.action, name: state.name };
@@ -32,6 +34,10 @@ function mapDispatchToProps(dispatch) {
     openLogin: () =>
       dispatch({
         type: "OPEN_LOGIN"
+      }),
+    openNotif: () =>
+      dispatch({
+        type: "OPEN_NOTIF"
       })
   };
 }
@@ -90,10 +96,19 @@ class HomeScreen extends React.Component {
     }
   };
 
+  handleAvatar = () => {
+    // if (this.props.name) {
+    //   this.props.openMenu();
+    // } else {
+    this.props.openLogin();
+    // }
+  };
+
   render() {
     return (
       <RootView>
         <Menu />
+        <Notifications />
         <AnimatedContainer
           style={{
             transform: [{ scale: this.state.scale }],
@@ -107,20 +122,19 @@ class HomeScreen extends React.Component {
             >
               <TitleBar>
                 <TouchableOpacity
-                  onPress={this.props.openLogin}
+                  onPress={this.handleAvatar}
                   style={{ position: "absolute", top: 0, left: 0 }}
                 >
                   <Avatar />
                 </TouchableOpacity>
                 <Title>Добро пожаловать,</Title>
                 <Name>{this.props.name}!</Name>
-                <NotificationIcon
-                  style={{
-                    position: "absolute",
-                    top: 5,
-                    right: 20
-                  }}
-                />
+                <TouchableOpacity
+                  onPress={() => this.props.openNotif()}
+                  style={{ position: "absolute", right: 20, top: 5 }}
+                >
+                  <NotificationButton />
+                </TouchableOpacity>
               </TitleBar>
 
               <ScrollView

@@ -159,12 +159,12 @@ class ModalLogin extends Component {
         <AnimateIcon
           isActive={this.state.isSuccessful}
           loop={false}
-          animation={require("../assets/lottie-checked-done")}
+          animation={require("../assets/success")}
         />
         <AnimateIcon
           isActive={this.state.isLoading}
           loop={true}
-          animation={require("../assets/27-loading")}
+          animation={require("../assets/loading")}
         />
       </AnimatedContainer>
     );

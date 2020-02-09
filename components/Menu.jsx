@@ -41,17 +41,21 @@ class Menu extends React.Component {
   }
 
   toggleMenu = () => {
-    if (this.props.action == "openMenu") {
+    if (this.props.action === "openMenu") {
       Animated.spring(this.state.top, {
         toValue: 54
       }).start();
     }
 
-    if (this.props.action == "closeMenu") {
+    if (this.props.action === "closeMenu") {
       Animated.spring(this.state.top, {
         toValue: screenHeight
       }).start();
     }
+  };
+
+  handleMenu = index => {
+    this.props.closeMenu();
   };
 
   render() {
@@ -78,13 +82,14 @@ class Menu extends React.Component {
         </TouchableOpacity>
         <Content>
           {items.map((item, index) => (
-            <MenuItems
+            <TouchableOpacity
               key={index}
-              x
-              icon={item.icon}
-              title={item.title}
-              text={item.text}
-            />
+              onPress={() => {
+                this.handleMenu(index);
+              }}
+            >
+              <MenuItems icon={item.icon} title={item.title} text={item.text} />
+            </TouchableOpacity>
           ))}
         </Content>
       </AnimatedContainer>

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { TouchableOpacity, StatusBar, ScrollView } from "react-native";
-import Markdown from "react-native-showdown";
+import WebView from "react-native-webview";
+import { PlayIcon } from "../components/Icons";
 import { Ionicons } from "@expo/vector-icons";
 
 function mapStateToProps(state) {
@@ -32,6 +33,18 @@ class SectionScreen extends Component {
           <StatusBar hidden />
           <Cover>
             <Image source={section.image} />
+            <PlayWrapper>
+              <TouchableOpacity
+                underlayColor="transparent"
+                onPress={() => {
+                  this.props.navigation.navigate("Video");
+                }}
+              >
+                <PlayView>
+                  <PlayIcon style={{ marginLeft: -10 }} />
+                </PlayView>
+              </TouchableOpacity>
+            </PlayWrapper>
             <Wrapper>
               <Logo source={section.logo} />
               <Subtitle>{section.subtitle}</Subtitle>
@@ -55,23 +68,17 @@ class SectionScreen extends Component {
             </CloseView>
           </TouchableOpacity>
           <Content>
-            {/*<WebView*/}
-            {/*    source={{ html: section.content + htmlStyles }}*/}
-            {/*    scalesPageToFit={false}*/}
-            {/*    scrollEnabled={false}*/}
-            {/*    ref={webView => this.webView = webView}*/}
-            {/*    onNavigationStateChange={event => {*/}
-            {/*      if(event.url !== 'about:blank') {*/}
-            {/*        this.webView.stopLoading();*/}
-            {/*        Linking.openURL(event.url)*/}
-            {/*      }*/}
-            {/*    }}*/}
-            {/*/>*/}
-            <Markdown
-              body={section.content}
-              pureCSS={htmlStyles}
+            <WebView
+              source={{ html: section.content + htmlStyles }}
               scalesPageToFit={false}
               scrollEnabled={false}
+              ref={webView => (this.webView = webView)}
+              onNavigationStateChange={event => {
+                if (event.url !== "about:blank") {
+                  this.webView.stopLoading();
+                  Linking.openURL(event.url);
+                }
+              }}
             />
           </Content>
         </Container>
@@ -202,4 +209,21 @@ const Subtitle = styled.Text`
   color: rgba(255, 255, 255, 0.8);
   margin-left: 5px;
   text-transform: uppercase;
+`;
+
+const PlayWrapper = styled.View`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -40px;
+  margin-left: -40px;
+`;
+
+const PlayView = styled.View`
+  width: 80px;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 40px;
+  justify-content: center;
+  align-items: center;
 `;
