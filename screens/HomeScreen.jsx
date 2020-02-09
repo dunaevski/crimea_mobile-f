@@ -13,7 +13,6 @@ import Card from "../components/Card";
 import Course from "../components/Course";
 import Menu from "../components/Menu";
 import styled from "styled-components";
-import { NotificationIcon } from "../components/Icons";
 import { connect } from "react-redux";
 import Avatar from "../components/Avatar";
 import mockData from "../mockData";
