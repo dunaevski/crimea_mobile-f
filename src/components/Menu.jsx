@@ -62,7 +62,7 @@ class Menu extends React.Component {
     return (
       <AnimatedContainer style={{ top: this.state.top }}>
         <Cover>
-          <Image source={require("assets/background2.jpg")} />
+          <Image source={require("./../../assets/background2.jpg")} />
           <Title> Username </Title>
           <Subtitle>Crimea on Your Phone</Subtitle>
         </Cover>
