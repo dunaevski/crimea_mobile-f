@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import { Dimensions } from "react-native";
-import { connect } from "react-redux";
+import { observer } from "mobx-react";
 import styled from "styled-components";
 import { LinearGradient } from "expo-linear-gradient";
 import CourseSection from "components/CourseSection";
 import Courses from "components/Courses";
 
-let screenWidth = Dimensions.get("window").width;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
-function mapStateToProps(state) {
-  return {};
-}
 
+@observer
 class CoursesScreen extends Component {
   static navigationOptions = {
     title: "Courses",
@@ -26,7 +24,7 @@ class CoursesScreen extends Component {
             <Background source={require("./../../assets/background12.jpg")} />
             <LinearGradient
               colors={["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.5)"]}
-              style={{ position: "absolute", width: screenWidth, height: 460 }}
+              style={{ position: "absolute", width: SCREEN_WIDTH, height: 460 }}
             />
             <Logo source={require("./../../assets/logo-react.png")} />
             <Caption>12 Sections</Caption>
@@ -59,7 +57,7 @@ class CoursesScreen extends Component {
   }
 }
 
-export default connect(mapStateToProps)(CoursesScreen);
+export default CoursesScreen;
 
 const Container = styled.View`
   flex: 1;
@@ -82,7 +80,7 @@ const Background = styled.Image`
   position: absolute;
   top: 0;
   left: 0;
-  width: ${screenWidth}px;
+  width: ${SCREEN_WIDTH}px;
   height: 460px;
 `;
 

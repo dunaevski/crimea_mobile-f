@@ -1,28 +1,30 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { observer } from "mobx-react";
 import AnimatedLottieView from "lottie-react-native";
 import { Animated, Dimensions } from "react-native";
 
-const screenHeight = Dimensions.get("window").height;
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 
+@observer
 class AnimateIcon extends Component {
-  state = {
-    top: new Animated.Value(0),
-    opacity: new Animated.Value(0)
-  };
+  top = new Animated.Value(0);
+  opacity = new Animated.Value(0);
+
+
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.isActive) {
-      Animated.timing(this.state.top, { toValue: 0, duration: 0 }).start();
-      Animated.timing(this.state.opacity, { toValue: 1 }).start();
+      Animated.timing(this.top, { toValue: 0, duration: 0 }).start();
+      Animated.timing(this.opacity, { toValue: 1 }).start();
 
       this.animation.play();
     } else {
-      Animated.timing(this.state.top, {
-        toValue: screenHeight,
+      Animated.timing(this.top, {
+        toValue: SCREEN_HEIGHT,
         duration: 0
       }).start();
-      Animated.timing(this.state.opacity, { toValue: 0 }).start();
+      Animated.timing(this.opacity, { toValue: 0 }).start();
 
       this.animation.loop = false;
     }
@@ -30,9 +32,7 @@ class AnimateIcon extends Component {
 
   render() {
     return (
-      <AnimatedContainer
-        style={{ top: this.state.top, opacity: this.state.opacity }}
-      >
+      <AnimatedContainer style={{ top: this.top, opacity: this.opacity }}>
         <AnimatedLottieView
           source={this.props.animation}
           autoPlay={false}

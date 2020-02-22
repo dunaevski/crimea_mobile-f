@@ -4,7 +4,7 @@ import { Video } from "expo-av";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity, Dimensions } from "react-native";
 
-let screenWidth = Dimensions.get("window").width;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 class VideoScreen extends React.Component {
   static navigationOptions = {
@@ -22,7 +22,7 @@ class VideoScreen extends React.Component {
           shouldPlay
           useNativeControls={true}
           resizeMode="cover"
-          style={{ width: screenWidth, height: 210 }}
+          style={{ width: SCREEN_WIDTH, height: 210 }}
         />
         <CloseView>
           <TouchableOpacity

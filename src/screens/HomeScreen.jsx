@@ -1,16 +1,17 @@
 import React from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
   Animated,
   Easing,
+  Platform,
+  SafeAreaView,
+  ScrollView,
   StatusBar,
-  Platform
+  TouchableOpacity
 } from "react-native";
 import styled from "styled-components";
-import mockData from "/mockData";
-import { connect } from "react-redux";
+import mockData from "../mockData";
+import { action, observable } from "mobx";
+import { inject, observer } from "mobx-react";
 import Logo from "components/Logo";
 import Card from "components/Card";
 import Course from "components/Course";
@@ -20,38 +21,16 @@ import ModalLogin from "components/ModalLogin";
 import NotificationButton from "components/NotificationButton";
 import Notifications from "components/Notifications";
 
-function mapStateToProps(state) {
-  return { action: state.action, name: state.name };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    openMenu: () =>
-      dispatch({
-        type: "OPEN_MENU"
-      }),
-    openLogin: () =>
-      dispatch({
-        type: "OPEN_LOGIN"
-      }),
-    openNotif: () =>
-      dispatch({
-        type: "OPEN_NOTIF"
-      })
-  };
-}
-
+@inject("UIStore")
+@observer
 class HomeScreen extends React.Component {
   static navigationOptions = {
     headerShown: false
   };
-
-  state = {
-    scale: new Animated.Value(1),
-    opacity: new Animated.Value(1),
-    loaded: false,
-    data: mockData
-  };
+  @observable loaded = false;
+  @observable scale = new Animated.Value(1);
+  @observable opacity = new Animated.Value(1);
+  data = mockData;
 
   componentDidMount() {
     StatusBar.setBarStyle("dark-content", true);
@@ -66,28 +45,26 @@ class HomeScreen extends React.Component {
   }
 
   toggleMenu = () => {
-    if (this.props.action == "openMenu") {
-      Animated.timing(this.state.scale, {
+    if (this.props.UIStore.isMenuOpen) {
+      Animated.timing(this.scale, {
         toValue: 0.9,
         duration: 300,
         easing: Easing.in()
       }).start();
 
-      Animated.spring(this.state.opacity, {
+      Animated.spring(this.opacity, {
         toValue: 0.5
       }).start();
 
       StatusBar.setBarStyle("light-content", true);
-    }
-
-    if (this.props.action == "closeMenu") {
-      Animated.timing(this.state.scale, {
+    } else {
+      Animated.timing(this.scale, {
         toValue: 1,
         duration: 300,
         easing: Easing.in()
       }).start();
 
-      Animated.spring(this.state.opacity, {
+      Animated.spring(this.opacity, {
         toValue: 1
       }).start();
 
@@ -95,23 +72,29 @@ class HomeScreen extends React.Component {
     }
   };
 
+  @action
   handleAvatar = () => {
-    // if (this.props.name) {
-    //   this.props.openMenu();
-    // } else {
-    this.props.openLogin();
-    // }
+    const { UIStore } = this.props;
+
+    if (!UIStore.name) {
+      UIStore.toggleMenu();
+    } else {
+      UIStore.toggleModalLogin();
+    }
   };
 
   render() {
+    const { UIStore } = this.props;
+
     return (
       <RootView>
         <Menu />
         <Notifications />
+
         <AnimatedContainer
           style={{
-            transform: [{ scale: this.state.scale }],
-            opacity: this.state.opacity
+            transform: [{ scale: this.scale }],
+            opacity: this.opacity
           }}
         >
           <SafeAreaView>
@@ -127,10 +110,14 @@ class HomeScreen extends React.Component {
                   <Avatar />
                 </TouchableOpacity>
                 <Title>Добро пожаловать,</Title>
-                <Name>{this.props.name}!</Name>
+                <Name>{UIStore.name}!</Name>
                 <TouchableOpacity
-                  onPress={() => this.props.openNotif()}
-                  style={{ position: "absolute", right: 20, top: 5 }}
+                  onPress={() => UIStore.toggleNotification()}
+                  style={{
+                    position: "absolute",
+                    right: 20,
+                    top: 5
+                  }}
                 >
                   <NotificationButton />
                 </TouchableOpacity>
@@ -146,8 +133,8 @@ class HomeScreen extends React.Component {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
               >
-                {!this.state.loading ? (
-                  this.state.data.logos.map((logo, index) => (
+                {!this.loading ? (
+                  this.data.logos.map((logo, index) => (
                     <Logo key={index} image={logo.image} text={logo.text} />
                   ))
                 ) : (
@@ -162,8 +149,8 @@ class HomeScreen extends React.Component {
                 style={{ paddingBottom: 30 }}
                 showsHorizontalScrollIndicator={false}
               >
-                {!this.state.loading ? (
-                  this.state.data.cards.map((card, index) => (
+                {!this.loading ? (
+                  this.data.cards.map((card, index) => (
                     <TouchableOpacity
                       key={index}
                       onPress={() => {
@@ -190,8 +177,8 @@ class HomeScreen extends React.Component {
               <Subtitle>{"Гиды".toUpperCase()}</Subtitle>
 
               <CoursesContainer>
-                {!this.state.loading ? (
-                  this.state.data.courses.map((course, index) => (
+                {!this.loading ? (
+                  this.data.courses.map((course, index) => (
                     <Course
                       key={index}
                       title={course.title}
@@ -216,7 +203,7 @@ class HomeScreen extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default HomeScreen;
 
 const Message = styled.Text`
   margin: 20px;

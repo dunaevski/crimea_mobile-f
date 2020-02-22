@@ -1,41 +1,40 @@
 import React from "react";
 import styled from "styled-components";
 import { Dimensions } from "react-native";
+import { observer } from "mobx-react";
+import { observable } from "mobx";
 
-const screenWidth = Dimensions.get("window").width;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
-function getCourseWidth(screenWidth) {
-  let cardWidth = screenWidth - 40;
-
-  if (screenWidth >= 768) {
-    cardWidth = (screenWidth - 60) / 2;
-  }
-
-  if (screenWidth >= 1024) {
-    cardWidth = (screenWidth - 80) / 3;
-  }
-
-  return cardWidth;
-}
-
+@observer
 class Course extends React.Component {
-  state = {
-    cardWidth: getCourseWidth(screenWidth)
-  };
+  @observable cardWidth = null;
 
   componentDidMount() {
+    this.cardWidth = this.getCourseWidth(SCREEN_WIDTH);
     Dimensions.addEventListener("change", this.adaptLayout);
   }
 
+  getCourseWidth = () => {
+    let cardWidth = SCREEN_WIDTH - 40;
+
+    if (SCREEN_WIDTH >= 768) {
+      cardWidth = (SCREEN_WIDTH - 60) / 2;
+    }
+    if (SCREEN_WIDTH >= 1024) {
+      cardWidth = (SCREEN_WIDTH - 80) / 3;
+    }
+
+    return cardWidth;
+  };
+
   adaptLayout = dimensions => {
-    this.setState({
-      cardWidth: getCourseWidth(dimensions.window.width)
-    });
+    this.cardWidth = this.getCourseWidth(dimensions.window.width);
   };
 
   render() {
     return (
-      <Container style={{ width: this.state.cardWidth }}>
+      <Container style={{ width: this.cardWidth }}>
         <Cover>
           <Image source={this.props.image} />
           <Logo source={this.props.logo} resizeMode="contain" />

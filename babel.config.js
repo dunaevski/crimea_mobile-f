@@ -11,6 +11,7 @@ module.exports = function(api) {
             components: path.resolve(__dirname, 'src/components/'),
             navigator: path.resolve(__dirname, 'src/navigator/'),
             screens: path.resolve(__dirname, 'src/screens/'),
+            globalStore: path.resolve(__dirname, 'src/globalStore/'),
           },
           extensions: [
             '.js',
@@ -20,6 +21,12 @@ module.exports = function(api) {
             '.json',
           ],
         },
+      ],
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          legacy: true
+        }
       ],
     ]
   };

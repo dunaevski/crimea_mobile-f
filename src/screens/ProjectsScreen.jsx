@@ -1,82 +1,84 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Project from "components/Project";
-import { PanResponder, Animated } from "react-native";
-import { connect } from "react-redux";
+import { Animated, PanResponder } from "react-native";
+import { observable } from "mobx";
+import { observer } from "mobx-react";
 
-function mapStateToProps(state) {
-  return {
-    active: state.action
-  };
-}
-
+@observer
 class ProjectsScreen extends Component {
   static navigationOptions = {
     headerShown: false
   };
-
-  state = {
-    pan: new Animated.ValueXY(),
-    scale: new Animated.Value(0.9),
-    translateY: new Animated.Value(44),
-    thirdScale: new Animated.Value(0.8),
-    thirdTranslateY: new Animated.Value(-50),
-    index: 0,
-    opacity: new Animated.Value(0)
-  };
+  @observable pan = new Animated.ValueXY();
+  @observable scale = new Animated.Value(0.9);
+  @observable translateY = new Animated.Value(44);
+  @observable thirdScale = new Animated.Value(-50);
+  @observable thirdTranslateY = new Animated.Value(1);
+  @observable index = 0;
+  @observable opacity = new Animated.Value(0);
+  @observable isOpenCard = false;
 
   constructor(props) {
     super(props);
 
     this._panResponder = PanResponder.create({
       onMoveShouldSetPanResponder: (event, gestureState) => {
-        if (gestureState.dx === 0 && gestureState.dy === 0) {
-          return false;
-        } else {
-          return this.props.action !== "openCard";
-        }
+        return !(gestureState.dx === 0 && gestureState.dy === 0);
       },
 
       onPanResponderGrant: () => {
-        Animated.spring(this.state.scale, { toValue: 1 }).start();
-        Animated.spring(this.state.translateY, { toValue: 0 }).start();
+        Animated.spring(this.scale, { toValue: 1 }).start();
+        Animated.spring(this.translateY, { toValue: 0 }).start();
 
-        Animated.spring(this.state.thirdScale, { toValue: 0.9 }).start();
-        Animated.spring(this.state.thirdTranslateY, { toValue: 44 }).start();
+        Animated.spring(this.thirdScale, { toValue: 0.9 }).start();
+        Animated.spring(this.thirdTranslateY, { toValue: 44 }).start();
 
-        Animated.timing(this.state.opacity, { toValue: 1 }).start();
+        Animated.timing(this.opacity, { toValue: 1 }).start();
       },
 
       onPanResponderMove: Animated.event([
         null,
-        { dx: this.state.pan.x, dy: this.state.pan.y }
+        {
+          dx: this.pan.x,
+          dy: this.pan.y
+        }
       ]),
 
       onPanResponderRelease: () => {
-        const positionY = this.state.pan.y.__getValue();
-        Animated.timing(this.state.opacity, { toValue: 0 }).start();
+        const positionY = this.pan.y.__getValue();
+        Animated.timing(this.opacity, { toValue: 0 }).start();
 
         if (positionY > 200) {
-          Animated.timing(this.state.pan, {
-            toValue: { x: 0, y: 1000 }
+          Animated.timing(this.pan, {
+            toValue: {
+              x: 0,
+              y: 1000
+            }
           }).start(() => {
-            this.state.pan.setValue({ x: 0, y: 0 });
-            this.state.scale.setValue(0.9);
-            this.state.translateY.setValue(44);
-            this.state.thirdScale.setValue(0.8);
-            this.state.thirdTranslateY.setValue(-50);
-            this.setState({ index: this.getNextIndex(this.state.index) });
+            this.pan.setValue({
+              x: 0,
+              y: 0
+            });
+            this.scale.setValue(0.9);
+            this.translateY.setValue(44);
+            this.thirdScale.setValue(0.8);
+            this.thirdTranslateY.setValue(-50);
+            this.index = this.getNextIndex(this.index);
           });
         } else {
-          Animated.spring(this.state.pan, {
-            toValue: { x: 0, y: 0 }
+          Animated.spring(this.pan, {
+            toValue: {
+              x: 0,
+              y: 0
+            }
           }).start();
 
-          Animated.spring(this.state.scale, { toValue: 0.9 }).start();
-          Animated.spring(this.state.translateY, { toValue: 44 }).start();
+          Animated.spring(this.scale, { toValue: 0.9 }).start();
+          Animated.spring(this.translateY, { toValue: 44 }).start();
 
-          Animated.spring(this.state.thirdScale, { toValue: 0.8 }).start();
-          Animated.spring(this.state.thirdTranslateY, { toValue: -50 }).start();
+          Animated.spring(this.thirdScale, { toValue: 0.8 }).start();
+          Animated.spring(this.thirdTranslateY, { toValue: -50 }).start();
         }
       }
     });
@@ -88,25 +90,32 @@ class ProjectsScreen extends Component {
     return nextIndex;
   };
 
+  openCard = () => {
+    this.isOpenCard = true;
+  };
+
+  closeCard = () => {
+    this.isOpenCard = false;
+  };
+
   render() {
     return (
       <Container>
-        <AnimatedMask style={{ opacity: this.state.opacity }} />
+        <AnimatedMask style={{ opacity: this.opacity }} />
         <Animated.View
           style={{
-            transform: [
-              { translateX: this.state.pan.x },
-              { translateY: this.state.pan.y }
-            ]
+            transform: [{ translateX: this.pan.x }, { translateY: this.pan.y }]
           }}
           {...this._panResponder.panHandlers}
         >
           <Project
-            title={projects[this.state.index].title}
-            image={projects[this.state.index].image}
-            author={projects[this.state.index].author}
-            text={projects[this.state.index].text}
+            title={projects[this.index].title}
+            image={projects[this.index].image}
+            author={projects[this.index].author}
+            text={projects[this.index].text}
             canOpen={true}
+            openCard={this.openCard}
+            closeCard={this.closeCard}
           />
         </Animated.View>
 
@@ -120,18 +129,17 @@ class ProjectsScreen extends Component {
             height: "100%",
             justifyContent: "center",
             alignItems: "center",
-            transform: [
-              { scale: this.state.scale },
-              { translateY: this.state.translateY }
-            ]
+            transform: [{ scale: this.scale }, { translateY: this.translateY }]
           }}
         >
           <Project
-            title={projects[this.getNextIndex(this.state.index)].title}
-            image={projects[this.getNextIndex(this.state.index)].image}
-            author={projects[this.getNextIndex(this.state.index)].author}
-            text={projects[this.getNextIndex(this.state.index)].text}
+            title={projects[this.getNextIndex(this.index)].title}
+            image={projects[this.getNextIndex(this.index)].image}
+            author={projects[this.getNextIndex(this.index)].author}
+            text={projects[this.getNextIndex(this.index)].text}
             canOpen={true}
+            openCard={this.openCard}
+            closeCard={this.closeCard}
           />
         </Animated.View>
 
@@ -146,17 +154,19 @@ class ProjectsScreen extends Component {
             justifyContent: "center",
             alignItems: "center",
             transform: [
-              { scale: this.state.thirdScale },
-              { translateY: this.state.thirdTranslateY }
+              { scale: this.thirdScale },
+              { translateY: this.thirdTranslateY }
             ]
           }}
         >
           <Project
-            title={projects[this.getNextIndex(this.state.index + 1)].title}
-            image={projects[this.getNextIndex(this.state.index + 1)].image}
-            author={projects[this.getNextIndex(this.state.index + 1)].author}
-            text={projects[this.getNextIndex(this.state.index + 1)].text}
+            title={projects[this.getNextIndex(this.index + 1)].title}
+            image={projects[this.getNextIndex(this.index + 1)].image}
+            author={projects[this.getNextIndex(this.index + 1)].author}
+            text={projects[this.getNextIndex(this.index + 1)].text}
             canOpen={true}
+            openCard={this.openCard}
+            closeCard={this.closeCard}
           />
         </Animated.View>
       </Container>
@@ -164,7 +174,7 @@ class ProjectsScreen extends Component {
   }
 }
 
-export default connect(mapStateToProps)(ProjectsScreen);
+export default ProjectsScreen;
 
 const Mask = styled.View`
   position: absolute;
