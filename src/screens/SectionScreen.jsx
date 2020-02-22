@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import styled from "styled-components";
 import { TouchableOpacity, StatusBar, ScrollView } from "react-native";
 import WebView from "react-native-webview";
-import { PlayIcon } from "../components/Icons";
+import { PlayIcon } from "components/Icons";
 import { Ionicons } from "@expo/vector-icons";
+import { observer } from "mobx-react";
 
-function mapStateToProps(state) {
-  return {};
-}
-
+@observer
 class SectionScreen extends Component {
   static navigationOptions = {
     headerShown: false
@@ -37,7 +34,7 @@ class SectionScreen extends Component {
               <TouchableOpacity
                 underlayColor="transparent"
                 onPress={() => {
-                  this.props.navigation.navigate("Video");
+                  navigation.navigate("Video");
                 }}
               >
                 <PlayView>
@@ -55,7 +52,7 @@ class SectionScreen extends Component {
           <TouchableOpacity
             style={{ position: "absolute", top: 20, right: 20 }}
             onPress={() => {
-              this.props.navigation.goBack();
+              navigation.goBack();
             }}
           >
             <CloseView>
@@ -87,7 +84,7 @@ class SectionScreen extends Component {
   }
 }
 
-export default connect(mapStateToProps)(SectionScreen);
+export default SectionScreen;
 
 const htmlStyles = `
    * {

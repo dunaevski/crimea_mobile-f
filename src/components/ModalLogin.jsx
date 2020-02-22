@@ -1,116 +1,98 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { action, observable } from "mobx";
+import { inject, observer } from "mobx-react";
 import {
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Alert,
   Animated,
-  Dimensions
+  Dimensions,
+  Keyboard,
+  TouchableOpacity,
+  TouchableWithoutFeedback
 } from "react-native";
 import { BlurView } from "expo-blur";
-import AnimateIcon from "./AnimateIcon";
-import { connect } from "react-redux";
+import AnimateIcon from "components/AnimateIcon";
 
-const screenHeight = Dimensions.get("window").height;
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-function mapStateToProps(state) {
-  return { action: state.action };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    closeLogin: () =>
-      dispatch({
-        type: "CLOSE_LOGIN"
-      })
-  };
-}
-
+@inject("UIStore")
+@observer
 class ModalLogin extends Component {
-  state = {
-    email: "",
-    password: "",
-    iconEmail: require("../assets/icon-email.png"),
-    iconPassword: require("../assets/icon-password.png"),
-    isSuccessful: false,
-    isLoading: false,
-    top: new Animated.Value(screenHeight),
-    scale: new Animated.Value(1.3),
-    translateY: new Animated.Value(0)
-  };
+  @observable email = "";
+  @observable password = "";
+  @observable iconEmail = require("./../../assets/icon-email.png");
+  @observable iconPassword = require("./../../assets/icon-password.png");
+  @observable isSuccessful = false;
+  @observable isLoading = false;
+  top = new Animated.Value(SCREEN_HEIGHT);
+  scale = new Animated.Value(1.3);
+  translateY = new Animated.Value(0);
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.action === "openLogin") {
-      Animated.timing(this.state.top, {
+    console.log(this.props.UIStore.isModalLoginOpen);
+    if (this.props.UIStore.isModalLoginOpen) {
+      Animated.timing(this.top, {
         toValue: 0,
         duration: 0
       }).start();
 
-      Animated.spring(this.state.scale, { toValue: 1 }).start();
-      Animated.timing(this.state.translateY, {
+      Animated.spring(this.scale, { toValue: 1 }).start();
+      Animated.timing(this.translateY, {
         toValue: 0,
         duration: 0
       }).start();
-    }
-
-    if (this.props.action === "closeLogin") {
+    } else {
       setTimeout(() => {
-        Animated.timing(this.state.top, {
-          toValue: screenHeight,
+        Animated.timing(this.top, {
+          toValue: SCREEN_HEIGHT,
           duration: 0
         }).start();
 
-        Animated.spring(this.state.scale, { toValue: 1.3 }).start();
+        Animated.spring(this.scale, { toValue: 1.3 }).start();
       }, 500);
 
-      Animated.timing(this.state.translateY, {
+      Animated.timing(this.translateY, {
         toValue: 1000,
         duration: 500
       }).start();
     }
   }
 
+  @action
   handleSubmitLogin = () => {
-    this.setState({ isLoading: true });
+    this.isLoading = true;
 
     setTimeout(() => {
-      this.setState({
-        isLoading: false,
-        isSuccessful: true
-      });
+      this.isLoading = false;
+      this.isSuccessful = true;
 
       // Alert.alert("Congrats", "You are login!");
 
       setTimeout(() => {
-        this.props.closeLogin();
-        this.setState({ isSuccessful: false });
+        this.props.UIStore.toggleModalLogin();
+        this.isSuccessful = false;
       }, 1000);
     }, 2000);
   };
 
   focusEmail = () => {
-    this.setState({
-      iconEmail: require("../assets/icon-email-animated.gif"),
-      iconPassword: require("../assets/icon-password.png")
-    });
+    this.iconEmail = require("./../../assets/icon-email-animated.gif");
+    this.iconPassword = require("./../../assets/icon-password.png");
   };
 
   focusPassword = () => {
-    this.setState({
-      iconEmail: require("../assets/icon-email.png"),
-      iconPassword: require("../assets/icon-password-animated.gif")
-    });
+    this.iconEmail = require("./../../assets/icon-email.png");
+    this.iconPassword = require("./../../assets/icon-password-animated.gif");
   };
 
   tapBackground = () => {
     Keyboard.dismiss();
-    this.props.closeLogin();
+    this.props.UIStore.toggleModalLogin();
   };
 
   render() {
+    const { isModalLoginOpen } = this.props.UIStore;
     return (
-      <AnimatedContainer style={{ top: this.state.top }}>
+      <AnimatedContainer style={{ top: this.top }}>
         <TouchableWithoutFeedback onPress={this.tapBackground}>
           <BlurView
             titnt="default"
@@ -124,19 +106,16 @@ class ModalLogin extends Component {
         </TouchableWithoutFeedback>
         <AnimatedModal
           style={{
-            transform: [
-              { scale: this.state.scale },
-              { translateY: this.state.translateY }
-            ]
+            transform: [{ scale: this.scale }, { translateY: this.translateY }]
           }}
         >
-          <Logo source={require("../assets/logo-dc.png")} />
+          <Logo source={require("./../../assets/logo-dc.png")} />
           <Text>Start Taiping. Access Pro Content </Text>
           <TextInput
             placeholder="Email"
             keyboardType="email-address"
             onChangeText={email => {
-              this.setState({ email });
+              this.email = email;
             }}
             onFocus={this.focusEmail}
           />
@@ -144,12 +123,12 @@ class ModalLogin extends Component {
             placeholder="Password"
             secureTextEntry={true}
             onChangeText={password => {
-              this.setState({ password });
+              this.password = password;
             }}
             onFocus={this.focusPassword}
           />
-          <IconEmail source={this.state.iconEmail} />
-          <IconPassword source={this.state.iconPassword} />
+          <IconEmail source={this.iconEmail} />
+          <IconPassword source={this.iconPassword} />
           <TouchableOpacity onPress={this.handleSubmitLogin}>
             <Button>
               <ButtonText>Login In</ButtonText>
@@ -157,21 +136,21 @@ class ModalLogin extends Component {
           </TouchableOpacity>
         </AnimatedModal>
         <AnimateIcon
-          isActive={this.state.isSuccessful}
+          isActive={this.isSuccessful}
           loop={false}
-          animation={require("../assets/success")}
+          animation={require("./../../assets/success")}
         />
         <AnimateIcon
-          isActive={this.state.isLoading}
+          isActive={this.isLoading}
           loop={true}
-          animation={require("../assets/loading")}
+          animation={require("./../../assets/loading")}
         />
       </AnimatedContainer>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalLogin);
+export default ModalLogin;
 
 const Container = styled.View`
   position: absolute;
@@ -203,6 +182,16 @@ const Logo = styled.Image`
   margin-top: 50px;
 `;
 
+const Text = styled.Text`
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  width: 160px;
+  text-align: center;
+  color: #b8bece;
+`;
+
 const TextInput = styled.TextInput`
   border: 1px solid #dbdfea;
   width: 295px;
@@ -212,16 +201,6 @@ const TextInput = styled.TextInput`
   color: #3c4560;
   margin-top: 20px;
   padding-left: 44px;
-`;
-
-const Text = styled.Text`
-  margin-top: 20px;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  width: 160px;
-  text-align: center;
-  color: #b8bece;
 `;
 
 const Button = styled.View`
@@ -238,7 +217,8 @@ const Button = styled.View`
 const ButtonText = styled.Text`
   color: white;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
+  text-transform: uppercase;
 `;
 
 const IconEmail = styled.Image`
@@ -248,6 +228,7 @@ const IconEmail = styled.Image`
   top: 179px;
   left: 31px;
 `;
+
 const IconPassword = styled.Image`
   width: 18px;
   height: 24px;

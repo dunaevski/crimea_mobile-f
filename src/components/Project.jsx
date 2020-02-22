@@ -2,70 +2,51 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import {
   Animated,
-  TouchableWithoutFeedback,
   Dimensions,
   StatusBar,
-  TouchableOpacity
+  TouchableOpacity,
+  TouchableWithoutFeedback
 } from "react-native";
+import { observable } from "mobx";
+import { observer } from "mobx-react";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { connect } from "react-redux";
-
-function mapStateToProps(state) {
-  return {
-    action: state.action
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    openCard: () =>
-      dispatch({
-        type: "OPEN_CARD"
-      }),
-    closeCard: () =>
-      dispatch({
-        type: "CLOSE_CARD"
-      })
-  };
-}
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 const tabBarHeight = 83;
 
+@observer
 class Project extends Component {
-  state = {
-    cardWidth: new Animated.Value(315),
-    cardHeight: new Animated.Value(460),
-    titleTop: new Animated.Value(20),
-    opacity: new Animated.Value(0),
-    textHeight: new Animated.Value(100)
-  };
+  @observable cardWidth = new Animated.Value(315);
+  @observable cardHeight = new Animated.Value(460);
+  @observable titleTop = new Animated.Value(20);
+  @observable opacity = new Animated.Value(0);
+  @observable textHeight = new Animated.Value(100);
 
   openCard = () => {
     if (!this.props.canOpen) return;
 
-    Animated.spring(this.state.cardWidth, { toValue: screenWidth }).start();
-    Animated.spring(this.state.cardHeight, {
+    Animated.spring(this.cardWidth, { toValue: screenWidth }).start();
+    Animated.spring(this.cardHeight, {
       toValue: screenHeight - tabBarHeight
     }).start();
-    Animated.spring(this.state.titleTop, { toValue: 40 }).start();
-    Animated.timing(this.state.opacity, { toValue: 1 }).start();
-    Animated.spring(this.state.textHeight, { toValue: 1000 }).start();
+    Animated.spring(this.titleTop, { toValue: 40 }).start();
+    Animated.timing(this.opacity, { toValue: 1 }).start();
+    Animated.spring(this.textHeight, { toValue: 1000 }).start();
 
     StatusBar.setHidden(true);
     this.props.openCard();
   };
 
   closeCard = () => {
-    Animated.spring(this.state.cardWidth, { toValue: 315 }).start();
-    Animated.spring(this.state.cardHeight, {
+    Animated.spring(this.cardWidth, { toValue: 315 }).start();
+    Animated.spring(this.cardHeight, {
       toValue: 460
     }).start();
-    Animated.spring(this.state.titleTop, { toValue: 20 }).start();
-    Animated.timing(this.state.opacity, { toValue: 0 }).start();
-    Animated.spring(this.state.textHeight, { toValue: 100 }).start();
+    Animated.spring(this.titleTop, { toValue: 20 }).start();
+    Animated.timing(this.opacity, { toValue: 0 }).start();
+    Animated.spring(this.textHeight, { toValue: 100 }).start();
 
     StatusBar.setHidden(false);
     this.props.closeCard();
@@ -79,16 +60,19 @@ class Project extends Component {
         }}
       >
         <AnimatedContainer
-          style={{ width: this.state.cardWidth, height: this.state.cardHeight }}
+          style={{
+            width: this.cardWidth,
+            height: this.cardHeight
+          }}
         >
           <Cover>
             <Image source={this.props.image} />
-            <AnimatedTitle style={{ top: this.state.titleTop }}>
+            <AnimatedTitle style={{ top: this.titleTop }}>
               {this.props.title}
             </AnimatedTitle>
             <Author>by {this.props.author}</Author>
           </Cover>
-          <AnimatedText style={{ height: this.state.textHeight }}>
+          <AnimatedText style={{ height: this.textHeight }}>
             {this.props.text}
           </AnimatedText>
           <AnimatedLinearGradient
@@ -97,7 +81,7 @@ class Project extends Component {
               position: "absolute",
               top: 330,
               width: "100%",
-              height: this.state.textHeight
+              height: this.textHeight
             }}
           />
 
@@ -107,7 +91,7 @@ class Project extends Component {
               this.closeCard();
             }}
           >
-            <AnimatedCloseView style={{ opacity: this.state.opacity }}>
+            <AnimatedCloseView style={{ opacity: this.opacity }}>
               <Ionicons name="ios-close" size={32} color="#546bfb" />
             </AnimatedCloseView>
           </TouchableOpacity>
@@ -117,7 +101,7 @@ class Project extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Project);
+export default Project;
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
 

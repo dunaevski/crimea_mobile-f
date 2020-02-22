@@ -1,36 +1,22 @@
 import React from "react";
+import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { Animated, TouchableOpacity, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import MenuItems from "./MenuItems";
-import { connect } from "react-redux";
+import MenuItems from "components/MenuItems";
 
-const screenWidth = Dimensions.get("window").width;
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-let cardWidth = screenWidth;
-if (screenWidth > 500) {
+let cardWidth = SCREEN_WIDTH;
+if (SCREEN_WIDTH > 500) {
   cardWidth = 500;
 }
 
-function mapStateToProps(state) {
-  return { action: state.action };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    closeMenu: () =>
-      dispatch({
-        type: "CLOSE_MENU"
-      })
-  };
-}
-
-const screenHeight = Dimensions.get("window").height;
-
+@inject("UIStore")
+@observer
 class Menu extends React.Component {
-  state = {
-    top: new Animated.Value(screenHeight)
-  };
+  top = new Animated.Value(SCREEN_HEIGHT);
 
   componentDidMount() {
     this.toggleMenu();
@@ -41,33 +27,34 @@ class Menu extends React.Component {
   }
 
   toggleMenu = () => {
-    if (this.props.action === "openMenu") {
-      Animated.spring(this.state.top, {
+    if (this.props.UIStore.isMenuOpen) {
+      Animated.spring(this.top, {
         toValue: 54
       }).start();
-    }
-
-    if (this.props.action === "closeMenu") {
-      Animated.spring(this.state.top, {
-        toValue: screenHeight
+    } else {
+      Animated.spring(this.top, {
+        toValue: SCREEN_HEIGHT
       }).start();
     }
   };
 
-  handleMenu = index => {
-    this.props.closeMenu();
+  handleMenu = () => {
+    this.props.UIStore.toggleMenu();
   };
 
   render() {
+    const { isMenuOpen, toggleMenu } = this.props.UIStore;
     return (
-      <AnimatedContainer style={{ top: this.state.top }}>
+      <AnimatedContainer style={{ top: this.top }}>
         <Cover>
-          <Image source={require("../assets/background2.jpg")} />
+          <Image source={require("./../../assets/background2.jpg")} />
           <Title> Username </Title>
           <Subtitle>Crimea on Your Phone</Subtitle>
         </Cover>
         <TouchableOpacity
-          onPress={this.props.closeMenu}
+          onPress={() => {
+            this.props.UIStore.toggleMenu();
+          }}
           style={{
             position: "absolute",
             top: 120,
@@ -97,7 +84,7 @@ class Menu extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default Menu;
 
 const Container = styled.View`
   position: absolute;
@@ -148,7 +135,7 @@ const Cover = styled.View`
 `;
 
 const Content = styled.View`
-  height: ${screenHeight}px;
+  height: ${SCREEN_HEIGHT}px;
   background: #f0f3f5;
   padding: 50px;
 `;
