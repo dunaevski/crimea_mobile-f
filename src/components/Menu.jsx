@@ -1,19 +1,21 @@
-import React from "react";
-import { inject, observer } from "mobx-react";
-import styled from "styled-components";
-import { Animated, TouchableOpacity, Dimensions } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import MenuItems from "components/MenuItems";
+import React from 'react';
+import { inject, observer } from 'mobx-react';
+import styled from 'styled-components';
+import { Animated, Dimensions, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import MenuItems from 'components/MenuItems';
+import { menuItems as items } from '../mockData';
 
-const SCREEN_WIDTH = Dimensions.get("window").width;
-const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 let cardWidth = SCREEN_WIDTH;
 if (SCREEN_WIDTH > 500) {
   cardWidth = 500;
 }
 
-@inject("UIStore")
+
+@inject('UIStore')
 @observer
 class Menu extends React.Component {
   top = new Animated.Value(SCREEN_HEIGHT);
@@ -43,17 +45,18 @@ class Menu extends React.Component {
   };
 
   render() {
-    const { isMenuOpen, toggleMenu } = this.props.UIStore;
+    const { UIStore } = this.props;
+    const isMenuOpen = UIStore.isMenuOpen;
     return (
-      <AnimatedContainer style={{ top: this.top }}>
-        <Cover>
-          <Image source={require("./../../assets/background2.jpg")} />
-          <Title> Username </Title>
-          <Subtitle>Crimea on Your Phone</Subtitle>
-        </Cover>
-        <TouchableOpacity
-          onPress={() => {
-            this.props.UIStore.toggleMenu();
+        <AnimatedContainer style={ { top: this.top } }>
+          <Cover>
+            <Image source={ require('./../../assets/background2.jpg') } />
+            <Title> { UIStore.name } </Title>
+            <Subtitle>Crimea on Your Phone</Subtitle>
+          </Cover>
+          <TouchableOpacity
+              onPress={ () => {
+                UIStore.toggleMenu();
           }}
           style={{
             position: "absolute",
@@ -139,26 +142,3 @@ const Content = styled.View`
   background: #f0f3f5;
   padding: 50px;
 `;
-
-const items = [
-  {
-    icon: "ios-settings",
-    title: "Account",
-    text: "settings"
-  },
-  {
-    icon: "ios-card",
-    title: "Billing",
-    text: "payments"
-  },
-  {
-    icon: "ios-compass",
-    title: "Learn React",
-    text: "start course"
-  },
-  {
-    icon: "ios-exit",
-    title: "Log out",
-    text: "see you soon!"
-  }
-];

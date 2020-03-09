@@ -1,14 +1,15 @@
-import React from "react";
-import styled from "styled-components";
-import { NotificationIcon } from "components/Icons";
+import React from 'react';
+import styled from 'styled-components';
+import { NotificationIcon } from 'components/Icons';
+
 
 const NotificationButton = () => (
-  <Container>
-    <NotificationIcon />
-    <Bubble>
-      <Text>3</Text>
-    </Bubble>
-  </Container>
+    <Container>
+        <NotificationIcon />
+        <Bubble>
+            <Text>3</Text>
+        </Bubble>
+    </Container>
 );
 
 export default NotificationButton;

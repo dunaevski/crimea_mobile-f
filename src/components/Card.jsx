@@ -1,20 +1,20 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Card = props => (
-  <Container style={{ elevation: 10 }}>
-    <Cover>
-      <Image source={props.image} />
-      <Title>{props.title}</Title>
-    </Cover>
-    <Content>
-      <Logo source={props.logo} />
-      <Wrapper>
-        <Caption>{props.caption}</Caption>
-        <Subtitle>{props.subtitle.toUpperCase()}</Subtitle>
-      </Wrapper>
-    </Content>
-  </Container>
+    <Container style={ { elevation: 10 } }>
+        <Cover>
+            <Image source={ props.image } />
+            <Title>{ props.title }</Title>
+        </Cover>
+        <Content>
+            <Logo source={ props.logo } />
+            <Wrapper>
+                <Caption>{ props.caption }</Caption>
+                <Subtitle>{ props.subtitle.toUpperCase() }</Subtitle>
+            </Wrapper>
+        </Content>
+    </Container>
 );
 
 export default Card;

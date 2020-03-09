@@ -1,55 +1,57 @@
-import React from "react";
-import styled from "styled-components";
-import { Dimensions } from "react-native";
-import { observer } from "mobx-react";
-import { observable } from "mobx";
+import React from 'react';
+import styled from 'styled-components';
+import { Dimensions } from 'react-native';
+import { observer } from 'mobx-react';
+import { observable } from 'mobx';
 
-const SCREEN_WIDTH = Dimensions.get("window").width;
+const SCREEN_WIDTH = Dimensions.get('window').width;
+
 
 @observer
 class Course extends React.Component {
-  @observable cardWidth = null;
+    @observable cardWidth = null;
 
-  componentDidMount() {
-    this.cardWidth = this.getCourseWidth(SCREEN_WIDTH);
-    Dimensions.addEventListener("change", this.adaptLayout);
-  }
-
-  getCourseWidth = () => {
-    let cardWidth = SCREEN_WIDTH - 40;
-
-    if (SCREEN_WIDTH >= 768) {
-      cardWidth = (SCREEN_WIDTH - 60) / 2;
-    }
-    if (SCREEN_WIDTH >= 1024) {
-      cardWidth = (SCREEN_WIDTH - 80) / 3;
+    componentDidMount() {
+        this.cardWidth = this.getCourseWidth(SCREEN_WIDTH);
+        Dimensions.addEventListener('change', this.adaptLayout);
     }
 
-    return cardWidth;
-  };
+    getCourseWidth = () => {
+        let cardWidth = SCREEN_WIDTH - 40;
 
-  adaptLayout = dimensions => {
-    this.cardWidth = this.getCourseWidth(dimensions.window.width);
-  };
+        if (SCREEN_WIDTH >= 768) {
+            cardWidth = (SCREEN_WIDTH - 60) / 2;
+        }
+        if (SCREEN_WIDTH >= 1024) {
+            cardWidth = (SCREEN_WIDTH - 80) / 3;
+        }
 
-  render() {
-    return (
-      <Container style={{ width: this.cardWidth }}>
-        <Cover>
-          <Image source={this.props.image} />
-          <Logo source={this.props.logo} resizeMode="contain" />
-          <Subtitle>{this.props.subtitle}</Subtitle>
-          <Title>{this.props.title}</Title>
-        </Cover>
-        <Content>
-          <Avatar source={this.props.avatar} />
-          <Caption>{this.props.caption}</Caption>
-          <Author>Автор: {this.props.author}</Author>
-        </Content>
-      </Container>
-    );
-  }
+        return cardWidth;
+    };
+
+    adaptLayout = dimensions => {
+        this.cardWidth = this.getCourseWidth(dimensions.window.width);
+    };
+
+    render() {
+        return (
+            <Container style={ { width: this.cardWidth } }>
+                <Cover>
+                    <Image source={ this.props.image } />
+                    <Logo source={ this.props.logo } resizeMode="contain" />
+                    <Subtitle>{ this.props.subtitle }</Subtitle>
+                    <Title>{ this.props.title }</Title>
+                </Cover>
+                <Content>
+                    <Avatar source={ this.props.avatar } />
+                    <Caption>{ this.props.caption }</Caption>
+                    <Author>Автор: { this.props.author }</Author>
+                </Content>
+            </Container>
+        );
+    }
 }
+
 
 export default Course;
 

@@ -1,12 +1,12 @@
-import React from "react";
-import { createStackNavigator } from "react-navigation-stack";
-import { createBottomTabNavigator } from "react-navigation-tabs";
-import { Ionicons } from "@expo/vector-icons";
-import HomeScreen from "screens/HomeScreen";
-import SectionScreen from "screens/SectionScreen";
-import CoursesScreen from "screens/CoursesScreen";
-import ProjectsScreen from "screens/ProjectsScreen";
-import VideoScreen from "screens/VideoScreen";
+import React from 'react';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { Ionicons } from '@expo/vector-icons';
+import HomeScreen from 'screens/HomeScreen';
+import SectionScreen from 'screens/SectionScreen';
+import CoursesScreen from 'screens/CoursesScreen';
+import ProjectsScreen from 'screens/ProjectsScreen';
+import VideoScreen from 'screens/VideoScreen';
 
 const activeColor = "#4775f2";
 const inactiveColor = "#b8bece";

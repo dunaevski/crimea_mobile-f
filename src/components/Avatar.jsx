@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { observable } from "mobx";
+import React, { Component } from 'react';
+import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
-import styled from "styled-components";
+import styled from 'styled-components';
+
 
 @inject('UIStore')
 @observer

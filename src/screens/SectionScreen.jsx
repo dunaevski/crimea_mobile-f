@@ -1,19 +1,20 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { TouchableOpacity, StatusBar, ScrollView } from "react-native";
-import WebView from "react-native-webview";
-import { PlayIcon } from "components/Icons";
-import { Ionicons } from "@expo/vector-icons";
-import { observer } from "mobx-react";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { Linking, ScrollView, StatusBar, TouchableOpacity } from 'react-native';
+import WebView from 'react-native-webview';
+import { PlayIcon } from 'components/Icons';
+import { Ionicons } from '@expo/vector-icons';
+import { observer } from 'mobx-react';
+
 
 @observer
 class SectionScreen extends Component {
   static navigationOptions = {
-    headerShown: false
+    headerShown: false,
   };
 
   componentDidMount() {
-    StatusBar.setBarStyle("light-content", true);
+    StatusBar.setBarStyle('light-content', true);
   }
 
   componentWillUnmount() {
@@ -87,20 +88,21 @@ class SectionScreen extends Component {
 export default SectionScreen;
 
 const htmlStyles = `
+<style>
    * {
       font-family: -apple-system, Roboto;
       margin: 0;
       padding: 0;
-      font-size: 17px;
+      font-size: 30px;
       font-weight: normal;
       color: #3c4560;
-      line-height: 24px;
+      line-height: 40px;
     }
     body {
           background-color: #f2f2f2;
-}
+    }
     h2 {
-      font-size: 20px;
+      font-size: 40px;
       text-transform: uppercase;
       color: #b8bece;
       font-weight: 600;
@@ -125,18 +127,7 @@ const htmlStyles = `
       border-radius: 10px;
       margin-top: 20px;
     }
-    pre {
-      padding: 20px;
-      background: #212C4F;
-      overflow: hidden;
-      word-wrap: break-word;
-      border-radius: 10px;
-      margin-top: 20px;
-    }
-    
-    code {
-      color: white;
-    }
+    </style>
 `;
 
 const Content = styled.View`

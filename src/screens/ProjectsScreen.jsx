@@ -1,61 +1,64 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import Project from "components/Project";
-import { Animated, PanResponder } from "react-native";
-import { observable } from "mobx";
-import { observer } from "mobx-react";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import Project from 'components/Project';
+import { Animated, PanResponder } from 'react-native';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+import { projects } from '../mockData';
+
 
 @observer
 class ProjectsScreen extends Component {
-  static navigationOptions = {
-    headerShown: false
-  };
-  @observable pan = new Animated.ValueXY();
-  @observable scale = new Animated.Value(0.9);
-  @observable translateY = new Animated.Value(44);
-  @observable thirdScale = new Animated.Value(-50);
-  @observable thirdTranslateY = new Animated.Value(1);
-  @observable index = 0;
-  @observable opacity = new Animated.Value(0);
-  @observable isOpenCard = false;
+    static navigationOptions = {
+        headerShown: false,
+    };
 
-  constructor(props) {
-    super(props);
+    pan = new Animated.ValueXY();
+    scale = new Animated.Value(0.9);
+    translateY = new Animated.Value(44);
+    thirdScale = new Animated.Value(-50);
+    thirdTranslateY = new Animated.Value(1);
+    opacity = new Animated.Value(0);
+    @observable index = 0;
+    @observable isOpenCard = false;
 
-    this._panResponder = PanResponder.create({
-      onMoveShouldSetPanResponder: (event, gestureState) => {
-        return !(gestureState.dx === 0 && gestureState.dy === 0);
-      },
+    constructor(props) {
+        super(props);
 
-      onPanResponderGrant: () => {
-        Animated.spring(this.scale, { toValue: 1 }).start();
-        Animated.spring(this.translateY, { toValue: 0 }).start();
+        this._panResponder = PanResponder.create({
+            onMoveShouldSetPanResponder: (event, gestureState) => {
+                return !(gestureState.dx === 0 && gestureState.dy === 0);
+            },
 
-        Animated.spring(this.thirdScale, { toValue: 0.9 }).start();
-        Animated.spring(this.thirdTranslateY, { toValue: 44 }).start();
+            onPanResponderGrant: () => {
+                Animated.spring(this.scale, { toValue: 1 }).start();
+                Animated.spring(this.translateY, { toValue: 0 }).start();
 
-        Animated.timing(this.opacity, { toValue: 1 }).start();
-      },
+                Animated.spring(this.thirdScale, { toValue: 0.9 }).start();
+                Animated.spring(this.thirdTranslateY, { toValue: 44 }).start();
 
-      onPanResponderMove: Animated.event([
-        null,
-        {
-          dx: this.pan.x,
-          dy: this.pan.y
-        }
-      ]),
+                Animated.timing(this.opacity, { toValue: 1 }).start();
+            },
 
-      onPanResponderRelease: () => {
-        const positionY = this.pan.y.__getValue();
-        Animated.timing(this.opacity, { toValue: 0 }).start();
+            onPanResponderMove: Animated.event([
+                null,
+                {
+                    dx: this.pan.x,
+                    dy: this.pan.y,
+                },
+            ]),
 
-        if (positionY > 200) {
-          Animated.timing(this.pan, {
-            toValue: {
-              x: 0,
-              y: 1000
-            }
-          }).start(() => {
+            onPanResponderRelease: () => {
+                const positionY = this.pan.y.__getValue();
+                Animated.timing(this.opacity, { toValue: 0 }).start();
+
+                if (positionY > 200) {
+                    Animated.timing(this.pan, {
+                        toValue: {
+                            x: 0,
+                            y: 1000,
+                        },
+                    }).start(() => {
             this.pan.setValue({
               x: 0,
               y: 0
@@ -195,29 +198,3 @@ const Container = styled.View`
   align-items: center;
   background: #f0f3f5;
 `;
-
-const Text = styled.Text``;
-
-const projects = [
-  {
-    title: "Price Tag",
-    image: require("./../../assets/background5.jpg"),
-    author: "Liu Yi",
-    text:
-      "Thanks to Design+Code, I improved my design skill and learned to do animations for my app Price Tag, a top news app in China.Thanks to Design+Code, I improved my design skill and learned to do animations for my app Price Tag, a top news app in China.Thanks to Design+Code, I improved my design skill and learned to do animations for my app Price Tag, a top news app in China."
-  },
-  {
-    title: "The DM App - Ananoumous Chat",
-    image: require("./../../assets/background6.jpg"),
-    author: "Chad Goodman",
-    text:
-      "Design+Code was the first resource I used when breaking into software. I went from knowing nothing about design or code to building a production ready app from scratch. "
-  },
-  {
-    title: "Nikhiljay",
-    image: require("./../../assets/background7.jpg"),
-    author: "Nikhil D'Souza",
-    text:
-      "Recently finished the React course by @Mengto, and I 10/10 would recommend. I already rewrote my personal website in @reactjs and I'm very excited with it."
-  }
-];

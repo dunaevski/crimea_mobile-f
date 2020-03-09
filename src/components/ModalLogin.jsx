@@ -1,16 +1,10 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { action, observable } from "mobx";
-import { inject, observer } from "mobx-react";
-import {
-  Animated,
-  Dimensions,
-  Keyboard,
-  TouchableOpacity,
-  TouchableWithoutFeedback
-} from "react-native";
-import { BlurView } from "expo-blur";
-import AnimateIcon from "components/AnimateIcon";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { action, observable } from 'mobx';
+import { inject, observer } from 'mobx-react';
+import { Animated, Dimensions, Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { BlurView } from 'expo-blur';
+import AnimateIcon from 'components/AnimateIcon';
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
@@ -28,7 +22,6 @@ class ModalLogin extends Component {
   translateY = new Animated.Value(0);
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(this.props.UIStore.isModalLoginOpen);
     if (this.props.UIStore.isModalLoginOpen) {
       Animated.timing(this.top, {
         toValue: 0,
@@ -141,9 +134,9 @@ class ModalLogin extends Component {
           animation={require("./../../assets/success")}
         />
         <AnimateIcon
-          isActive={this.isLoading}
-          loop={true}
-          animation={require("./../../assets/loading")}
+            isActive={ this.isLoading }
+            loop={ true }
+            animation={ require('./../../assets/loading') }
         />
       </AnimatedContainer>
     );
