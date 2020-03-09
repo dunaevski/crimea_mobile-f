@@ -105,33 +105,36 @@ class ModalLogin extends Component {
           <Logo source={require("./../../assets/logo-dc.png")} />
           <Text>Start Taiping. Access Pro Content </Text>
           <TextInput
-            placeholder="Email"
-            keyboardType="email-address"
-            onChangeText={email => {
-              this.email = email;
-            }}
-            onFocus={this.focusEmail}
+              placeholder="Email"
+              keyboardType="email-address"
+              onChangeText={ email => {
+                this.email = email;
+              } }
+              onFocus={ this.focusEmail }
           />
           <TextInput
-            placeholder="Password"
-            secureTextEntry={true}
-            onChangeText={password => {
-              this.password = password;
-            }}
-            onFocus={this.focusPassword}
+              placeholder="Password"
+              secureTextEntry={ true }
+              onChangeText={ password => {
+                this.password = password;
+              } }
+              onFocus={ this.focusPassword }
           />
-          <IconEmail source={this.iconEmail} />
-          <IconPassword source={this.iconPassword} />
-          <TouchableOpacity onPress={this.handleSubmitLogin}>
+          <IconEmail source={ this.iconEmail } />
+          <IconPassword source={ this.iconPassword } />
+          <TouchableOpacity
+              activeOpacity={ 0.7 }
+              onPress={ this.handleSubmitLogin }
+          >
             <Button>
               <ButtonText>Login In</ButtonText>
             </Button>
           </TouchableOpacity>
         </AnimatedModal>
         <AnimateIcon
-          isActive={this.isSuccessful}
-          loop={false}
-          animation={require("./../../assets/success")}
+            isActive={ this.isSuccessful }
+            loop={ false }
+            animation={ require('./../../assets/success') }
         />
         <AnimateIcon
             isActive={ this.isLoading }

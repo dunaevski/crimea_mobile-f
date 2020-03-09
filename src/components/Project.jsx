@@ -6,14 +6,14 @@ import { observer } from 'mobx-react';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
-const tabBarHeight = 83;
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const tabBarHeight = 0.06;
 
 
 @observer
 class Project extends Component {
-    @observable cardWidth = new Animated.Value(315);
+    @observable cardWidth = new Animated.Value(SCREEN_WIDTH * 0.9);
     @observable cardHeight = new Animated.Value(460);
     @observable titleTop = new Animated.Value(20);
     @observable opacity = new Animated.Value(0);
@@ -22,9 +22,9 @@ class Project extends Component {
     openCard = () => {
         if (!this.props.canOpen) return;
 
-        Animated.spring(this.cardWidth, { toValue: screenWidth }).start();
+        Animated.spring(this.cardWidth, { toValue: SCREEN_WIDTH }).start();
         Animated.spring(this.cardHeight, {
-            toValue: screenHeight - tabBarHeight,
+            toValue: SCREEN_HEIGHT - SCREEN_HEIGHT * tabBarHeight,
         }).start();
         Animated.spring(this.titleTop, { toValue: 40 }).start();
         Animated.timing(this.opacity, { toValue: 1 }).start();
@@ -35,7 +35,7 @@ class Project extends Component {
     };
 
     closeCard = () => {
-        Animated.spring(this.cardWidth, { toValue: 315 }).start();
+        Animated.spring(this.cardWidth, { toValue: SCREEN_WIDTH * 0.9 }).start();
         Animated.spring(this.cardHeight, {
             toValue: 460,
         }).start();
@@ -89,6 +89,7 @@ class Project extends Component {
                             top: 20,
                             right: 20,
                         } }
+                        activeOpacity={ 0.7 }
                         onPress={ () => {
                             this.closeCard();
                         } }

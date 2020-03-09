@@ -49,40 +49,42 @@ class Menu extends React.Component {
     const isMenuOpen = UIStore.isMenuOpen;
     return (
         <AnimatedContainer style={ { top: this.top } }>
-          <Cover>
-            <Image source={ require('./../../assets/background2.jpg') } />
-            <Title> { UIStore.name } </Title>
-            <Subtitle>Crimea on Your Phone</Subtitle>
-          </Cover>
-          <TouchableOpacity
-              onPress={ () => {
-                UIStore.toggleMenu();
-          }}
-          style={{
-            position: "absolute",
-            top: 120,
-            left: "50%",
-            marginLeft: -22,
-            zIndex: 1
-          }}
-        >
-          <CloseView>
-            <Ionicons name="ios-close" size={44} color="#546bfb" />
-          </CloseView>
-        </TouchableOpacity>
-        <Content>
-          {items.map((item, index) => (
+            <Cover>
+                <Image source={ require('./../../assets/background2.jpg') } />
+                <Title> { UIStore.name } </Title>
+                <Subtitle>Crimea on Your Phone</Subtitle>
+            </Cover>
             <TouchableOpacity
-              key={index}
-              onPress={() => {
-                this.handleMenu(index);
-              }}
+                activeOpacity={ 0.7 }
+                onPress={ () => {
+                    UIStore.toggleMenu();
+                } }
+                style={ {
+                    position: 'absolute',
+                    top: 120,
+                    left: '50%',
+                    marginLeft: -22,
+                    zIndex: 1,
+                } }
             >
-              <MenuItems icon={item.icon} title={item.title} text={item.text} />
+                <CloseView>
+                    <Ionicons name="ios-close" size={ 44 } color="#546bfb" />
+                </CloseView>
             </TouchableOpacity>
-          ))}
-        </Content>
-      </AnimatedContainer>
+            <Content>
+                { items.map((item, index) => (
+                    <TouchableOpacity
+                        key={ index }
+                        activeOpacity={ 0.7 }
+                        onPress={ () => {
+                            this.handleMenu(index);
+                        } }
+                    >
+                        <MenuItems icon={ item.icon } title={ item.title } text={ item.text } />
+                    </TouchableOpacity>
+                )) }
+            </Content>
+        </AnimatedContainer>
     );
   }
 }

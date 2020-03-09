@@ -33,6 +33,7 @@ class VideoScreen extends React.Component {
                         onPress={ () => {
                             this.props.navigation.goBack();
                         } }
+                        activeOpacity={ 0.7 }
                         style={ { padding: 20 } }
                     >
                         <Ionicons name="ios-close" size={ 44 } color="white" />

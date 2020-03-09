@@ -40,142 +40,154 @@ class ProjectsScreen extends Component {
                 Animated.timing(this.opacity, { toValue: 1 }).start();
             },
 
-            onPanResponderMove: Animated.event([
-                null,
-                {
-                    dx: this.pan.x,
-                    dy: this.pan.y,
-                },
-            ]),
+            onPanResponderMove: (e, gestureState) => {
+                if (!this.isOpenCard) {
+                    Animated.event([
+                        null,
+                        {
+                            dx: this.pan.x,
+                            dy: this.pan.y,
+                        },
+                    ])(e, gestureState); // <<--- INVOKING HERE!
+                }
+            },
 
             onPanResponderRelease: () => {
                 const positionY = this.pan.y.__getValue();
                 Animated.timing(this.opacity, { toValue: 0 }).start();
 
-                if (positionY > 200) {
+                if (positionY > 200 && !this.isOpenCard) {
                     Animated.timing(this.pan, {
                         toValue: {
                             x: 0,
                             y: 1000,
                         },
                     }).start(() => {
-            this.pan.setValue({
-              x: 0,
-              y: 0
-            });
-            this.scale.setValue(0.9);
-            this.translateY.setValue(44);
-            this.thirdScale.setValue(0.8);
-            this.thirdTranslateY.setValue(-50);
-            this.index = this.getNextIndex(this.index);
-          });
-        } else {
-          Animated.spring(this.pan, {
-            toValue: {
-              x: 0,
-              y: 0
-            }
-          }).start();
+                        this.pan.setValue({
+                            x: 0,
+                            y: 0,
+                        });
+                        this.scale.setValue(0.9);
+                        this.translateY.setValue(44);
+                        this.thirdScale.setValue(0.8);
+                        this.thirdTranslateY.setValue(-50);
+                        this.index = this.getNextIndex(this.index);
+                    });
+                }
+                else {
+                    Animated.spring(this.pan, {
+                        toValue: {
+                            x: 0,
+                            y: 0,
+                        },
+                    }).start();
 
-          Animated.spring(this.scale, { toValue: 0.9 }).start();
-          Animated.spring(this.translateY, { toValue: 44 }).start();
+                    Animated.spring(this.scale, { toValue: 0.9 }).start();
+                    Animated.spring(this.translateY, { toValue: 44 }).start();
 
-          Animated.spring(this.thirdScale, { toValue: 0.8 }).start();
-          Animated.spring(this.thirdTranslateY, { toValue: -50 }).start();
-        }
-      }
-    });
-  }
+                    Animated.spring(this.thirdScale, { toValue: 0.8 }).start();
+                    Animated.spring(this.thirdTranslateY, { toValue: -50 }).start();
+                }
+            },
+        });
+    }
 
-  getNextIndex = index => {
-    let nextIndex = index + 1;
-    if (nextIndex > projects.length - 1) return 0;
-    return nextIndex;
-  };
+    getNextIndex = index => {
+        let nextIndex = index + 1;
+        if (nextIndex > projects.length - 1) return 0;
+        return nextIndex;
+    };
 
-  openCard = () => {
-    this.isOpenCard = true;
-  };
+    openCard = () => {
+        this.isOpenCard = true;
+    };
 
-  closeCard = () => {
-    this.isOpenCard = false;
-  };
+    closeCard = () => {
+        this.isOpenCard = false;
+    };
 
-  render() {
-    return (
-      <Container>
-        <AnimatedMask style={{ opacity: this.opacity }} />
-        <Animated.View
-          style={{
-            transform: [{ translateX: this.pan.x }, { translateY: this.pan.y }]
-          }}
-          {...this._panResponder.panHandlers}
-        >
-          <Project
-            title={projects[this.index].title}
-            image={projects[this.index].image}
-            author={projects[this.index].author}
-            text={projects[this.index].text}
-            canOpen={true}
-            openCard={this.openCard}
-            closeCard={this.closeCard}
-          />
-        </Animated.View>
+    render() {
+        return (
+            <Container>
+                <AnimatedMask style={ { opacity: this.opacity } } />
+                <Animated.View
+                    style={ {
+                        transform: [
+                            { translateX: this.pan.x },
+                            { translateY: this.pan.y },
+                        ],
+                    } }
+                    { ...this._panResponder.panHandlers }
+                >
+                    <Project
+                        title={ projects[this.index].title }
+                        image={ projects[this.index].image }
+                        author={ projects[this.index].author }
+                        text={ projects[this.index].text }
+                        canOpen={ true }
+                        openCard={ this.openCard }
+                        closeCard={ this.closeCard }
+                    />
+                </Animated.View>
 
-        <Animated.View
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            zIndex: -1,
-            width: "100%",
-            height: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            transform: [{ scale: this.scale }, { translateY: this.translateY }]
-          }}
-        >
-          <Project
-            title={projects[this.getNextIndex(this.index)].title}
-            image={projects[this.getNextIndex(this.index)].image}
-            author={projects[this.getNextIndex(this.index)].author}
-            text={projects[this.getNextIndex(this.index)].text}
-            canOpen={true}
-            openCard={this.openCard}
-            closeCard={this.closeCard}
-          />
-        </Animated.View>
+                <Animated.View
+                    style={ {
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        zIndex: -1,
+                        width: '100%',
+                        height: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        transform: [
+                            { scale: this.scale },
+                            { translateY: this.translateY },
+                        ],
+                    } }
+                >
+                    <Project
+                        title={ projects[this.getNextIndex(this.index)].title }
+                        image={ projects[this.getNextIndex(this.index)].image }
+                        author={ projects[this.getNextIndex(this.index)].author }
+                        text={ projects[this.getNextIndex(this.index)].text }
+                        canOpen={ true }
+                        openCard={ this.openCard }
+                        closeCard={ this.closeCard }
+                    />
+                </Animated.View>
 
-        <Animated.View
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            zIndex: -3,
-            width: "100%",
-            height: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            transform: [
-              { scale: this.thirdScale },
-              { translateY: this.thirdTranslateY }
-            ]
-          }}
-        >
-          <Project
-            title={projects[this.getNextIndex(this.index + 1)].title}
-            image={projects[this.getNextIndex(this.index + 1)].image}
-            author={projects[this.getNextIndex(this.index + 1)].author}
-            text={projects[this.getNextIndex(this.index + 1)].text}
-            canOpen={true}
-            openCard={this.openCard}
-            closeCard={this.closeCard}
-          />
-        </Animated.View>
-      </Container>
-    );
-  }
+                <Animated.View
+                    style={ {
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        zIndex: -3,
+                        width: '100%',
+                        height: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        transform: [
+                            { scale: this.thirdScale },
+                            { translateY: this.thirdTranslateY },
+                        ],
+                    } }
+                >
+                    <Project
+                        title={ projects[this.getNextIndex(this.index + 1)].title }
+                        image={ projects[this.getNextIndex(this.index + 1)].image }
+                        author={ projects[this.getNextIndex(this.index + 1)].author }
+                        text={ projects[this.getNextIndex(this.index + 1)].text }
+                        canOpen={ true }
+                        openCard={ this.openCard }
+                        closeCard={ this.closeCard }
+                    />
+                </Animated.View>
+            </Container>
+        );
+    }
 }
+
 
 export default ProjectsScreen;
 

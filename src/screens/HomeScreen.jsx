@@ -99,6 +99,7 @@ class HomeScreen extends React.Component {
                         >
                             <TitleBar>
                                 <TouchableOpacity
+                                    activeOpacity={ 0.7 }
                                     onPress={ this.handleAvatar }
                                     style={ {
                                         position: 'absolute',
@@ -111,6 +112,7 @@ class HomeScreen extends React.Component {
                                 <Title>Добро пожаловать,</Title>
                                 <Name>{ UIStore.name }!</Name>
                                 <TouchableOpacity
+                                    activeOpacity={ 0.7 }
                                     onPress={ () => UIStore.toggleNotification() }
                                     style={ {
                                         position: 'absolute',
@@ -152,6 +154,7 @@ class HomeScreen extends React.Component {
                                     this.data.cards.map((card, index) => (
                                         <TouchableOpacity
                                             key={ index }
+                                            activeOpacity={ 0.7 }
                                             onPress={ () => {
                                                 this.props.navigation.push('Section', {
                                                     section: card,

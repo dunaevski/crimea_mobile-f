@@ -5,9 +5,9 @@ import { Animated, Dimensions, SafeAreaView, ScrollView, TouchableOpacity } from
 import { Ionicons } from '@expo/vector-icons';
 import { notificationItems as items } from '../mockData';
 
-let screenWidth = Dimensions.get('window').width;
-let cardWith = screenWidth - 40;
-if (screenWidth > 500) {
+let SCREEN_WIDTH = Dimensions.get('window').width;
+let cardWith = SCREEN_WIDTH - 40;
+if (SCREEN_WIDTH > 500) {
   cardWith = 460;
 }
 
@@ -60,41 +60,42 @@ class Notifications extends React.Component {
     return (
       <AnimatedContainer style={{ top: this.top }}>
         <TouchableOpacity
-          onPress={() => this.props.UIStore.toggleNotification()}
-          style={{
-            position: "absolute",
-            top: 40,
-            left: "50%",
-            marginLeft: -22,
-            zIndex: 100
-          }}
+            onPress={ () => this.props.UIStore.toggleNotification() }
+            activeOpacity={ 0.7 }
+            style={ {
+              position: 'absolute',
+              top: 40,
+              left: '50%',
+              marginLeft: -22,
+              zIndex: 100,
+            } }
         >
-          <CloseButton style={{ elevation: 20 }}>
-            <Ionicons name="ios-close" size={44} color="#546bfb" />
+          <CloseButton style={ { elevation: 20 } }>
+            <Ionicons name="ios-close" size={ 44 } color="#546bfb" />
           </CloseButton>
         </TouchableOpacity>
         <SafeAreaView>
-          <ScrollView style={{ padding: 20 }}>
+          <ScrollView style={ { padding: 20 } }>
             <Wrapper>
               <Subtitle>New</Subtitle>
-              {items.map((item, index) => (
-                <AnimatedItem
-                  key={index}
-                  style={{
-                    opacity: this.opacity,
-                    transform: [{ translateY: this.translateY }]
-                  }}
-                >
-                  <Header>
-                    <Logo source={{ uri: item.logo }} resizeMode="contain" />
-                    <Title>{item.title}</Title>
-                    <DateContainer>
-                      <Date>{item.date}</Date>
-                    </DateContainer>
-                  </Header>
-                  <Text>{item.text}</Text>
-                </AnimatedItem>
-              ))}
+              { items.map((item, index) => (
+                  <AnimatedItem
+                      key={ index }
+                      style={ {
+                        opacity: this.opacity,
+                        transform: [ { translateY: this.translateY } ],
+                      } }
+                  >
+                    <Header>
+                      <Logo source={ { uri: item.logo } } resizeMode="contain" />
+                      <Title>{ item.title }</Title>
+                      <DateContainer>
+                        <Date>{ item.date }</Date>
+                      </DateContainer>
+                    </Header>
+                    <Text>{ item.text }</Text>
+                  </AnimatedItem>
+              )) }
             </Wrapper>
           </ScrollView>
         </SafeAreaView>

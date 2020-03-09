@@ -31,31 +31,47 @@ HomeStack.navigationOptions = ({ navigation }) => {
   }
 
   return {
-    tabBarVisible,
-    tabBarLabel: "Home",
-    tabBarIcon: ({ focused }) => (
-      <Ionicons
-        name="ios-home"
-        size={26}
-        color={focused ? activeColor : inactiveColor}
-      />
-    )
+      tabBarVisible,
+      tabBarLabel: 'Home',
+      tabBarIcon: ({ focused }) => (
+          <Ionicons
+              name="ios-home"
+              size={ 28 }
+              color={ focused ? activeColor : inactiveColor }
+          />
+      ),
   };
 };
 
+const SearchStack = createStackNavigator({
+        Search: HomeScreen,
+    },
+);
+
+SearchStack.navigationOptions = {
+    tabBarLabel: 'Search',
+    tabBarIcon: ({ focused }) => (
+        <Ionicons
+            name="ios-search"
+            size={ 28 }
+            color={ focused ? activeColor : inactiveColor }
+        />
+    ),
+};
+
 const CoursesStack = createStackNavigator({
-  Courses: CoursesScreen
+    Courses: CoursesScreen,
 });
 
 CoursesStack.navigationOptions = {
-  tabBarLabel: "Courses",
-  tabBarIcon: ({ focused }) => (
-    <Ionicons
-      name="ios-albums"
-      size={26}
-      color={focused ? activeColor : inactiveColor}
-    />
-  )
+    tabBarLabel: 'Courses',
+    tabBarIcon: ({ focused }) => (
+        <Ionicons
+            name="ios-albums"
+            size={ 28 }
+            color={ focused ? activeColor : inactiveColor }
+        />
+    ),
 };
 
 const ProjectStack = createStackNavigator({
@@ -65,18 +81,27 @@ const ProjectStack = createStackNavigator({
 ProjectStack.navigationOptions = {
   tabBarLabel: "Projects",
   tabBarIcon: ({ focused }) => (
-    <Ionicons
-      name="ios-folder"
-      size={26}
-      color={focused ? activeColor : inactiveColor}
-    />
+      <Ionicons
+          name="ios-folder"
+          size={ 28 }
+          color={ focused ? activeColor : inactiveColor }
+      />
   )
 };
 
+
 const TabNavigator = createBottomTabNavigator({
-  HomeStack,
-  CoursesStack,
-  ProjectStack
+    HomeStack,
+    SearchStack,
+    CoursesStack,
+    ProjectStack,
+}, {
+    swipeEnabled: true,
+    tabBarOptions: {
+        allowFontScaling: true,
+        showLabel: false,
+        style: { height: 44 },
+    },
 });
 
 export default TabNavigator;

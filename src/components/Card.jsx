@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Dimensions } from 'react-native';
+const SCREEN_WIDTH = Dimensions.get('window').width;
+
 
 const Card = props => (
     <Container style={ { elevation: 10 } }>
@@ -18,6 +21,15 @@ const Card = props => (
 );
 
 export default Card;
+
+const Container = styled.View`
+  background: white;
+  width: ${SCREEN_WIDTH - 80}px;
+  height: 280px;
+  border-radius: 14px;
+  margin: 20px 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+`;
 
 const Content = styled.View`
   padding-left: 20px;
@@ -47,15 +59,6 @@ const Subtitle = styled.Text`
 
 const Wrapper = styled.View`
   margin-left: 10px;
-`;
-
-const Container = styled.View`
-  background: white;
-  width: 315px;
-  height: 280px;
-  border-radius: 14px;
-  margin: 20px 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 `;
 
 const Cover = styled.View`

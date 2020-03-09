@@ -33,35 +33,41 @@ class SectionScreen extends Component {
             <Image source={section.image} />
             <PlayWrapper>
               <TouchableOpacity
-                underlayColor="transparent"
-                onPress={() => {
-                  navigation.navigate("Video");
-                }}
+                  underlayColor="transparent"
+                  activeOpacity={ 0.7 }
+                  onPress={ () => {
+                    navigation.navigate('Video');
+                  } }
               >
                 <PlayView>
-                  <PlayIcon style={{ marginLeft: -10 }} />
+                  <PlayIcon style={ { marginLeft: -10 } } />
                 </PlayView>
               </TouchableOpacity>
             </PlayWrapper>
             <Wrapper>
-              <Logo source={section.logo} />
-              <Subtitle>{section.subtitle}</Subtitle>
+              <Logo source={ section.logo } />
+              <Subtitle>{ section.subtitle }</Subtitle>
             </Wrapper>
-            <Title>{section.title}</Title>
-            <Caption>{section.caption}</Caption>
+            <Title>{ section.title }</Title>
+            <Caption>{ section.caption }</Caption>
           </Cover>
           <TouchableOpacity
-            style={{ position: "absolute", top: 20, right: 20 }}
-            onPress={() => {
-              navigation.goBack();
-            }}
+              style={ {
+                position: 'absolute',
+                top: 20,
+                right: 20,
+              } }
+              activeOpacity={ 0.7 }
+              onPress={ () => {
+                navigation.goBack();
+              } }
           >
             <CloseView>
               <Ionicons
-                name="ios-close"
-                size={36}
-                color="#4775f2"
-                style={{ marginTop: -2 }}
+                  name="ios-close"
+                  size={ 36 }
+                  color="#4775f2"
+                  style={ { marginTop: -2 } }
               />
             </CloseView>
           </TouchableOpacity>
