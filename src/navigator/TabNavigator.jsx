@@ -7,6 +7,7 @@ import SectionScreen from 'screens/SectionScreen';
 import CoursesScreen from 'screens/CoursesScreen';
 import ProjectsScreen from 'screens/ProjectsScreen';
 import VideoScreen from 'screens/VideoScreen';
+import SearchScreen from 'screens/SearchScreen';
 
 const activeColor = "#4775f2";
 const inactiveColor = "#b8bece";
@@ -44,7 +45,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
 };
 
 const SearchStack = createStackNavigator({
-        Search: HomeScreen,
+        Search: SearchScreen,
     },
 );
 

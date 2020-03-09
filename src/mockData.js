@@ -1,30 +1,30 @@
 const logos = [
   {
-    image: require('../assets/logo-framerx.png'),
+    image: require('../assets/yalta-logo.png'),
     text: 'Ялта',
   },
   {
-    image: require('../assets/logo-figma.png'),
-    text: 'Алушта',
-  },
-  {
-    image: require('../assets/logo-studio.png'),
-    text: 'Евпатория',
-  },
-  {
-    image: require('../assets/logo-react.png'),
-    text: 'Керч',
-  },
-  {
-    image: require('../assets/logo-swift.png'),
+    image: require('../assets/sevas-logo.png'),
     text: 'Севастополь',
   },
   {
-    image: require('../assets/logo-sketch.png'),
+    image: require('../assets/alushta-logo.png'),
+    text: 'Алушта',
+  },
+  {
+    image: require('../assets/evpatoria-logo.png'),
+    text: 'Евпатория',
+  },
+  {
+    image: require('../assets/kerch-logo.png'),
+    text: 'Керч',
+  },
+  {
+    image: require('../assets/simf-logo.png'),
     text: 'Симферопль',
   },
   {
-    image: require('../assets/logo-framerx.png'),
+    image: require('../assets/feodos-logo.png'),
     text: 'Феодосия',
   },
 ];
@@ -161,7 +161,7 @@ export const courses = [
 
 export const menuItems = [
   {
-    icon: 'ios-settings',
+    icon: 'ios-person',
     title: 'Account',
     text: 'settings',
   },
@@ -174,6 +174,11 @@ export const menuItems = [
     icon: 'ios-compass',
     title: 'Learn React',
     text: 'start course',
+  },
+  {
+    icon: 'ios-settings',
+    title: 'Settings',
+    text: 'Preferance',
   },
   {
     icon: 'ios-exit',

@@ -18,7 +18,7 @@ export default MenuItems;
 
 const Container = styled.View`
   flex-direction: row;
-  margin: 15px 0;
+  margin: 10px 0;
 `;
 
 const IconView = styled.View`
@@ -34,7 +34,7 @@ const Content = styled.View`
 
 const Title = styled.Text`
   color: #3c4560;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
 `;
 
@@ -42,5 +42,4 @@ const Text = styled.Text`
   color: #3c4560;
   font-weight: 600;
   opacity: 0.6;
-  margin-top: 5px;
 `;
