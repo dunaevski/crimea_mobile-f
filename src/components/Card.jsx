@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Dimensions } from 'react-native';
+import { colors, sizes } from 'constants/theme';
+
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 
@@ -44,15 +46,15 @@ const Logo = styled.Image`
 `;
 
 const Caption = styled.Text`
-  color: #3c4560;
-  font-size: 20px;
+  color: ${ colors.textGray };
+  font-size: ${ sizes.caption }px;
   font-weight: 600;
 `;
 
 const Subtitle = styled.Text`
-  color: #b8bece;
+  color: ${ colors.textGray2 };
   font-weight: 600;
-  font-size: 15px;
+  font-size: ${ sizes.text }px;
   text-transform: uppercase;
   margin-top: 4px;
 `;
@@ -79,7 +81,8 @@ const Image = styled.Image`
 
 const Title = styled.Text`
   color: white;
-  font-size: 24px;
+  font-size: ${ sizes.title }px;
+
   font-weight: bold;
   margin-top: 20px;
   margin-left: 20px;

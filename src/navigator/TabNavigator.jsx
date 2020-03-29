@@ -8,9 +8,10 @@ import CoursesScreen from 'screens/CoursesScreen';
 import ProjectsScreen from 'screens/ProjectsScreen';
 import VideoScreen from 'screens/VideoScreen';
 import SearchScreen from 'screens/SearchScreen';
+import { colors } from 'constants/theme'
 
-const activeColor = "#4775f2";
-const inactiveColor = "#b8bece";
+const activeColor = colors.blue;
+const inactiveColor = colors.textGray2;
 
 const HomeStack = createStackNavigator(
   {
@@ -101,7 +102,7 @@ const TabNavigator = createBottomTabNavigator({
     tabBarOptions: {
         allowFontScaling: true,
         showLabel: false,
-        style: { height: 44 },
+        style: { height: 45 },
     },
 });
 

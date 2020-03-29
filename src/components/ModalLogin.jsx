@@ -5,16 +5,19 @@ import { inject, observer } from 'mobx-react';
 import { Animated, Dimensions, Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { BlurView } from 'expo-blur';
 import AnimateIcon from 'components/AnimateIcon';
+import { colors, sizes } from 'constants/theme';
 
-const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
-@inject("UIStore")
+
+@inject('UIStore')
 @observer
 class ModalLogin extends Component {
-  @observable email = "";
-  @observable password = "";
-  @observable iconEmail = require("./../../assets/icon-email.png");
-  @observable iconPassword = require("./../../assets/icon-password.png");
+  @observable email = '';
+  @observable password = '';
+  @observable iconEmail = require('./../../assets/icon-email.png');
+  @observable iconPassword = require('./../../assets/icon-password.png');
   @observable isSuccessful = false;
   @observable isLoading = false;
   top = new Animated.Value(SCREEN_HEIGHT);
@@ -88,40 +91,48 @@ class ModalLogin extends Component {
       <AnimatedContainer style={{ top: this.top }}>
         <TouchableWithoutFeedback onPress={this.tapBackground}>
           <BlurView
-            titnt="default"
-            intensity={100}
-            style={{
-              position: "absolute",
-              width: "100%",
-              height: "100%"
-            }}
+              titnt="default"
+              intensity={ 100 }
+              style={ {
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+              } }
           />
         </TouchableWithoutFeedback>
         <AnimatedModal
-          style={{
-            transform: [{ scale: this.scale }, { translateY: this.translateY }]
-          }}
+            style={ {
+              transform: [
+                { scale: this.scale },
+                { translateY: this.translateY },
+              ],
+            } }
         >
-          <Logo source={require("./../../assets/logo-dc.png")} />
+          <Logo source={ require('./../../assets/logo-dc.png') } />
           <Text>Start Taiping. Access Pro Content </Text>
-          <TextInput
-              placeholder="Email"
-              keyboardType="email-address"
-              onChangeText={ email => {
-                this.email = email;
-              } }
-              onFocus={ this.focusEmail }
-          />
-          <TextInput
-              placeholder="Password"
-              secureTextEntry={ true }
-              onChangeText={ password => {
-                this.password = password;
-              } }
-              onFocus={ this.focusPassword }
-          />
-          <IconEmail source={ this.iconEmail } />
-          <IconPassword source={ this.iconPassword } />
+          <Email>
+            <IconEmail source={ this.iconEmail } />
+            <TextInput
+                placeholder="Email"
+                keyboardType="email-address"
+                onChangeText={ email => {
+                  this.email = email;
+                } }
+                onFocus={ this.focusEmail }
+            />
+          </Email>
+          <Password>
+            <IconPassword source={ this.iconPassword } />
+            <TextInput
+                placeholder="Password"
+                secureTextEntry={ true }
+                onChangeText={ password => {
+                  this.password = password;
+                } }
+                onFocus={ this.focusPassword }
+            />
+          </Password>
+
           <TouchableOpacity
               activeOpacity={ 0.7 }
               onPress={ this.handleSubmitLogin }
@@ -162,8 +173,8 @@ const Container = styled.View`
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 const Modal = styled.View`
-  width: 335px;
-  height: 370px;
+  width: ${ SCREEN_WIDTH * 0.8 }px;
+  height: 390px;
   background: white;
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -180,28 +191,28 @@ const Logo = styled.Image`
 
 const Text = styled.Text`
   margin-top: 20px;
-  font-size: 13px;
+  font-size: ${ sizes.text }px;
   font-weight: 600;
   text-transform: uppercase;
   width: 160px;
   text-align: center;
-  color: #b8bece;
+  color: ${ colors.textGray2 };
 `;
 
 const TextInput = styled.TextInput`
-  border: 1px solid #dbdfea;
-  width: 295px;
+  border: 1px solid ${ colors.borderWhite };
+  width: ${ SCREEN_WIDTH * 0.7 }px;
   height: 44px;
   border-radius: 10px;
-  font-size: 17px;
-  color: #3c4560;
+  font-size: ${ sizes.text }px;
+  color: ${ colors.textGray };
   margin-top: 20px;
   padding-left: 44px;
 `;
 
 const Button = styled.View`
-  background: #5263ff;
-  width: 295px;
+  background: ${ colors.blue };
+  width: ${ SCREEN_WIDTH * 0.7 }px;
   height: 50px;
   justify-content: center;
   align-items: center;
@@ -213,22 +224,30 @@ const Button = styled.View`
 const ButtonText = styled.Text`
   color: white;
   font-weight: 600;
-  font-size: 20px;
+  font-size: ${ sizes.text }px;
   text-transform: uppercase;
+`;
+
+const Email = styled.View`
+
+`;
+
+const Password = styled.View`
+
 `;
 
 const IconEmail = styled.Image`
   width: 24px;
   height: 16px;
   position: absolute;
-  top: 179px;
-  left: 31px;
+  top: 32px;
+  left: 13px;
 `;
 
 const IconPassword = styled.Image`
   width: 18px;
   height: 24px;
   position: absolute;
-  top: 239px;
-  left: 35px;
+  top: 28px;
+  left: 13px;
 `;

@@ -5,6 +5,8 @@ import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import { colors, sizes } from 'constants/theme';
+
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -95,7 +97,7 @@ class Project extends Component {
                         } }
                     >
                         <AnimatedCloseView style={ { opacity: this.opacity } }>
-                            <Ionicons name="ios-close" size={ 32 } color="#546bfb" />
+                            <Ionicons name="ios-close" size={ 32 } color={ colors.blue } />
                         </AnimatedCloseView>
                     </TouchableOpacity>
                 </AnimatedContainer>
@@ -147,7 +149,8 @@ const Title = styled.Text`
   top: 20px;
   left: 20px;
   font-weight: bold;
-  font-size: 24px;
+  font-size: ${ sizes.title }px;
+
   color: white;
   width: 300px;
 `;
@@ -159,16 +162,16 @@ const Author = styled.Text`
   bottom: 20px;
   left: 20px;
   color: rgba(255, 255, 255, 0.8);
-  font-size: 15px;
+  font-size: ${ sizes.text }px;
   font-weight: 600;
   text-transform: uppercase;
 `;
 
 const Text = styled.Text`
-  font-size: 17px;
+  font-size: ${ sizes.text }px;
   margin: 20px;
   line-height: 24px;
-  color: #3c4560;
+  color: ${ colors.textGray };
 `;
 
 const AnimatedText = Animated.createAnimatedComponent(Text);

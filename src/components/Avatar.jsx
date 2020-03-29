@@ -10,12 +10,12 @@ class Avatar extends Component {
   @observable photo = "https://cl.ly/55da82beb939/download/avatar-default.jpg";
 
   componentDidMount() {
-    fetch("https://uinames.com/api/?ext&region=russia")
-      .then(response => response.json())
-      .then(response => {
-        this.photo = response.photo;
-        this.props.UIStore.setName(response.name);
-      });
+    // fetch("https://uinames.com/api/?ext&region=russia")
+    //   .then(response => response.json())
+    //   .then(response => {
+    //     this.photo = response.photo;
+    //     this.props.UIStore.setName(response.name);
+    //   });
   }
 
   render() {

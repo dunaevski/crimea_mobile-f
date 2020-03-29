@@ -7,6 +7,8 @@ import MenuItems from 'components/MenuItems';
 import { menuItems as items } from '../mockData';
 import Switch from 'components/Switch';
 import { observable } from 'mobx';
+import { colors, sizes } from 'constants/theme';
+
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -82,7 +84,7 @@ class Menu extends React.Component {
                         } }
                     >
                         <CloseView>
-                            <Ionicons name="ios-close" size={ 44 } color="#546bfb" />
+                            <Ionicons name="ios-close" size={ 44 } color={ colors.blue } />
                         </CloseView>
                     </TouchableOpacity>
                     <Content>
@@ -154,12 +156,12 @@ const Image = styled.Image`
 
 const Title = styled.Text`
   color: white;
-  font-size: 20px;
+  font-size: ${sizes.caption}px;
   font-weight: 600;
 `;
 
 const Subtitle = styled.Text`
-  font-size: 13px;
+  font-size: ${sizes.text}px;
   color: rgba(255, 255, 255, 0.5);
   margin-top: 8px;
 `;
@@ -173,6 +175,6 @@ const Cover = styled.View`
 
 const Content = styled.View`
   height: ${SCREEN_HEIGHT}px;
-  background: #f0f3f5;
+  background: ${ colors.white };
   padding: 25px 0 0 40px ;
 `;

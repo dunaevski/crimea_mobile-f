@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Dimensions } from 'react-native';
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
+import { sizes, colors } from 'constants/theme'
+
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -88,7 +90,8 @@ const Logo = styled.Image`
 `;
 
 const Title = styled.Text`
-  font-size: 24px;
+  font-size: ${sizes.title}px;
+
   color: white;
   font-weight: 600;
   margin-top: 4px;
@@ -98,7 +101,7 @@ const Title = styled.Text`
 `;
 
 const Subtitle = styled.Text`
-  font-size: 15px;
+  font-size: ${sizes.text}px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.8);
   text-transform: uppercase;
@@ -121,14 +124,14 @@ const Avatar = styled.Image`
 `;
 
 const Caption = styled.Text`
-  font-size: 14px;
-  color: #3c4560;
+  font-size: ${sizes.text}px;
+  color: ${ colors.textGray };
   font-weight: 500;
 `;
 
 const Author = styled.Text`
-  font-size: 13px;
-  color: #b8bece;
+  font-size: ${sizes.text}px;
+  color: ${ colors.textGray2 };
   font-weight: 500;
   margin-top: 4px;
 `;

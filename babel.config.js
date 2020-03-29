@@ -11,6 +11,7 @@ module.exports = function(api) {
             components: path.resolve(__dirname, 'src/components/'),
             navigator: path.resolve(__dirname, 'src/navigator/'),
             screens: path.resolve(__dirname, 'src/screens/'),
+            constants: path.resolve(__dirname, 'src/constants/'),
             globalStore: path.resolve(__dirname, 'src/globalStore/'),
           },
           extensions: [

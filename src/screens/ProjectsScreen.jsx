@@ -5,6 +5,7 @@ import { Animated, PanResponder } from 'react-native';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { projects } from '../mockData';
+import { colors } from 'constants/theme'
 
 
 @observer
@@ -208,5 +209,5 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background: #f0f3f5;
+  background: ${ colors.white }; 
 `;

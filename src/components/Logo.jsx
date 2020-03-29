@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { sizes } from 'constants/theme'
 
 const Logo = (props) => (
     <Container>
@@ -31,7 +32,7 @@ const Image = styled.Image`
 
 const Text = styled.Text`
   font-weight: 600;
-  font-size: 17px;
+  font-size: ${sizes.text}px;
   margin-left: 8px;
 `;
 

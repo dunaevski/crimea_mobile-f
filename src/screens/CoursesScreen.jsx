@@ -5,7 +5,9 @@ import styled from 'styled-components';
 import { LinearGradient } from 'expo-linear-gradient';
 import CourseSection from 'components/CourseSection';
 import Courses from 'components/Courses';
-import { sections } from '../mockData'
+import { sections } from '../mockData';
+import { colors, sizes } from 'constants/theme';
+
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -72,7 +74,7 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background: #f0f3f5;
+  background: ${ colors.white }; 
 `;
 
 const ScrollView = styled.ScrollView`
@@ -82,7 +84,7 @@ const ScrollView = styled.ScrollView`
 
 const Hero = styled.View`
   height: 460px;
-  background: #3c4560;
+  background: ${ colors.textGray }; 
 `;
 
 const Background = styled.Image`
@@ -102,16 +104,16 @@ const Logo = styled.Image`
 `;
 
 const Caption = styled.Text`
-  font-size: 15px;
+  font-size: ${ sizes.text }px;
   font-weight: 600;
   text-transform: uppercase;
-  color: #b8bece;
+  color: ${ colors.textGray2 }; 
   margin-top: 20px;
   margin-left: 20px;
 `;
 
 const Title = styled.Text`
-  font-size: 32px;
+  font-size: ${ sizes.bigTitle }px;
   color: white;
   font-weight: 600;
   margin-top: 4px;
@@ -144,13 +146,13 @@ const Avatar = styled.Image`
 
 const Name = styled.Text`
   margin-left: 8px;
-  color: #b8bece;
+  color: ${ colors.textGray2 };  
 `;
 
 const Subtitle = styled.Text`
-  font-size: 15px;
+  font-size: ${ sizes.text }px;
   text-transform: uppercase;
   font-weight: 600;
-  color: #b8bece;
+  color: ${ colors.textGray2 };
   margin: 20px 0 0 20px;
 `;

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { action, observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
-import { Dimensions, Keyboard, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
+import { Dimensions, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { colors, sizes } from 'constants/theme';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -21,15 +22,18 @@ export default class SearchBar extends Component {
         return (
             <SafeAreaView>
                 <Container>
-                    <Ionicons name="ios-search" size={ 30 } color="#546bfb" />
                     <TextInput
                         placeholder="Type Here..."
                         onChangeText={ this.props.onChangeSearch }
                         value={ this.props.searchValue }
                     />
-                    <TouchableWithoutFeedback onPress={ this.clearSearch }>
-                        <Ionicons name="ios-close" size={ 44 } color="#546bfb" />
-                    </TouchableWithoutFeedback>
+                    { this.props.searchValue ? (
+                        <TouchableWithoutFeedback onPress={ this.clearSearch }>
+                            <Ionicons name="ios-close" size={ 32 } color={ colors.blue } />
+                        </TouchableWithoutFeedback>
+                    ) : (
+                        <Ionicons name="ios-search" size={ 24 } color={ colors.blue } />
+                    ) }
                 </Container>
             </SafeAreaView>
         );
@@ -37,11 +41,11 @@ export default class SearchBar extends Component {
 }
 
 const Container = styled.View`
-  width: ${ SCREEN_WIDTH * 0.9 }px;
+  width: ${ SCREEN_WIDTH - sizes.padding * 2 }px;
   height: 44px;
   background-color: white;
-  border: 1px solid #dbdfea;
-  border-radius: 15px;
+  border: 1px solid ${ colors.borderWhite };  
+  border-radius: 12px;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
@@ -51,6 +55,6 @@ const Container = styled.View`
 const TextInput = styled.TextInput`
   height: 44px;
   width: 80%;
-  font-size: 15px;
-  color: #3c4560;
+  font-size: ${ sizes.text }px;
+  color: ${ colors.textGray }; 
 `;

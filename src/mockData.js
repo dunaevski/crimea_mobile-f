@@ -66,7 +66,7 @@ const cards = [
 
 <img src="https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif" alt="img">
 </body>
-        `,
+        `
   },
   {
     title: 'Styled Components',
@@ -238,6 +238,64 @@ export const projects = [
     author: 'Nikhil D\'Souza',
     text:
         'Recently finished the React course by @Mengto, and I 10/10 would recommend. I already rewrote my personal website in @reactjs and I\'m very excited with it.',
+  },
+];
+
+export const smallCategory = [
+  {
+    title: 'Плажи',
+  },
+  {
+    title: 'Ай-Петри',
+  },
+  {
+    title: 'Прогулки на лодках',
+  },
+  {
+    title: 'Набережная',
+  },
+];
+
+export const category = [
+  {
+    title: 'Где поесть',
+    icon: 'ios-restaurant',
+    subtitle: 'Вкусно и сытно перекусить',
+  },
+  {
+    title: 'Магазины',
+    icon: 'ios-basket',
+    subtitle: 'Накупить продуктов недорого',
+  },
+  {
+    title: 'Достопримечательности',
+    icon: 'ios-eye',
+    subtitle: 'Взглянуть на итсорию',
+  },
+  {
+    title: 'Искусство',
+    icon: 'ios-color-palette',
+    subtitle: 'Прикоснуться к высокому',
+  },
+  {
+    title: 'Активный отдых',
+    icon: 'ios-bonfire',
+    subtitle: 'Отдохнуть с острыми ощущениями',
+  },
+  {
+    title: 'Развлечения',
+    icon: 'ios-videocam',
+    subtitle: 'Выбраться в город',
+  },
+  {
+    title: 'Ночная жизнь',
+    icon: 'ios-wine',
+    subtitle: 'Вечернии пляски',
+  },
+  {
+    title: 'Отели',
+    icon: 'ios-bed',
+    subtitle: 'Отоспаться',
   },
 ];
 

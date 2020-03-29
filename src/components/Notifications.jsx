@@ -4,13 +4,13 @@ import { inject, observer } from 'mobx-react';
 import { Animated, Dimensions, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { notificationItems as items } from '../mockData';
+import { colors, sizes } from 'constants/theme';
 
 let SCREEN_WIDTH = Dimensions.get('window').width;
 let cardWith = SCREEN_WIDTH - 40;
 if (SCREEN_WIDTH > 500) {
   cardWith = 460;
 }
-
 
 @inject('UIStore')
 @observer
@@ -71,7 +71,7 @@ class Notifications extends React.Component {
             } }
         >
           <CloseButton style={ { elevation: 20 } }>
-            <Ionicons name="ios-close" size={ 44 } color="#546bfb" />
+            <Ionicons name="ios-close" size={ 44 } color={ colors.blue } />
           </CloseButton>
         </TouchableOpacity>
         <SafeAreaView>
@@ -113,7 +113,7 @@ const Container = styled.View`
   width: 100%;
   height: 100%;
   z-index: 100;
-  background: #f0f3f5;
+  background: ${ colors.white };  
 `;
 
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
@@ -136,10 +136,10 @@ const Wrapper = styled.View`
 `;
 
 const Subtitle = styled.Text`
-  font-size: 15px;
+  font-size: ${ sizes.text }px;
   text-transform: uppercase;
   font-weight: 600;
-  color: #b8bece;
+  color: ${ colors.textGray2 };  
 `;
 
 const Item = styled.View`
@@ -164,7 +164,7 @@ const Logo = styled.Image`
 `;
 
 const DateContainer = styled.View`
-  background: #4775f2;
+  background: ${ colors.blue };  
   border-radius: 10px;
   flex-direction: row;
   align-items: center;
@@ -177,21 +177,21 @@ const DateContainer = styled.View`
 
 const Date = styled.Text`
   color: white;
-  font-size: 12px;
+  font-size: ${ sizes.smallText }px;
   font-weight: 600;
   text-transform: uppercase;
 `;
 
 const Title = styled.Text`
-  font-size: 20px;
-  color: #3c4560;
+  font-size: ${ sizes.caption }px;
+  color: ${ colors.textGray };  
   font-weight: bold;
   margin-left: 8px;
 `;
 
 const Text = styled.Text`
-  font-size: 17px;
-  color: #3c4560;
+  font-size: ${ sizes.text }px;
+  color: ${ colors.textGray }; 
   margin-top: 20px;
   line-height: 24px;
 `;

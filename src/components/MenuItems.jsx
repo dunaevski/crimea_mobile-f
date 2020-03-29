@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Ionicons } from '@expo/vector-icons';
+import { colors, sizes } from 'constants/theme';
+
 
 const MenuItems = props => (
     <Container>
         <IconView>
-            <Ionicons name={ props.icon } size={ 24 } color="#546bfb" />
+            <Ionicons name={ props.icon } size={ 24 } color={ colors.blue } />
         </IconView>
         <Content>
             <Title>{ props.title }</Title>
@@ -33,13 +35,13 @@ const Content = styled.View`
 `;
 
 const Title = styled.Text`
-  color: #3c4560;
-  font-size: 20px;
+  color: ${ colors.textGray }; 
+  font-size: ${ sizes.caption }px;
   font-weight: 600;
 `;
 
 const Text = styled.Text`
-  color: #3c4560;
+  color: ${ colors.textGray }; 
   font-weight: 600;
   opacity: 0.6;
 `;

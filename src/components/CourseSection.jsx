@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { LinearGradient } from 'expo-linear-gradient';
+import { colors, sizes } from 'constants/theme';
+
 
 const CourseSection = props => (
     <Container>
@@ -19,8 +21,8 @@ const CourseSection = props => (
             />
             <LinearGradient
                 colors={ [
-                    '#3399ff',
-                    '#33e1ff',
+                    colors.gradBlue,
+                    colors.gradBlue2,
                 ] }
                 start={ [
                     0,
@@ -56,7 +58,7 @@ const Container = styled.View`
 const Mask = styled.View`
   height: 100%;
   border-radius: 10px;
-  background: #3c4560;
+  background: ${ colors.textGray }; 
   overflow: hidden;
   justify-content: flex-end;
   margin-left: 20px;
@@ -69,7 +71,7 @@ const Image = styled.Image`
 `;
 
 const Text = styled.Text`
-  font-size: 15px;
+  font-size: ${ sizes.text }px;
   font-weight: 600;
   color: white;
   margin: 16px;

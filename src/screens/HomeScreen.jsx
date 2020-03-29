@@ -12,6 +12,7 @@ import Avatar from 'components/Avatar';
 import ModalLogin from 'components/ModalLogin';
 import NotificationButton from 'components/NotificationButton';
 import Notifications from 'components/Notifications';
+import { colors, sizes } from 'constants/theme';
 
 
 @inject('UIStore')
@@ -70,7 +71,7 @@ class HomeScreen extends React.Component {
     handleAvatar = () => {
         const { UIStore } = this.props;
 
-        if (!UIStore.name) {
+        if (UIStore.name) {
             UIStore.toggleMenu();
         }
         else {
@@ -132,6 +133,7 @@ class HomeScreen extends React.Component {
                                     paddingTop: 30,
                                 } }
                                 horizontal={ true }
+                                contentContainerStyle={{ paddingRight: 20}}
                                 showsHorizontalScrollIndicator={ false }
                             >
                                 { !this.loading ? (
@@ -210,8 +212,8 @@ export default HomeScreen;
 
 const Message = styled.Text`
   margin: 20px;
-  color: #b8bece;
-  font-size: 15px;
+  color: ${ colors.textGray2 };
+  font-size: ${ sizes.text }px;
   font-weight: 500;
 `;
 
@@ -222,9 +224,9 @@ const CoursesContainer = styled.View`
 `;
 
 const Subtitle = styled.Text`
-  color: #b8bece;
+  color: ${ colors.textGray2 };
   font-weight: 600;
-  font-size: 15px;
+  font-size: ${ sizes.text }px;
   margin-left: 20px;
   margin-top: 20px;
   text-transform: uppercase;
@@ -237,7 +239,7 @@ const RootView = styled.View`
 
 const Container = styled.View`
   flex: 1;
-  background-color: #f0f3f5;
+  background-color: ${ colors.white };
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 `;
@@ -245,14 +247,14 @@ const Container = styled.View`
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 const Title = styled.Text`
-  font-size: 16px;
-  color: #b8bece;
+  font-size: ${ sizes.text }px;
+  color: ${ colors.textGray2 };
   font-weight: 500;
 `;
 
 const Name = styled.Text`
-  font-size: 20px;
-  color: #3c4560;
+  font-size: ${ sizes.caption }px;
+  color: ${ colors.textGray };
   font-weight: bold;
 `;
 

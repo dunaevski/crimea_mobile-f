@@ -5,6 +5,7 @@ import WebView from 'react-native-webview';
 import { PlayIcon } from 'components/Icons';
 import { Ionicons } from '@expo/vector-icons';
 import { observer } from 'mobx-react';
+import { colors, sizes } from 'constants/theme';
 
 
 @observer
@@ -66,7 +67,7 @@ class SectionScreen extends Component {
               <Ionicons
                   name="ios-close"
                   size={ 36 }
-                  color="#4775f2"
+                  color={ colors.blue }
                   style={ { marginTop: -2 } }
               />
             </CloseView>
@@ -101,16 +102,16 @@ const htmlStyles = `
       padding: 0;
       font-size: 30px;
       font-weight: normal;
-      color: #3c4560;
+      color: ${ colors.textGray };
       line-height: 40px;
     }
     body {
-          background-color: #f2f2f2;
+          background-color: ${ colors.white };
     }
     h2 {
       font-size: 40px;
       text-transform: uppercase;
-      color: #b8bece;
+      color: ${ colors.textGray2 };
       font-weight: 600;
       margin-top: 50px;
     }
@@ -120,7 +121,7 @@ const htmlStyles = `
     }
   
     a {
-      color: #4775f2;
+      color: ${ colors.blue };
       font-weight: 600;
       text-decoration: none;
     }
@@ -156,7 +157,8 @@ const Image = styled.Image`
 `;
 
 const Title = styled.Text`
-  font-size: 24px;
+  font-size: ${ sizes.title }px;
+
   font-weight: bold;
   color: white;
   width: 170px;
@@ -167,7 +169,7 @@ const Title = styled.Text`
 
 const Caption = styled.Text`
   color: white;
-  font-size: 17px;
+  font-size: ${ sizes.text }px;
   position: absolute;
   bottom: 20px;
   left: 20px;
@@ -198,7 +200,7 @@ const Logo = styled.Image`
 `;
 
 const Subtitle = styled.Text`
-  font-size: 15px;
+  font-size: ${ sizes.text }px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.8);
   margin-left: 5px;
