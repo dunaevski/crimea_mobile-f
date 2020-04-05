@@ -8,9 +8,7 @@ import Courses from 'components/Courses';
 import { sections } from '../mockData';
 import { colors, sizes } from 'constants/theme';
 
-
 const SCREEN_WIDTH = Dimensions.get('window').width;
-
 
 @observer
 class CoursesScreen extends Component {

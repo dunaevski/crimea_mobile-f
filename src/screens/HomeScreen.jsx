@@ -1,5 +1,13 @@
 import React from 'react';
-import { Animated, Easing, Platform, SafeAreaView, ScrollView, StatusBar, TouchableOpacity } from 'react-native';
+import {
+    Animated,
+    Easing,
+    Platform,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    TouchableOpacity,
+} from 'react-native';
 import styled from 'styled-components';
 import mockData from '../mockData';
 import { action, observable } from 'mobx';
@@ -65,6 +73,16 @@ class HomeScreen extends React.Component {
 
             StatusBar.setBarStyle('dark-content', true);
         }
+    };
+
+    getStyle = (active) => {
+        return active ? [
+            colors.blue,
+            colors.white,
+        ] : [
+            colors.white,
+            colors.textGray,
+        ];
     };
 
     @action
@@ -133,23 +151,45 @@ class HomeScreen extends React.Component {
                                     paddingTop: 30,
                                 } }
                                 horizontal={ true }
-                                contentContainerStyle={{ paddingRight: 20}}
+                                contentContainerStyle={ { paddingRight: 20 } }
                                 showsHorizontalScrollIndicator={ false }
                             >
                                 { !this.loading ? (
                                     this.data.logos.map((logo, index) => (
-                                        <Logo key={ index } image={ logo.image } text={ logo.text } />
+                                        <TouchableOpacity
+                                            key={ index }
+                                            activeOpacity={ 0.7 }
+                                            onPress={ () => {
+                                                alert('qwe');
+                                            } }
+                                        >
+                                            <Logo image={ logo.image } text={ logo.text } color={ this.getStyle(logo.active) } />
+                                        </TouchableOpacity>
                                     ))
                                 ) : (
-                                    <Message>Loading...</Message>
+                                    <Message>Загрузка...</Message>
                                 ) }
                             </ScrollView>
 
-                            <Subtitle>{ 'Популярные места'.toUpperCase() }</Subtitle>
+                            <SubtitleView>
+                                <Subtitle>{ 'Популярные места'.toUpperCase() }</Subtitle>
+                                <TouchableOpacity
+                                    activeOpacity={ 0.7 }
+                                    onPress={ () => {
+                                        this.props.navigation.push('All', {
+                                            section: this.data.cards,
+                                        });
+                                    } }
+                                >
+                                    <ViewAll> Показать всё </ViewAll>
+                                </TouchableOpacity>
+                            </SubtitleView>
 
                             <ScrollView
                                 horizontal={ true }
-                                style={ { paddingBottom: 30 } }
+                                style={ {
+                                    paddingLeft: 10,
+                                } }
                                 showsHorizontalScrollIndicator={ false }
                             >
                                 { !this.loading ? (
@@ -170,6 +210,7 @@ class HomeScreen extends React.Component {
                                                 logo={ card.logo }
                                                 subtitle={ card.subtitle }
                                                 content={ card.content }
+                                                favorite={ card.favorite }
                                             />
                                         </TouchableOpacity>
                                     ))
@@ -178,7 +219,10 @@ class HomeScreen extends React.Component {
                                 ) }
                             </ScrollView>
 
-                            <Subtitle>{ 'Гиды'.toUpperCase() }</Subtitle>
+                            <SubtitleView>
+                                <Subtitle>{ 'Гиды'.toUpperCase() }</Subtitle>
+                                <ViewAll> Показать всё </ViewAll>
+                            </SubtitleView>
 
                             <CoursesContainer>
                                 { !this.loading ? (
@@ -207,7 +251,6 @@ class HomeScreen extends React.Component {
     }
 }
 
-
 export default HomeScreen;
 
 const Message = styled.Text`
@@ -223,13 +266,24 @@ const CoursesContainer = styled.View`
   padding-left: 10px;
 `;
 
+const SubtitleView = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: ${ sizes.margin }px;
+`;
+
 const Subtitle = styled.Text`
   color: ${ colors.textGray2 };
+  margin-left: ${ sizes.margin }px;
   font-weight: 600;
   font-size: ${ sizes.text }px;
-  margin-left: 20px;
-  margin-top: 20px;
   text-transform: uppercase;
+`;
+
+const ViewAll = styled.Text`
+  margin-right: ${ sizes.margin }px;
+  color: ${ colors.blue };
 `;
 
 const RootView = styled.View`

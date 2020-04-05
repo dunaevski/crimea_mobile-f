@@ -2,6 +2,7 @@ const colors = {
     blue: '#4775f2',
     gradBlue: '#3399ff',
     gradBlue2: '#33e1ff',
+    pink: '#ff54a0',
     textGray: '#3c4560',
     textGray2: '#b8bece',
     borderWhite: '#dbdfea',

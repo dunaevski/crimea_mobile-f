@@ -11,6 +11,7 @@ import CourseSection from 'components/CourseSection';
 import Category from 'components/Category';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
+import { article } from '../mockData';
 
 @inject('UIStore')
 @observer
@@ -27,7 +28,6 @@ export default class SearchScreen extends Component {
     };
 
     onChangeSearch = searchText => {
-        console.log(this);
         this.searchValue = searchText;
     };
 
@@ -48,7 +48,7 @@ export default class SearchScreen extends Component {
                             contentContainerStyle={{ paddingBottom: 120}}
                             showsHorizontalScrollIndicator={ false }
                         >
-                            <Subtitle>{ 'Выберите категорию' }</Subtitle>
+                            <Subtitle>{ 'Популярное' }</Subtitle>
 
                             <ScrollView
                                 style={ {
@@ -72,6 +72,8 @@ export default class SearchScreen extends Component {
                                 )) }
                             </ScrollView>
 
+                            <Subtitle>{ 'Подборки' }</Subtitle>
+
                             <Sections>
                                 <SectionScrollView
                                     horizontal={ true }
@@ -82,7 +84,9 @@ export default class SearchScreen extends Component {
                                             key={ index }
                                             activeOpacity={ 0.7 }
                                             onPress={ () => {
-                                                alert('qwe');
+                                                this.props.navigation.push('Section', {
+                                                    section: section,
+                                                });
                                             } }
                                         >
                                             <CourseSection
@@ -95,12 +99,16 @@ export default class SearchScreen extends Component {
                                 </SectionScrollView>
                             </Sections>
 
+                            <Subtitle>{ 'Выберите категорию' }</Subtitle>
+
                             { category.map((item, index) => (
                                 <TouchableOpacity
                                     key={ index }
                                     activeOpacity={ 0.7 }
                                     onPress={ () => {
-                                        alert('qwe');
+                                        this.props.navigation.push('Category', {
+                                            article,
+                                        });
                                     } }
                                 >
                                     <Category
@@ -137,11 +145,8 @@ const Subtitle = styled.Text`
 `;
 
 const Sections = styled.View`
-  margin-top: ${ sizes.margin }px;
-  margin-bottom: ${ sizes.margin }px;
   flex-direction: row;
 `;
 
 const SectionScrollView = styled.ScrollView`
-  padding: 10px 0;
 `;

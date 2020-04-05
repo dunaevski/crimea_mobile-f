@@ -32,23 +32,24 @@ class Menu extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.UIStore.isMenuOpen) {
             StatusBar.setBarStyle('light-content', true);
-        } else {
+        }
+        else {
             StatusBar.setBarStyle('dark-content', true);
         }
         this.toggleMenu();
     }
 
     toggleMenu = () => {
-    if (this.props.UIStore.isMenuOpen) {
-      Animated.spring(this.top, {
-          toValue: 0,
-      }).start();
-    }
-    else {
-        Animated.spring(this.top, {
-            toValue: SCREEN_HEIGHT,
-        }).start();
-    }
+        if (this.props.UIStore.isMenuOpen) {
+            Animated.spring(this.top, {
+                toValue: 0,
+            }).start();
+        }
+        else {
+            Animated.spring(this.top, {
+                toValue: SCREEN_HEIGHT,
+            }).start();
+        }
     };
 
     handleMenu = () => {
@@ -68,7 +69,7 @@ class Menu extends React.Component {
                     <Cover>
                         <Image source={ require('./../../assets/background2.jpg') } />
                         <Title> { UIStore.name } </Title>
-                        <Subtitle>Crimea on Your Phone</Subtitle>
+                        <Subtitle>Крым в Твоих руках</Subtitle>
                     </Cover>
                     <TouchableOpacity
                         activeOpacity={ 0.7 }
@@ -156,12 +157,12 @@ const Image = styled.Image`
 
 const Title = styled.Text`
   color: white;
-  font-size: ${sizes.caption}px;
+  font-size: ${ sizes.caption }px;
   font-weight: 600;
 `;
 
 const Subtitle = styled.Text`
-  font-size: ${sizes.text}px;
+  font-size: ${ sizes.text }px;
   color: rgba(255, 255, 255, 0.5);
   margin-top: 8px;
 `;
@@ -174,7 +175,7 @@ const Cover = styled.View`
 `;
 
 const Content = styled.View`
-  height: ${SCREEN_HEIGHT}px;
+  height: ${ SCREEN_HEIGHT }px;
   background: ${ colors.white };
   padding: 25px 0 0 40px ;
 `;

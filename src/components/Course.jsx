@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { Dimensions } from 'react-native';
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
-import { sizes, colors } from 'constants/theme'
-
+import { sizes, colors } from 'constants/theme';
+import { Ionicons } from '@expo/vector-icons';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -41,8 +41,16 @@ class Course extends React.Component {
                 <Cover>
                     <Image source={ this.props.image } />
                     <Logo source={ this.props.logo } resizeMode="contain" />
-                    <Subtitle>{ this.props.subtitle }</Subtitle>
                     <Title>{ this.props.title }</Title>
+                    <Location>
+                        <Ionicons
+                            name="ios-navigate"
+                            size={ 20 }
+                            color={ colors.textGray2 }
+                            style
+                        />
+                        <Subtitle>{ this.props.subtitle }</Subtitle>
+                    </Location>
                 </Cover>
                 <Content>
                     <Avatar source={ this.props.avatar } />
@@ -53,7 +61,6 @@ class Course extends React.Component {
         );
     }
 }
-
 
 export default Course;
 
@@ -90,22 +97,27 @@ const Logo = styled.Image`
 `;
 
 const Title = styled.Text`
-  font-size: ${sizes.title}px;
-
-  color: white;
-  font-weight: 600;
-  margin-top: 4px;
-  margin-bottom: 20px;
-  margin-left: 20px;
   width: 170px;
+  color: white;
+  margin-left: 20px;
+  font-size: ${ sizes.title }px;
+  font-weight: 600;
+`;
+
+const Location = styled.View`
+  display: flex;
+  flex-direction: row;
+  margin-top: 4px;
+  margin-bottom:${ sizes.margin }px;
+  margin-left: ${ sizes.margin }px;
 `;
 
 const Subtitle = styled.Text`
-  font-size: ${sizes.text}px;
+  font-size: ${ sizes.text }px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.8);
   text-transform: uppercase;
-  margin-left: 20px;
+  margin-left: 10px;
 `;
 
 const Content = styled.View`
@@ -124,13 +136,13 @@ const Avatar = styled.Image`
 `;
 
 const Caption = styled.Text`
-  font-size: ${sizes.text}px;
+  font-size: ${ sizes.text }px;
   color: ${ colors.textGray };
   font-weight: 500;
 `;
 
 const Author = styled.Text`
-  font-size: ${sizes.text}px;
+  font-size: ${ sizes.text }px;
   color: ${ colors.textGray2 };
   font-weight: 500;
   margin-top: 4px;

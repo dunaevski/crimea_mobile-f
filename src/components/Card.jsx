@@ -1,22 +1,52 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Dimensions } from 'react-native';
+import { Dimensions, TouchableOpacity } from 'react-native';
 import { colors, sizes } from 'constants/theme';
+import { Ionicons } from '@expo/vector-icons';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
+const getCourseWidth = () => {
+    let cardWidth = SCREEN_WIDTH - 40;
+
+    if (SCREEN_WIDTH >= 768) {
+        cardWidth = (SCREEN_WIDTH - 60) / 2;
+    }
+    if (SCREEN_WIDTH >= 1024) {
+        cardWidth = (SCREEN_WIDTH - 80) / 3;
+    }
+
+    return cardWidth;
+};
 
 const Card = props => (
     <Container style={ { elevation: 10 } }>
         <Cover>
             <Image source={ props.image } />
             <Title>{ props.title }</Title>
+            <TouchableOpacity
+                style={ {
+                    position: 'absolute',
+                    top: 20,
+                    right: 20,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 30,
+                    height: 30,
+                    borderRadius: 15,
+                    backgroundColor: colors.white,
+                } }
+                activeOpacity={ 0.7 }
+            >
+                <Ionicons name="ios-heart" size={ 16 } color={ props.favorite ? colors.pink : colors.textGray2 } />
+            </TouchableOpacity>
         </Cover>
         <Content>
             <Logo source={ props.logo } />
             <Wrapper>
                 <Caption>{ props.caption }</Caption>
-                <Subtitle>{ props.subtitle.toUpperCase() }</Subtitle>
+                <Subtitle>{ props.subtitle }</Subtitle>
             </Wrapper>
         </Content>
     </Container>
@@ -25,8 +55,8 @@ const Card = props => (
 export default Card;
 
 const Container = styled.View`
-  background: white;
-  width: ${SCREEN_WIDTH - 80}px;
+  background: ${ colors.white };
+  width: ${ getCourseWidth() - 50 }px;
   height: 280px;
   border-radius: 14px;
   margin: 20px 10px;
@@ -55,7 +85,6 @@ const Subtitle = styled.Text`
   color: ${ colors.textGray2 };
   font-weight: 600;
   font-size: ${ sizes.text }px;
-  text-transform: uppercase;
   margin-top: 4px;
 `;
 
@@ -66,8 +95,7 @@ const Wrapper = styled.View`
 const Cover = styled.View`
   width: 100%;
   height: 200px;
-  border-top-left-radius: 14px;
-  border-top-right-radius: 14px;
+  border-radius: ${ sizes.radius }px;
   overflow: hidden;
 `;
 
@@ -80,11 +108,10 @@ const Image = styled.Image`
 `;
 
 const Title = styled.Text`
-  color: white;
+  color: ${ colors.white };
   font-size: ${ sizes.title }px;
-
   font-weight: bold;
   margin-top: 20px;
   margin-left: 20px;
-  width: 100px;
+  width: 150px;
 `;

@@ -23,7 +23,7 @@ const Container = styled.View`
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   flex-direction: row;
   align-items: center;
-  margin: 3px 20px;
+  margin: 5px 20px;
 `;
 
 const View = styled.View`

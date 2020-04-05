@@ -47,7 +47,7 @@ const Container = styled.View`
   border: 1px solid ${ colors.borderWhite };  
   border-radius: 12px;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding: 0 15px;
 `;

@@ -9,100 +9,103 @@ import { colors, sizes } from 'constants/theme';
 let SCREEN_WIDTH = Dimensions.get('window').width;
 let cardWith = SCREEN_WIDTH - 40;
 if (SCREEN_WIDTH > 500) {
-  cardWith = 460;
+    cardWith = 460;
 }
+
 
 @inject('UIStore')
 @observer
 class Notifications extends React.Component {
-  translateY = new Animated.Value(30);
-  opacity = new Animated.Value(0);
-  top = new Animated.Value(3000);
+    translateY = new Animated.Value(30);
+    opacity = new Animated.Value(0);
+    top = new Animated.Value(3000);
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.toggleNotif();
-  }
-
-  toggleNotif = () => {
-    if (this.props.UIStore.isNotificationOpen) {
-      Animated.parallel([
-        Animated.spring(this.translateY, {
-          toValue: 0
-        }),
-        Animated.timing(this.opacity, {
-          toValue: 1,
-          duration: 500
-        }),
-        Animated.timing(this.top, {
-          toValue: 0,
-          duration: 0
-        })
-      ]).start();
-    } else {
-      Animated.parallel([
-        Animated.spring(this.translateY, {
-          toValue: 30
-        }),
-        Animated.timing(this.opacity, {
-          toValue: 0,
-          duration: 500
-        }),
-        Animated.timing(this.top, {
-          toValue: 3000,
-          duration: 0
-        })
-      ]).start();
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.toggleNotif();
     }
-  };
 
-  render() {
-    const { isNotificationOpen } = this.props.UIStore;
-    return (
-      <AnimatedContainer style={{ top: this.top }}>
-        <TouchableOpacity
-            onPress={ () => this.props.UIStore.toggleNotification() }
-            activeOpacity={ 0.7 }
-            style={ {
-              position: 'absolute',
-              top: 40,
-              left: '50%',
-              marginLeft: -22,
-              zIndex: 100,
-            } }
-        >
-          <CloseButton style={ { elevation: 20 } }>
-            <Ionicons name="ios-close" size={ 44 } color={ colors.blue } />
-          </CloseButton>
-        </TouchableOpacity>
-        <SafeAreaView>
-          <ScrollView style={ { padding: 20 } }>
-            <Wrapper>
-              <Subtitle>New</Subtitle>
-              { items.map((item, index) => (
-                  <AnimatedItem
-                      key={ index }
-                      style={ {
-                        opacity: this.opacity,
-                        transform: [ { translateY: this.translateY } ],
-                      } }
-                  >
-                    <Header>
-                      <Logo source={ { uri: item.logo } } resizeMode="contain" />
-                      <Title>{ item.title }</Title>
-                      <DateContainer>
-                        <Date>{ item.date }</Date>
-                      </DateContainer>
-                    </Header>
-                    <Text>{ item.text }</Text>
-                  </AnimatedItem>
-              )) }
-            </Wrapper>
-          </ScrollView>
-        </SafeAreaView>
-      </AnimatedContainer>
-    );
-  }
+    toggleNotif = () => {
+        if (this.props.UIStore.isNotificationOpen) {
+            Animated.parallel([
+                Animated.spring(this.translateY, {
+                    toValue: 0,
+                }),
+                Animated.timing(this.opacity, {
+                    toValue: 1,
+                    duration: 500,
+                }),
+                Animated.timing(this.top, {
+                    toValue: 0,
+                    duration: 0,
+                }),
+            ]).start();
+        }
+        else {
+            Animated.parallel([
+                Animated.spring(this.translateY, {
+                    toValue: 30,
+                }),
+                Animated.timing(this.opacity, {
+                    toValue: 0,
+                    duration: 500,
+                }),
+                Animated.timing(this.top, {
+                    toValue: 3000,
+                    duration: 0,
+                }),
+            ]).start();
+        }
+    };
+
+    render() {
+        const { isNotificationOpen } = this.props.UIStore;
+        return (
+            <AnimatedContainer style={ { top: this.top } }>
+                <TouchableOpacity
+                    onPress={ () => this.props.UIStore.toggleNotification() }
+                    activeOpacity={ 0.7 }
+                    style={ {
+                        position: 'absolute',
+                        top: 40,
+                        left: '50%',
+                        marginLeft: -22,
+                        zIndex: 100,
+                    } }
+                >
+                    <CloseButton style={ { elevation: 20 } }>
+                        <Ionicons name="ios-close" size={ 44 } color={ colors.blue } />
+                    </CloseButton>
+                </TouchableOpacity>
+                <SafeAreaView>
+                    <ScrollView style={ { padding: 20 } }>
+                        <Wrapper>
+                            <Subtitle>New</Subtitle>
+                            { items.map((item, index) => (
+                                <AnimatedItem
+                                    key={ index }
+                                    style={ {
+                                        opacity: this.opacity,
+                                        transform: [ { translateY: this.translateY } ],
+                                    } }
+                                >
+                                    <Header>
+                                        <Logo source={ { uri: item.logo } } resizeMode="contain" />
+                                        <Title>{ item.title }</Title>
+                                        <DateContainer>
+                                            <Date>{ item.date }</Date>
+                                        </DateContainer>
+                                    </Header>
+                                    <Text>{ item.text }</Text>
+                                </AnimatedItem>
+                            )) }
+                        </Wrapper>
+                    </ScrollView>
+                </SafeAreaView>
+            </AnimatedContainer>
+        );
+    }
 }
+
 
 export default Notifications;
 
@@ -131,7 +134,7 @@ const CloseButton = styled.View`
 
 const Wrapper = styled.View`
   align-self: center;
-  width: ${cardWith}px;
+  width: ${ cardWith }px;
   padding-top: 50px;
 `;
 

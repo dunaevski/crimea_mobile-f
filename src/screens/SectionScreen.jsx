@@ -6,12 +6,40 @@ import { PlayIcon } from 'components/Icons';
 import { Ionicons } from '@expo/vector-icons';
 import { observer } from 'mobx-react';
 import { colors, sizes } from 'constants/theme';
+import { SafeAreaView } from 'react-navigation';
 
 
 @observer
 class SectionScreen extends Component {
-  static navigationOptions = {
-    headerShown: false,
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header: () => (
+          <SafeAreaView>
+            <Header>
+              <TouchableOpacity
+                  activeOpacity={ 0.7 }
+                  style={ {
+                    width: sizes.smallText * 3,
+                    height: sizes.smallText * 3,
+                    justifyContent: 'center',
+                    alignItems: 'flex-start',
+                  } }
+                  onPress={ () => navigation.goBack() }
+              >
+                <CloseView>
+                  <Ionicons
+                      name="ios-close"
+                      size={ 36 }
+                      color={ colors.blue }
+                      style={ { marginTop: -2 } }
+                  />
+                </CloseView>
+              </TouchableOpacity>
+            </Header>
+          </SafeAreaView>
+      ),
+      headerTransparent: true,
+    };
   };
 
   componentDidMount() {
@@ -19,7 +47,7 @@ class SectionScreen extends Component {
   }
 
   componentWillUnmount() {
-    StatusBar.setBarStyle("dark-content", true);
+    StatusBar.setBarStyle('dark-content', true);
   }
 
   render() {
@@ -52,38 +80,18 @@ class SectionScreen extends Component {
             <Title>{ section.title }</Title>
             <Caption>{ section.caption }</Caption>
           </Cover>
-          <TouchableOpacity
-              style={ {
-                position: 'absolute',
-                top: 20,
-                right: 20,
-              } }
-              activeOpacity={ 0.7 }
-              onPress={ () => {
-                navigation.goBack();
-              } }
-          >
-            <CloseView>
-              <Ionicons
-                  name="ios-close"
-                  size={ 36 }
-                  color={ colors.blue }
-                  style={ { marginTop: -2 } }
-              />
-            </CloseView>
-          </TouchableOpacity>
           <Content>
             <WebView
-              source={{ html: section.content + htmlStyles }}
-              scalesPageToFit={false}
-              scrollEnabled={false}
-              ref={webView => (this.webView = webView)}
-              onNavigationStateChange={event => {
-                if (event.url !== "about:blank") {
-                  this.webView.stopLoading();
-                  Linking.openURL(event.url);
-                }
-              }}
+                source={ { html: section.content + htmlStyles } }
+                scalesPageToFit={ false }
+                scrollEnabled={ false }
+                ref={ webView => (this.webView = webView) }
+                onNavigationStateChange={ event => {
+                  if (event.url !== 'about:blank') {
+                    this.webView.stopLoading();
+                    Linking.openURL(event.url);
+                  }
+                } }
             />
           </Content>
         </Container>
@@ -140,6 +148,17 @@ const htmlStyles = `
 const Content = styled.View`
   height: 1000px;
   padding: 20px;
+`;
+
+const Header = styled.View`
+  flex: 0;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  justify-content: space-between;
+  padding: ${ sizes.padding }px;
 `;
 
 const Container = styled.View`

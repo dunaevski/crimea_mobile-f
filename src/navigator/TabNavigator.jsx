@@ -8,6 +8,7 @@ import CoursesScreen from 'screens/CoursesScreen';
 import ProjectsScreen from 'screens/ProjectsScreen';
 import VideoScreen from 'screens/VideoScreen';
 import SearchScreen from 'screens/SearchScreen';
+import CategoryScreen from 'screens/CategoryScreen';
 import { colors } from 'constants/theme'
 
 const activeColor = colors.blue;
@@ -47,6 +48,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
 
 const SearchStack = createStackNavigator({
         Search: SearchScreen,
+        Category: CategoryScreen,
     },
 );
 
@@ -69,7 +71,7 @@ CoursesStack.navigationOptions = {
     tabBarLabel: 'Courses',
     tabBarIcon: ({ focused }) => (
         <Ionicons
-            name="ios-albums"
+            name="ios-folder"
             size={ 28 }
             color={ focused ? activeColor : inactiveColor }
         />
@@ -84,7 +86,7 @@ ProjectStack.navigationOptions = {
   tabBarLabel: "Projects",
   tabBarIcon: ({ focused }) => (
       <Ionicons
-          name="ios-folder"
+          name="ios-albums"
           size={ 28 }
           color={ focused ? activeColor : inactiveColor }
       />

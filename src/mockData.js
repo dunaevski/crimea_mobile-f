@@ -2,14 +2,15 @@ const logos = [
   {
     image: require('../assets/yalta-logo.png'),
     text: 'Ялта',
-  },
-  {
-    image: require('../assets/sevas-logo.png'),
-    text: 'Севастополь',
+    active: true
   },
   {
     image: require('../assets/alushta-logo.png'),
     text: 'Алушта',
+  },
+  {
+    image: require('../assets/sevas-logo.png'),
+    text: 'Севастополь',
   },
   {
     image: require('../assets/evpatoria-logo.png'),
@@ -31,11 +32,12 @@ const logos = [
 
 const cards = [
   {
-    title: 'React Native for Designers',
-    image: require('../assets/background11.jpg'),
-    subtitle: 'React Native',
-    caption: '1 of 12 sections',
-    logo: require('../assets/logo-react.png'),
+    title: 'Набережная имени Ленина',
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    subtitle: 'Достопримечатльность',
+    caption: 'Ялта',
+    logo: require('../assets/yalta-logo.png'),
+    favorite: true,
     content: `
         <body>
 <h2>How To Use</h2>
@@ -66,28 +68,29 @@ const cards = [
 
 <img src="https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif" alt="img">
 </body>
-        `
+        `,
   },
   {
     title: 'Styled Components',
-    image: require('../assets/background12.jpg'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
     subtitle: 'React Native',
     caption: '2 of 12 sections',
-    logo: require('../assets/logo-react.png'),
+    favorite: false,
+    logo: require('../assets/yalta-logo.png'),
   },
   {
     title: 'Props and Icons',
-    image: require('../assets/background13.jpg'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
     subtitle: 'React Native',
     caption: '3 of 12 sections',
-    logo: require('../assets/logo-react.png'),
+    logo: require('../assets/yalta-logo.png'),
   },
   {
     title: 'Static Data and Loop',
-    image: require('../assets/background14.jpg'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
     subtitle: 'React Native',
     caption: '4 of 12 sections',
-    logo: require('../assets/logo-react.png'),
+    logo: require('../assets/yalta-logo.png'),
   },
 ];
 
@@ -95,45 +98,45 @@ export const sections = [
   {
     title: 'React Native for Designers',
     progress: 0.2,
-    image: require('../assets/background1.jpg'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
   },
   {
     title: 'Styled Components',
     progress: 0.3,
-    image: require('../assets/background2.jpg'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
   },
   {
     title: 'Icons and SVG',
     progress: 0.9,
-    image: require('../assets/background3.jpg'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
   },
   {
     title: 'Props and Data',
     progress: 0.5,
-    image: require('../assets/background4.jpg'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
   },
   {
     title: 'States and Layout Animation',
     progress: 0.1,
-    image: require('../assets/background6.jpg'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
   },
 ];
 
 export const courses = [
   {
-    title: 'Prototype in InVision Studio',
-    subtitle: '10 sections',
-    image: require('../assets/background13.jpg'),
-    logo: require('../assets/logo-studio.png'),
-    author: 'Meng To',
+    title: '7 лучших мест Алушты',
+    subtitle: 'Алушта',
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    logo: require('../assets/alushta-logo.png'),
+    author: 'Ирина Терешкова',
     avatar: require('../assets/avatar.jpg'),
     caption: 'Design and interactive prototype',
   },
   {
     title: 'React for Designers',
     subtitle: '12 sections',
-    image: require('../assets/background11.jpg'),
-    logo: require('../assets/logo-react.png'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    logo: require('../assets/simf-logo.png'),
     author: 'Meng To',
     avatar: require('../assets/avatar.jpg'),
     caption: 'Learn to design and code a React site',
@@ -141,8 +144,8 @@ export const courses = [
   {
     title: 'Design and Code with Framer X',
     subtitle: '10 sections',
-    image: require('../assets/background14.jpg'),
-    logo: require('../assets/logo-framerx.png'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    logo: require('../assets/evpatoria-logo.png'),
     author: 'Meng To',
     avatar: require('../assets/avatar.jpg'),
     caption: 'Create powerful design and code components for your app',
@@ -150,8 +153,8 @@ export const courses = [
   {
     title: 'Design System in Figma',
     subtitle: '10 sections',
-    image: require('../assets/background6.jpg'),
-    logo: require('../assets/logo-figma.png'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    logo: require('../assets/feodos-logo.png'),
     author: 'Meng To',
     avatar: require('../assets/avatar.jpg'),
     caption:
@@ -162,28 +165,23 @@ export const courses = [
 export const menuItems = [
   {
     icon: 'ios-person',
-    title: 'Account',
-    text: 'settings',
+    title: 'Аккаунт',
+    text: 'измени себя',
   },
   {
-    icon: 'ios-card',
-    title: 'Billing',
-    text: 'payments',
-  },
-  {
-    icon: 'ios-compass',
-    title: 'Learn React',
-    text: 'start course',
+    icon: 'ios-heart',
+    title: 'Избранное',
+    text: 'то, что ты любишь',
   },
   {
     icon: 'ios-settings',
-    title: 'Settings',
-    text: 'Preferance',
+    title: 'Настройки',
+    text: 'настрой под себя',
   },
   {
     icon: 'ios-exit',
-    title: 'Log out',
-    text: 'see you soon!',
+    title: 'Выход',
+    text: 'скоро увидимся!',
   },
 ];
 
@@ -220,21 +218,21 @@ export const notificationItems = [
 export const projects = [
   {
     title: 'Price Tag',
-    image: require('../assets/background5.jpg'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
     author: 'Liu Yi',
     text:
         'Thanks to Design+Code, I improved my design skill and learned to do animations for my app Price Tag, a top news app in China.Thanks to Design+Code, I improved my design skill and learned to do animations for my app Price Tag, a top news app in China.Thanks to Design+Code, I improved my design skill and learned to do animations for my app Price Tag, a top news app in China.',
   },
   {
     title: 'The DM App - Ananoumous Chat',
-    image: require('../assets/background6.jpg'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
     author: 'Chad Goodman',
     text:
         'Design+Code was the first resource I used when breaking into software. I went from knowing nothing about design or code to building a production ready app from scratch. ',
   },
   {
     title: 'Nikhiljay',
-    image: require('../assets/background7.jpg'),
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
     author: 'Nikhil D\'Souza',
     text:
         'Recently finished the React course by @Mengto, and I 10/10 would recommend. I already rewrote my personal website in @reactjs and I\'m very excited with it.',
@@ -298,6 +296,30 @@ export const category = [
     subtitle: 'Отоспаться',
   },
 ];
+
+export const article = {
+  id: 1,
+  user: {
+    name: 'Lelia Chavez',
+    avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+  },
+  saved: true,
+  location: 'Santorini, Greece',
+  temperature: 34,
+  title: 'Santorini',
+  description:
+      'Santorini is one of the Cyclades islands in the Aegean Sea. It was devastated by a volcanic eruption in the 16th century BC, forever shaping its rugged landscape. The whitewashed, cubiform houses of its 2 principal towns, Fira and Oia, cling to cliffs above an underwater caldera (crater). They overlook the sea, small islands to the west and beaches made up of black, red and white lava pebbles.',
+  rating: 4.3,
+  reviews: 3212,
+  preview:
+      'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
+  images: [
+    'https://source.unsplash.com/1600x900/?nature,water',
+    'https://source.unsplash.com/1600x900/?nature,water',
+    'https://source.unsplash.com/1600x900/?nature,water',
+    'https://source.unsplash.com/1600x900/?nature,water',
+  ],
+};
 
 const mockData = {
   courses,

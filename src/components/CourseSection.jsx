@@ -2,7 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors, sizes } from 'constants/theme';
+import { Dimensions } from 'react-native';
 
+const SCREEN_WIDTH = Dimensions.get('window').width;
+
+const getCourseWidth = () => {
+    let cardWidth = SCREEN_WIDTH / 2 - 30;
+
+    if (SCREEN_WIDTH >= 768) {
+        cardWidth = (SCREEN_WIDTH / 2 - 60) / 2;
+    }
+    if (SCREEN_WIDTH >= 1024) {
+        cardWidth = (SCREEN_WIDTH / 2  - 100) / 3;
+    }
+
+    return cardWidth;
+};
 
 const CourseSection = props => (
     <Container>
@@ -49,7 +64,7 @@ const CourseSection = props => (
 export default CourseSection;
 
 const Container = styled.View`
-  width: 150px;
+  width: ${getCourseWidth()}px;
   height: 150px;
   border-radius: 10px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);

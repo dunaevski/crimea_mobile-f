@@ -1,28 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import { sizes } from 'constants/theme'
+import { sizes } from 'constants/theme';
 
-const Logo = (props) => (
-    <Container>
-        <Image source={ props.image } resizeMode='contain' />
-        <Text>
-            { props.text }
-        </Text>
-    </Container>
-);
+const Logo = ({ image, text, color }) => {
+    return (
+        <Container style={ { backgroundColor: color[0] } }>
+            <Image source={ image } resizeMode='contain' />
+            <Text style={ { color: color[1] } }>
+                { text }
+            </Text>
+        </Container>
+    );
+};
 
 export default Logo;
 
 const Container = styled.View`
   flex-direction: row;
-  background: white;
   height: 60px;
-  padding: 12px 16px 12px;
+  padding: 10px 15px;
   border-radius: 10px;
   box-shadow: 0 5px 10px rgba(0,0,0, 0.10);
   align-items: center;
   margin: 0 8px;
-  
+
 `;
 
 const Image = styled.Image`
