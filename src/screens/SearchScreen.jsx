@@ -138,7 +138,7 @@ const SearchContainer = styled.View`
 
 const Subtitle = styled.Text`
   color: ${ colors.textGray };
-  font-weight: 600;
+  font-weight: bold;
   font-size: ${ sizes.text }px;
   margin: ${ sizes.margin }px;
   text-transform: uppercase;

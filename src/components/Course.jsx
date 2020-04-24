@@ -107,8 +107,8 @@ const Title = styled.Text`
 const Location = styled.View`
   display: flex;
   flex-direction: row;
-  margin-top: 4px;
-  margin-bottom:${ sizes.margin }px;
+  margin-top: 14px;
+  margin-bottom:${ sizes.margin * 1.5 }px;
   margin-left: ${ sizes.margin }px;
 `;
 
