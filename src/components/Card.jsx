@@ -29,17 +29,16 @@ const Card = props => (
                     position: 'absolute',
                     top: 20,
                     right: 20,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                     width: 30,
                     height: 30,
-                    borderRadius: 15,
-                    backgroundColor: colors.white,
                 } }
                 activeOpacity={ 0.7 }
             >
-                <Ionicons name="ios-heart" size={ 16 } color={ props.favorite ? colors.pink : colors.textGray2 } />
+                <Ionicons
+                    name={ props.favorite ? 'ios-heart' : 'ios-heart-empty' }
+                    size={ 24 }
+                    color={ props.favorite ? colors.pink : colors.white }
+                />
             </TouchableOpacity>
         </Cover>
         <Content>

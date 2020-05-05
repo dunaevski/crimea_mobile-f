@@ -1,3 +1,4 @@
+// Меню логотипов
 const logos = [
   {
     image: require('../assets/yalta-logo.png'),
@@ -30,7 +31,8 @@ const logos = [
   },
 ];
 
-const cards = [
+// Определенное место
+export const cards = [
   {
     title: 'Набережная имени Ленина',
     image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
@@ -92,36 +94,68 @@ const cards = [
     caption: '4 of 12 sections',
     logo: require('../assets/yalta-logo.png'),
   },
+
+  {
+    title: 'Static Data and Loop',
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    subtitle: 'React Native',
+    caption: '4 of 12 sections',
+    logo: require('../assets/yalta-logo.png'),
+  },
+
+  {
+    title: 'Static Data and Loop',
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    subtitle: 'React Native',
+    caption: '4 of 12 sections',
+    logo: require('../assets/yalta-logo.png'),
+  },
+
+  {
+    title: 'Static Data and Loop',
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    subtitle: 'React Native',
+    caption: '4 of 12 sections',
+    logo: require('../assets/yalta-logo.png'),
+  },
 ];
 
+// Подборки определенных мест
 export const sections = [
   {
     title: 'React Native for Designers',
     progress: 0.2,
     image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    category: 'Рестораны',
   },
   {
     title: 'Styled Components',
     progress: 0.3,
     image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    category: 'Достопримечательности',
+    isFavorite: true,
   },
   {
     title: 'Icons and SVG',
     progress: 0.9,
     image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    category: 'Пляжи',
   },
   {
     title: 'Props and Data',
     progress: 0.5,
     image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    category: 'Море',
   },
   {
     title: 'States and Layout Animation',
     progress: 0.1,
     image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    category: 'Крым',
   },
 ];
 
+// Гиды
 export const courses = [
   {
     title: '7 лучших мест Алушты',
@@ -162,6 +196,7 @@ export const courses = [
   },
 ];
 
+// Меню (настроек )
 export const menuItems = [
   {
     icon: 'ios-person',
@@ -185,6 +220,7 @@ export const menuItems = [
   },
 ];
 
+// Уведомления
 export const notificationItems = [
   {
     logo: 'https://cl.ly/a4d00a918f39/download/logo-vue.png',
@@ -215,6 +251,7 @@ export const notificationItems = [
   },
 ];
 
+// Random
 export const projects = [
   {
     title: 'Price Tag',
@@ -239,6 +276,7 @@ export const projects = [
   },
 ];
 
+// Популярные запросыв поиске
 export const smallCategory = [
   {
     title: 'Плажи',
@@ -254,6 +292,7 @@ export const smallCategory = [
   },
 ];
 
+// Категории
 export const category = [
   {
     title: 'Где поесть',
@@ -297,6 +336,7 @@ export const category = [
   },
 ];
 
+// Внутреняя инфа
 export const article = {
   id: 1,
   user: {

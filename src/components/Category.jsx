@@ -5,13 +5,19 @@ import { Ionicons } from '@expo/vector-icons';
 
 const Category = props => (
     <Container>
-        <Ionicons name={ props.icon } size={ 36 } color={ colors.blue } />
+        <Ionicons
+            name={ props.icon }
+            size={ 36 }
+            color={ colors.blue }
+            style={ {
+                width: 36,
+            } } />
         <View>
             <Text>{ props.text }</Text>
             <Subtitle>{ props.subtitle }</Subtitle>
         </View>
         <Next>
-            <Ionicons name='ios-arrow-forward' size={ 26 } color={ colors.textGray2 } style={{marginRight: 100}}/>
+            <Ionicons name='ios-arrow-forward' size={ 26 } color={ colors.textGray2 } style={ { marginRight: 100 } } />
 
         </Next>
     </Container>
