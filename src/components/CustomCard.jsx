@@ -14,7 +14,7 @@ const tabBarHeight = 0.06;
 
 
 @observer
-class Project extends Component {
+class CustomCard extends Component {
     @observable cardWidth = new Animated.Value(SCREEN_WIDTH * 0.9);
     @observable cardHeight = new Animated.Value(460);
     @observable titleTop = new Animated.Value(20);
@@ -107,7 +107,7 @@ class Project extends Component {
 }
 
 
-export default Project;
+export default CustomCard;
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
 

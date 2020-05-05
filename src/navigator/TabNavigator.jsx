@@ -5,9 +5,10 @@ import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from 'screens/HomeScreen';
 import SectionScreen from 'screens/SectionScreen';
 import CoursesScreen from 'screens/CoursesScreen';
-import ProjectsScreen from 'screens/ProjectsScreen';
+import SwipeScreen from 'screens/SwipeScreen';
 import VideoScreen from 'screens/VideoScreen';
 import SearchScreen from 'screens/SearchScreen';
+import RecordScreen from 'screens/RecordScreen';
 import CategoryScreen from 'screens/CategoryScreen';
 import { colors } from 'constants/theme'
 
@@ -15,11 +16,12 @@ const activeColor = colors.blue;
 const inactiveColor = colors.textGray2;
 
 const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-    Section: SectionScreen,
-    Video: VideoScreen
-  },
+    {
+        Home: HomeScreen,
+        Record: RecordScreen,
+        Section: SectionScreen,
+        Video: VideoScreen,
+    },
   {
     mode: "modal"
   }
@@ -49,6 +51,9 @@ HomeStack.navigationOptions = ({ navigation }) => {
 const SearchStack = createStackNavigator({
         Search: SearchScreen,
         Category: CategoryScreen,
+        Record: RecordScreen,
+        Section: SectionScreen,
+        Video: VideoScreen,
     },
 );
 
@@ -78,19 +83,19 @@ CoursesStack.navigationOptions = {
     ),
 };
 
-const ProjectStack = createStackNavigator({
-  Project: ProjectsScreen
+const SwipeStack = createStackNavigator({
+    Swipe: SwipeScreen,
 });
 
-ProjectStack.navigationOptions = {
-  tabBarLabel: "Projects",
-  tabBarIcon: ({ focused }) => (
-      <Ionicons
-          name="ios-albums"
-          size={ 28 }
-          color={ focused ? activeColor : inactiveColor }
-      />
-  )
+SwipeStack.navigationOptions = {
+    tabBarLabel: 'Swipes',
+    tabBarIcon: ({ focused }) => (
+        <Ionicons
+            name="ios-albums"
+            size={ 28 }
+            color={ focused ? activeColor : inactiveColor }
+        />
+    ),
 };
 
 
@@ -98,7 +103,7 @@ const TabNavigator = createBottomTabNavigator({
     HomeStack,
     SearchStack,
     CoursesStack,
-    ProjectStack,
+    SwipeStack,
 }, {
     swipeEnabled: true,
     tabBarOptions: {

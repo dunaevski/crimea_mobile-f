@@ -14,7 +14,7 @@ import { action, observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import Logo from 'components/Logo';
 import Card from 'components/Card';
-import Course from 'components/Course';
+import BigCard from 'components/BigCard';
 import Menu from 'components/Menu';
 import Avatar from 'components/Avatar';
 import ModalLogin from 'components/ModalLogin';
@@ -198,7 +198,7 @@ class HomeScreen extends React.Component {
                                             key={ index }
                                             activeOpacity={ 0.7 }
                                             onPress={ () => {
-                                                this.props.navigation.push('Section', {
+                                                this.props.navigation.push('Record', {
                                                     section: card,
                                                 });
                                             } }
@@ -227,16 +227,26 @@ class HomeScreen extends React.Component {
                             <CoursesContainer>
                                 { !this.loading ? (
                                     this.data.courses.map((course, index) => (
-                                        <Course
+                                        <TouchableOpacity
                                             key={ index }
-                                            title={ course.title }
-                                            subtitle={ course.subtitle }
-                                            image={ course.image }
-                                            logo={ course.logo }
-                                            author={ course.author }
-                                            avatar={ course.avatar }
-                                            caption={ course.caption }
-                                        />
+                                            activeOpacity={ 0.7 }
+                                            onPress={ () => {
+                                                this.props.navigation.push('Section', {
+                                                    section: course,
+                                                });
+                                            } }
+                                        >
+                                            <BigCard
+                                                key={ index }
+                                                title={ course.title }
+                                                subtitle={ course.subtitle }
+                                                image={ course.image }
+                                                logo={ course.logo }
+                                                author={ course.author }
+                                                avatar={ course.avatar }
+                                                caption={ course.caption }
+                                            />
+                                        </TouchableOpacity>
                                     ))
                                 ) : (
                                     <Message>Loading...</Message>

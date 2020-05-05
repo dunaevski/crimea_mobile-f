@@ -1,5 +1,5 @@
 # Crimea Mobile 
-## 🗺 Project Layout
+## 🗺 CustomCard Layout
 
 - [`components`](/packages) All the source code for the Unimodules, if you want to edit a library or just see how it works this is where you'll find it.
 - [`assets`](/apps) This is where you can find Expo projects which are linked to the development Unimodules. You'll do most of your testing in here.

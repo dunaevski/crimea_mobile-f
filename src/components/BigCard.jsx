@@ -10,7 +10,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 
 @observer
-class Course extends React.Component {
+class BigCard extends React.Component {
     @observable cardWidth = null;
 
     componentDidMount() {
@@ -62,7 +62,7 @@ class Course extends React.Component {
     }
 }
 
-export default Course;
+export default BigCard;
 
 const Container = styled.View`
   width: 335px;

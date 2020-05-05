@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import {
-    Text,
-    Animated,
     Dimensions,
     ScrollView,
     TouchableOpacity,
@@ -11,13 +9,13 @@ import {
 import { SafeAreaView } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, sizes } from 'constants/theme';
+import { cards, article } from '../mockData';
+import Results from 'components/Results';
 
 const { width, height } = Dimensions.get('window');
 
 
-class CategoryScreen extends React.Component {
-    scrollX = new Animated.Value(0);
-
+class RecordScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             header: () => (
@@ -38,13 +36,6 @@ class CategoryScreen extends React.Component {
                                 color={ colors.white }
                             />
                         </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Ionicons
-                                name="ios-more"
-                                size={ sizes.title }
-                                color={ colors.white }
-                            />
-                        </TouchableOpacity>
                     </Header>
                 </SafeAreaView>
             ),
@@ -52,112 +43,30 @@ class CategoryScreen extends React.Component {
         };
     };
 
-    renderDots = () => {
-        const { navigation } = this.props;
-        const article = navigation.getParam('article');
-
-        const dotPosition = Animated.divide(this.scrollX, width);
-
-        return (
-            <DotsContainer>
-                { article.images.map((item, index) => {
-                    const opacity = dotPosition.interpolate({
-                        inputRange: [
-                            index - 1,
-                            index,
-                            index + 1,
-                        ],
-                        outputRange: [
-                            0.5,
-                            1,
-                            0.5,
-                        ],
-                        extrapolate: 'clamp',
-                    });
-                    return (
-                        <Animated.View
-                            key={ `step-${ item }-${ index }` }
-                            style={ [
-                                {
-                                    width: 8,
-                                    height: 8,
-                                    borderRadius: 4,
-                                    marginHorizontal: 6,
-                                    backgroundColor: colors.white,
-                                },
-                                { opacity },
-                            ] }
-                        />
-                    );
-                }) }
-            </DotsContainer>
-        );
-    };
-
-    renderRatings = rating => {
-        const stars = new Array(5).fill(0);
-        return stars.map((_, index) => {
-            const activeStar = Math.floor(rating) >= index + 1;
-            return (
-                <Ionicons
-                    key={ `star-${ index }` }
-                    name="ios-star"
-                    size={ sizes.text }
-                    color={ colors[activeStar ? 'gradBlue' : 'textGray2'] }
-                />
-            );
-        });
-    };
-
     render() {
-        const { navigation } = this.props;
-        const article = navigation.getParam('article');
-
         return (
-            <Container>
-                <Images>
-                    <ScrollView
-                        horizontal
-                        pagingEnabled
-                        scrollEnabled
-                        showsHorizontalScrollIndicator={ false }
-                        decelerationRate={ 0 }
-                        scrollEventThrottle={ 16 }
-                        snapToAlignment="center"
-                        onScroll={ Animated.event([
-                            { nativeEvent: { contentOffset: { x: this.scrollX } } },
-                        ]) }
-                    >
-                        { article.images.map((img, index) => (
-                            <Image
-                                key={ `${ index }-${ img }` }
-                                source={ { uri: img } }
-                                resizeMode="cover"
-                            />
-                        )) }
-                    </ScrollView>
-                    { this.renderDots() }
-                </Images>
+            <ScrollView>
                 <Container>
-                    <ArticleContainer>
-                        <Avatar source={ { uri: article.user.avatar } } />
-                        <Title>{ article.title }</Title>
-                        <Rating>
-                            { this.renderRatings(article.rating) }
-                            <RatingNumber>{ article.rating }</RatingNumber>
-                            <RatingReview>({ article.reviews } reviews)</RatingReview>
-                        </Rating>
+                    <ImagesView>
+                        <Image
+                            source={ { uri: article.preview } }
+                        />
+                        <TextView>
+                            <Title>{ article.title }</Title>
+                            <SubTitle>({ article.reviews } reviews)</SubTitle>
+                        </TextView>
+                    </ImagesView>
 
-                        <ArticleText>
-                            { article.description.split('').slice(0, 180) }...
-                            <TouchableOpacity>
-                                {/*<ReadMore> Read more</ReadMore>*/ }
-                            </TouchableOpacity>
-
-                        </ArticleText>
-                    </ArticleContainer>
+                    <Container>
+                        <ResultsContainer>
+                            <Results
+                                navigation={ this.props.navigation }
+                                results={ cards }
+                            />
+                        </ResultsContainer>
+                    </Container>
                 </Container>
-            </Container>
+            </ScrollView>
         );
     }
 }
@@ -175,41 +84,33 @@ const Header = styled.View`
   padding: ${ sizes.padding }px;
 `;
 
-const DotsContainer = styled.View`
-  flex: 0;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: 36px;
-  right: 0;
-  left: 0;
-`;
-
 const Container = styled.View`
   flex: 1;
 `;
 
-const Images = styled.View`
+const ImagesView = styled.View`
+`;
+
+const TextView = styled.View`
+  position: absolute;
+  bottom: ${ sizes.margin }px;
+  left: ${ sizes.margin }px;
 `;
 
 const Image = styled.Image`
   width: ${ width }px;
   height: ${ width }px;
+  border-bottom-left-radius: ${ sizes.radius }px;
+  border-bottom-right-radius: ${ sizes.radius }px;
 `;
 
-const ArticleContainer = styled.View`
-  padding: ${ sizes.padding * 2 }px;
-  background-color: ${ colors.white };
-  border-top-left-radius: ${ sizes.radius }px;
-  border-top-right-radius: ${ sizes.radius }px;
-  margin-top: ${ -sizes.padding / 2 }px;
+const ResultsContainer = styled.View`
+ display: flex;
+ align-items: center;
+ background-color: ${ colors.white };
 `;
 
 const Avatar = styled.Image`
-  position: absolute;
-  top: ${ -sizes.margin }px;
-  right: ${ sizes.margin }px;
   width: ${ sizes.padding * 2 }px;
   height: ${ sizes.padding * 2 }px;
   border-radius: ${ sizes.padding }px;
@@ -217,36 +118,14 @@ const Avatar = styled.Image`
 
 const Title = styled.Text`
   font-size: ${ sizes.title }px;
+  color: ${ colors.white };
   font-weight: bold;
+  margin-bottom: ${ sizes.margin / 2 }px;
 `;
 
-const Rating = styled.View`
-  flex-direction: row;
-  align-items: center;
-  margin-top: ${ sizes.margin / 2 }px;
-`;
-
-const RatingNumber = styled.Text`
-  margin-left: ${ sizes.margin / 2 }px;
-  color: ${ colors.gradBlue };
-`;
-
-const RatingReview = styled.Text`
-  margin-left: 8px;
+const SubTitle = styled.Text`
   color: ${ colors.textGray2 };
+  margin-bottom: ${ sizes.margin / 2 }px;
 `;
 
-const ArticleText = styled.Text`
-  margin-top: ${ sizes.margin }px;
-  font-size: ${ sizes.smallText * 1.2 }px;
-  line-height: ${ sizes.smallText * 2 }px;
-  color: ${ colors.textGray2 };
-`;
-
-const ReadMore = styled.Text`
-  font-size: ${ sizes.smallText * 1.2 }px;
-  line-height: ${ sizes.smallText * 2 }px;
-  color: ${ colors.blue };
-`;
-
-export default CategoryScreen;
+export default RecordScreen;

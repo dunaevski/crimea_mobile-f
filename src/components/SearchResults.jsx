@@ -8,52 +8,13 @@ import {
 import styled from 'styled-components';
 import { colors, sizes } from 'constants/theme';
 import FilterSearch from 'components/FilterSearch';
-import SmallCard from 'components/SmallCard';
-import { article } from '../mockData';
+import Results from 'components/Results';
 
-
-const SCREEN_HEIGHT = Dimensions.get('window').height;
-const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default class SearchResults extends Component {
-    renderResults = () => {
-        if (this.props.results) {
-            return this.props.results.map((result, index) => {
-                return (
-                    <TouchableOpacity
-                        key={ index }
-                        activeOpacity={ 0.7 }
-                        onPress={ () => {
-                            this.props.navigation.push('Category', {
-                                article,
-                            });
-                        } }
-                    >
-                        <SmallCard
-                            image={ result.image }
-                            title={ result.title }
-                            category={ result.subtitle }
-                            caption={ result.caption }
-                            isFavorite={ result.favorite }
-                        />
-                    </TouchableOpacity>
-                );
-            });
-        }
-        else {
-            return (
-                <NoSearchResults>
-                    <NotFoundImage source={ require('./../../assets/notfound3.png') } />
-                    <NoResultsTitle> Ничего не найдено </NoResultsTitle>
-                    <NoResultsSubTitle>
-                        Попробуйте поискать по другому или удалить фильтр
-                    </NoResultsSubTitle>
-                </NoSearchResults>
-            );
-        }
-    };
-
     render() {
+        console.log( this.props.navigation )
+
         return (
             <TouchableWithoutFeedback onPress={ this.props.tapBackground }>
                 <React.Fragment>
@@ -67,7 +28,10 @@ export default class SearchResults extends Component {
                     </HeaderView>
 
                         <ResultsView>
-                            { this.renderResults() }
+                            <Results
+                                navigation={ this.props.navigation }
+                                results={ this.props.results }
+                            />
                         </ResultsView>
                     </ScrollView>
                 </React.Fragment>
@@ -97,30 +61,3 @@ const Subtitle = styled.Text`
   font-size: ${ sizes.bigTitle }px;
 `;
 
-const NoSearchResults = styled.View`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: ${ SCREEN_HEIGHT * 0.6 }px;
-`;
-
-const NoResultsTitle = styled.Text`
-  color: ${ colors.textGray };
-  font-weight: bold;
-  font-size: ${ sizes.caption }px;
-  text-align: center;
-`;
-
-const NotFoundImage = styled.Image`
- width: 250px;
- height: 200px;
-`;
-
-const NoResultsSubTitle = styled.Text`
-  margin-top: ${ sizes.margin }px;
-  color: ${ colors.textGray2 };
-  font-weight: bold;
-  font-size: ${ sizes.text }px;
-  text-align: center;
-  width: ${ SCREEN_WIDTH * 0.6 }px;
-`;

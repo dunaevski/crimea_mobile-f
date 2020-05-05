@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { observer } from 'mobx-react';
 import { colors, sizes } from 'constants/theme';
 import { SafeAreaView } from 'react-navigation';
-
+import { cards as sections } from '../mockData';
 
 @observer
 class SectionScreen extends Component {
@@ -52,7 +52,7 @@ class SectionScreen extends Component {
 
   render() {
     const { navigation } = this.props;
-    const section = navigation.getParam("section");
+    const section = sections[0];
 
     return (
       <ScrollView showsVerticalScrollIndicator={false}>

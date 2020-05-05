@@ -3,10 +3,10 @@ import { Dimensions } from 'react-native';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
 import { LinearGradient } from 'expo-linear-gradient';
-import CourseSection from 'components/CourseSection';
-import Courses from 'components/Courses';
-import { sections } from '../mockData';
+import SmallCard from 'components/SmallCard';
+import { courses, sections } from '../mockData';
 import { colors, sizes } from 'constants/theme';
+import BigCard from 'components/BigCard';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -43,7 +43,7 @@ class CoursesScreen extends Component {
                                 showsHorizontalScrollIndicator={ false }
                             >
                                 { sections.map((section, index) => (
-                                    <CourseSection
+                                    <SmallCard
                                         key={ index }
                                         title={ section.title }
                                         image={ section.image }
@@ -58,7 +58,20 @@ class CoursesScreen extends Component {
                         </Author>
                     </Hero>
                     <Subtitle>Latest Courses</Subtitle>
-                    <Courses />
+                    <SubContainer>
+                        { courses.map((course, index) => (
+                            <BigCard
+                                key={ index }
+                                image={ course.image }
+                                title={ course.title }
+                                subtitle={ course.subtitle }
+                                logo={ course.logo }
+                                author={ course.author }
+                                avatar={ course.avatar }
+                                caption={ course.caption }
+                            />
+                        )) }
+                    </SubContainer>
                 </ScrollView>
             </Container>
         );
@@ -154,3 +167,11 @@ const Subtitle = styled.Text`
   color: ${ colors.textGray2 };
   margin: 20px 0 0 20px;
 `;
+
+const SubContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-left: 10px;
+`;
+

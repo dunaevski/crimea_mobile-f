@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Project from 'components/Project';
+import CustomCard from 'components/CustomCard';
 import { Animated, PanResponder } from 'react-native';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
@@ -9,7 +9,7 @@ import { colors } from 'constants/theme'
 
 
 @observer
-class ProjectsScreen extends Component {
+class SwipeScreen extends Component {
     static navigationOptions = {
         headerShown: false,
     };
@@ -120,7 +120,7 @@ class ProjectsScreen extends Component {
                     } }
                     { ...this._panResponder.panHandlers }
                 >
-                    <Project
+                    <CustomCard
                         title={ projects[this.index].title }
                         image={ projects[this.index].image }
                         author={ projects[this.index].author }
@@ -147,7 +147,7 @@ class ProjectsScreen extends Component {
                         ],
                     } }
                 >
-                    <Project
+                    <CustomCard
                         title={ projects[this.getNextIndex(this.index)].title }
                         image={ projects[this.getNextIndex(this.index)].image }
                         author={ projects[this.getNextIndex(this.index)].author }
@@ -174,7 +174,7 @@ class ProjectsScreen extends Component {
                         ],
                     } }
                 >
-                    <Project
+                    <CustomCard
                         title={ projects[this.getNextIndex(this.index + 1)].title }
                         image={ projects[this.getNextIndex(this.index + 1)].image }
                         author={ projects[this.getNextIndex(this.index + 1)].author }
@@ -190,7 +190,7 @@ class ProjectsScreen extends Component {
 }
 
 
-export default ProjectsScreen;
+export default SwipeScreen;
 
 const Mask = styled.View`
   position: absolute;

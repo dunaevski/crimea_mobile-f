@@ -25,4 +25,5 @@ const Container = styled.View`
 
 const Text = styled.Text`
   color: ${ colors.white };
+  font-weight: bold;
 `;

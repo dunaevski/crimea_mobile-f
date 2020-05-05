@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { article, category, sections, smallCategory } from '../mockData';
 import SmallCategory from 'components/SmallCategory';
-import CourseSection from 'components/CourseSection';
+import SmallCard from 'components/SmallCard';
 import Category from 'components/Category';
 import styled from 'styled-components';
 import { colors, sizes } from 'constants/theme';
@@ -60,7 +60,7 @@ export default class SearchCategory extends Component {
                                         });
                                     } }
                                 >
-                                    <CourseSection
+                                    <SmallCard
                                         title={ section.title }
                                         image={ section.image }
                                         progress={ section.progress }
