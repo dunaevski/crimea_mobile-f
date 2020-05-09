@@ -1,14 +1,20 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
-import { Animated, Dimensions, StatusBar, TouchableOpacity } from 'react-native';
+import {
+    Animated,
+    Dimensions,
+    StatusBar,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import MenuItems from 'components/MenuItems';
 import { menuItems as items } from '../mockData';
 import Switch from 'components/Switch';
 import { observable } from 'mobx';
 import { colors, sizes } from 'constants/theme';
-
+import { BlurView } from 'expo-blur';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -65,6 +71,21 @@ class Menu extends React.Component {
         const isMenuOpen = UIStore.isMenuOpen;
         return (
             <AnimatedContainer style={ { top: this.top } }>
+                <TouchableWithoutFeedback
+                    onPress={ () => {
+                        UIStore.toggleMenu();
+                    } }
+                >
+                    <BlurView
+                        titnt="default"
+                        intensity={ 100 }
+                        style={ {
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                        } }
+                    />
+                </TouchableWithoutFeedback>
                 <Container>
                     <Cover>
                         <Image source={ require('./../../assets/background2.jpg') } />
@@ -117,11 +138,11 @@ class Menu extends React.Component {
     }
 }
 
-
 export default Menu;
 
 const Container = styled.View`
   height: 700px;
+  width: ${ cardWidth }px;
   background: white;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
@@ -130,8 +151,9 @@ const Container = styled.View`
 
 const BackgroundContainer = styled.View`
   position: absolute;
-  width: ${ cardWidth }px;
+  width: ${ SCREEN_WIDTH }px;
   height: ${ SCREEN_HEIGHT }px;
+  align-items: center;
   background: rgba(0, 0, 0, 0.75);
   z-index: 100;
   align-self: center;
@@ -177,5 +199,5 @@ const Cover = styled.View`
 const Content = styled.View`
   height: ${ SCREEN_HEIGHT }px;
   background: ${ colors.white };
-  padding: 25px 0 0 40px ;
+  padding: 25px 0 0 40px;
 `;

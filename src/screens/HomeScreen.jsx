@@ -89,7 +89,7 @@ class HomeScreen extends React.Component {
     handleAvatar = () => {
         const { UIStore } = this.props;
 
-        if (!UIStore.name) {
+        if (UIStore.name) {
             UIStore.toggleMenu();
         }
         else {

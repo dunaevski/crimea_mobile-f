@@ -1,17 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors, sizes } from 'constants/theme';
+import { colors, sizes, randomColor } from 'constants/theme';
 import { Ionicons } from '@expo/vector-icons';
 
 const Category = props => (
     <Container>
-        <Ionicons
-            name={ props.icon }
-            size={ 36 }
-            color={ colors.blue }
-            style={ {
-                width: 36,
-            } } />
+        <IconView>
+            <Ionicons
+                index={ props.index }
+                name={ props.icon }
+                size={ 37.5 }
+                color={ colors.white }
+            />
+        </IconView>
         <View>
             <Text>{ props.text }</Text>
             <Subtitle>{ props.subtitle }</Subtitle>
@@ -24,6 +25,18 @@ const Category = props => (
 );
 
 export default Category;
+
+const randColor = (itemIndex) => {
+    let colorIndex = 0;
+    if (randomColor.length <= itemIndex) {
+        colorIndex = itemIndex % randomColor.length;
+    }
+    else {
+        colorIndex = itemIndex;
+    }
+    console.log(randomColor[colorIndex]);
+    return randomColor[colorIndex];
+};
 
 const Container = styled.View`
   background: white;
@@ -39,6 +52,15 @@ const Container = styled.View`
 
 const View = styled.View`
   margin-left: 25px;
+`;
+
+const IconView = styled.View`
+  width: 50px;
+  height: 50px;
+  background-color: ${ props => randColor(props.children.props.index) };
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
 `;
 
 const Next = styled.View`

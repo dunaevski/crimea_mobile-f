@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { action, observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
-import { Animated, Dimensions, Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import {
+  Animated,
+  Dimensions,
+  Keyboard,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import { BlurView } from 'expo-blur';
 import AnimateIcon from 'components/AnimateIcon';
 import { colors, sizes } from 'constants/theme';
@@ -108,8 +114,8 @@ class ModalLogin extends Component {
               ],
             } }
         >
-          <Logo source={ require('./../../assets/logo-dc.png') } />
-          <Text>Start Taiping. Access Pro Content </Text>
+          <Logo source={ require('./../../assets/logo.png') } />
+          <Text>Откройте для себя новый крым </Text>
           <Email>
             <IconEmail source={ this.iconEmail } />
             <TextInput
@@ -124,7 +130,7 @@ class ModalLogin extends Component {
           <Password>
             <IconPassword source={ this.iconPassword } />
             <TextInput
-                placeholder="Password"
+                placeholder="Пароль"
                 secureTextEntry={ true }
                 onChangeText={ password => {
                   this.password = password;
@@ -132,15 +138,38 @@ class ModalLogin extends Component {
                 onFocus={ this.focusPassword }
             />
           </Password>
-
+          <ForgotView>
+            <TouchableOpacity
+                activeOpacity={ 0.7 }
+                onPress={ this.handleSubmitLogin }
+            >
+              <Forgot>Забыли пароль?</Forgot>
+            </TouchableOpacity>
+          </ForgotView>
           <TouchableOpacity
               activeOpacity={ 0.7 }
               onPress={ this.handleSubmitLogin }
           >
             <Button>
-              <ButtonText>Login In</ButtonText>
+              <ButtonText>Вход</ButtonText>
             </Button>
           </TouchableOpacity>
+          <Text>Или</Text>
+          <SocialView>
+            <SocialIcon source={ require('./../../assets/vkIcon.png') } />
+            <SocialIcon source={ require('./../../assets/googleIcon.png') } />
+            <SocialIcon source={ require('./../../assets/facebookIcon.png') } />
+          </SocialView>
+
+          <SignUpView>
+            <Text> Нет аккаунта? </Text>
+            <TouchableOpacity
+                activeOpacity={ 0.7 }
+                onPress={ this.handleSubmitLogin }
+            >
+              <SignUp>Создать</SignUp>
+            </TouchableOpacity>
+          </SignUpView>
         </AnimatedModal>
         <AnimateIcon
             isActive={ this.isSuccessful }
@@ -174,7 +203,7 @@ const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 const Modal = styled.View`
   width: ${ SCREEN_WIDTH * 0.8 }px;
-  height: 390px;
+  height: 480px;
   background: white;
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -186,7 +215,7 @@ const AnimatedModal = Animated.createAnimatedComponent(Modal);
 const Logo = styled.Image`
   width: 44px;
   height: 44px;
-  margin-top: 50px;
+  margin-top: 15px;
 `;
 
 const Text = styled.Text`
@@ -228,13 +257,20 @@ const ButtonText = styled.Text`
   text-transform: uppercase;
 `;
 
-const Email = styled.View`
-
+const ForgotView = styled.View`
+  margin-top: 10px;
+  margin-right: ${ sizes.margin }px;
+  align-self: flex-end;
 `;
 
-const Password = styled.View`
-
+const Forgot = styled.Text`
+  color: ${ colors.gradBlue };
+  font-weight: bold;
 `;
+
+const Email = styled.View``;
+
+const Password = styled.View``;
 
 const IconEmail = styled.Image`
   width: 24px;
@@ -250,4 +286,28 @@ const IconPassword = styled.Image`
   position: absolute;
   top: 28px;
   left: 13px;
+`;
+
+const SocialView = styled.View`
+  flex-direction: row;
+  margin-top: 10px;
+`;
+
+const SocialIcon = styled.Image`
+  width: 44px;
+  height: 44px;
+  margin-left: 10px;
+`;
+
+const SignUpView = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SignUp = styled.Text`
+  margin-top: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: ${ colors.blue };
 `;

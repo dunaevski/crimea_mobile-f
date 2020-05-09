@@ -10,6 +10,8 @@ const colors = {
     white: '#F0F3F5',
 };
 
+const randomColor = ['#f6705b', '#df813b', '#4188df', '#28b878', '#af77dd']
+
 const sizes = {
     // font sizes
     bigTitle: 32,
@@ -28,4 +30,4 @@ const sizes = {
     radius: 14,
 };
 
-export { colors, sizes };
+export { colors, sizes, randomColor };

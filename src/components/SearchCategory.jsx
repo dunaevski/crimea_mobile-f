@@ -83,6 +83,7 @@ export default class SearchCategory extends Component {
                             } }
                         >
                             <Category
+                                index={ index }
                                 text={ item.title }
                                 icon={ item.icon }
                                 subtitle={ item.subtitle }
