@@ -203,7 +203,7 @@ const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 const Modal = styled.View`
   width: ${ SCREEN_WIDTH * 0.8 }px;
-  height: 480px;
+  height: 470px;
   background: white;
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -247,7 +247,7 @@ const Button = styled.View`
   align-items: center;
   border-radius: 10px;
   box-shadow: 0 10px 20px #c2cbff;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 const ButtonText = styled.Text`

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import MenuItems from 'components/MenuItems';
-import { menuItems as items } from '../mockData';
+import { article, menuItems as items } from '../mockData';
 import Switch from 'components/Switch';
 import { observable } from 'mobx';
 import { colors, sizes } from 'constants/theme';
@@ -25,7 +25,7 @@ if (SCREEN_WIDTH > 500) {
 }
 
 
-@inject('UIStore')
+@inject('UIStore', 'UserStore')
 @observer
 class Menu extends React.Component {
     @observable dark = false;
@@ -58,8 +58,25 @@ class Menu extends React.Component {
         }
     };
 
-    handleMenu = () => {
-        this.props.UIStore.toggleMenu();
+    handleMenu = (index) => {
+        switch (index) {
+            case 0:
+                this.props.navigation.push('Profile');
+                this.props.UIStore.toggleMenu();
+                break;
+            case 1:
+                this.props.navigation.push('Favorite');
+                this.props.UIStore.toggleMenu();
+                break;
+            case 2:
+                this.props.navigation.push('Settings');
+                this.props.UIStore.toggleMenu();
+                break;
+            case 3:
+                this.props.UIStore.toggleMenu();
+                break;
+        }
+
     };
 
     setDark = () => {
@@ -67,7 +84,7 @@ class Menu extends React.Component {
     };
 
     render() {
-        const { UIStore } = this.props;
+        const { UIStore, UserStore } = this.props;
         const isMenuOpen = UIStore.isMenuOpen;
         return (
             <AnimatedContainer style={ { top: this.top } }>
@@ -89,7 +106,7 @@ class Menu extends React.Component {
                 <Container>
                     <Cover>
                         <Image source={ require('./../../assets/background2.jpg') } />
-                        <Title> { UIStore.name } </Title>
+                        <Title> { UserStore.fullName } </Title>
                         <Subtitle>Крым в Твоих руках</Subtitle>
                     </Cover>
                     <TouchableOpacity

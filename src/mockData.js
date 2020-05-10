@@ -317,7 +317,7 @@ export const category = [
   {
     title: 'Активный отдых',
     icon: 'ios-bonfire',
-    subtitle: 'Отдохнуть с острыми ощущениями',
+    subtitle: 'Хорошо отдохнуть',
   },
   {
     title: 'Развлечения',

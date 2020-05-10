@@ -47,7 +47,6 @@ class BigCard extends React.Component {
                             name="ios-navigate"
                             size={ 20 }
                             color={ colors.textGray2 }
-                            style
                         />
                         <Subtitle>{ this.props.subtitle }</Subtitle>
                     </Location>

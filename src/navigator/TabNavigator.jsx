@@ -10,6 +10,7 @@ import VideoScreen from 'screens/VideoScreen';
 import SearchScreen from 'screens/SearchScreen';
 import RecordScreen from 'screens/RecordScreen';
 import CategoryScreen from 'screens/CategoryScreen';
+import ProfileScreen from 'screens/ProfileScreen';
 import { colors } from 'constants/theme'
 
 const activeColor = colors.blue;
@@ -21,6 +22,7 @@ const HomeStack = createStackNavigator(
         Record: RecordScreen,
         Section: SectionScreen,
         Video: VideoScreen,
+        Profile: ProfileScreen,
     },
   {
     mode: "modal"

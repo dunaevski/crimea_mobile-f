@@ -193,6 +193,7 @@ const Images = styled.View`
 const Image = styled.Image`
   width: ${ width }px;
   height: ${ width }px;
+  max-height: 400px;
 `;
 
 const ArticleContainer = styled.View`

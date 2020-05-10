@@ -13,6 +13,7 @@ module.exports = function(api) {
             screens: path.resolve(__dirname, 'src/screens/'),
             constants: path.resolve(__dirname, 'src/constants/'),
             globalStore: path.resolve(__dirname, 'src/globalStore/'),
+            helpers: path.resolve(__dirname, 'src/helpers/'),
           },
           extensions: [
             '.js',

@@ -11,8 +11,6 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default class Results extends Component {
     render() {
-        console.log( this.props.navigation )
-
         if (this.props.results) {
             return this.props.results.map((result, index) => {
                 return (
@@ -39,10 +37,10 @@ export default class Results extends Component {
         else {
             return (
                 <NoSearchResults>
-                    <NotFoundImage source={ require('./../../assets/notfound3.png') } />
+                    <NotFoundImage source={ this.props.picture } />
                     <NoResultsTitle> Ничего не найдено </NoResultsTitle>
                     <NoResultsSubTitle>
-                        Попробуйте поискать по другому или удалить фильтр
+                        { this.props.text }
                     </NoResultsSubTitle>
                 </NoSearchResults>
             );

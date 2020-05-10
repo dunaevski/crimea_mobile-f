@@ -60,6 +60,8 @@ class RecordScreen extends React.Component {
                     <Container>
                         <ResultsContainer>
                             <Results
+                                picture={require('./../../assets/notfound3.png')}
+                                text={'Попробуйте поискать по другому или удалить фильтр'}
                                 navigation={ this.props.navigation }
                                 results={ cards }
                             />
@@ -89,6 +91,7 @@ const Container = styled.View`
 `;
 
 const ImagesView = styled.View`
+  max-height: 400px;
 `;
 
 const TextView = styled.View`

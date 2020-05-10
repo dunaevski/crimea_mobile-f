@@ -16,14 +16,13 @@ import Logo from 'components/Logo';
 import Card from 'components/Card';
 import BigCard from 'components/BigCard';
 import Menu from 'components/Menu';
-import Avatar from 'components/Avatar';
 import ModalLogin from 'components/ModalLogin';
 import NotificationButton from 'components/NotificationButton';
 import Notifications from 'components/Notifications';
 import { colors, sizes } from 'constants/theme';
+import { fetchUserInfo } from 'helpers/actions/profile';
 
-
-@inject('UIStore')
+@inject('UIStore', 'UserStore')
 @observer
 class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -40,6 +39,16 @@ class HomeScreen extends React.Component {
         if (Platform.OS === 'android') {
             StatusBar.setBarStyle('light-content', true);
         }
+
+        fetchUserInfo().then((response) => {
+            if (response && response.results) {
+                this.props.UserStore.setUser({
+                    isSign: true,
+                    ...response.results[0],
+                });
+            }
+        });
+
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -87,9 +96,10 @@ class HomeScreen extends React.Component {
 
     @action
     handleAvatar = () => {
-        const { UIStore } = this.props;
+        const { UIStore, UserStore } = this.props;
+        const user = UserStore.getUser();
 
-        if (UIStore.name) {
+        if (user.isSign) {
             UIStore.toggleMenu();
         }
         else {
@@ -98,11 +108,11 @@ class HomeScreen extends React.Component {
     };
 
     render() {
-        const { UIStore } = this.props;
-
+        const { UIStore, UserStore } = this.props;
+        const user = UserStore.getUser();
         return (
             <RootView>
-                <Menu />
+                <Menu navigation={ this.props.navigation } />
                 <Notifications />
 
                 <AnimatedContainer
@@ -124,12 +134,13 @@ class HomeScreen extends React.Component {
                                         position: 'absolute',
                                         top: 0,
                                         left: 0,
+                                        marginLeft: 20,
                                     } }
                                 >
-                                    <Avatar />
+                                    <Avatar source={ { uri: user.picture ? user.picture.medium : user.defaultPhoto } } />
                                 </TouchableOpacity>
                                 <Title>Добро пожаловать,</Title>
-                                <Name>{ UIStore.name }!</Name>
+                                <Name>{ UserStore.fullName }!</Name>
                                 <TouchableOpacity
                                     activeOpacity={ 0.7 }
                                     onPress={ () => UIStore.toggleNotification() }
@@ -326,4 +337,10 @@ const TitleBar = styled.View`
   width: 100%;
   margin-top: 50px;
   padding-left: 80px;
+`;
+
+const Avatar = styled.Image`
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
 `;

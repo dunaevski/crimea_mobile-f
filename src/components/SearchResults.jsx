@@ -13,7 +13,6 @@ import Results from 'components/Results';
 
 export default class SearchResults extends Component {
     render() {
-        console.log( this.props.navigation )
 
         return (
             <TouchableWithoutFeedback onPress={ this.props.tapBackground }>
@@ -29,6 +28,8 @@ export default class SearchResults extends Component {
 
                         <ResultsView>
                             <Results
+                                picture={require('./../../assets/notfound3.png')}
+                                text={'Попробуйте поискать по другому или удалить фильтр'}
                                 navigation={ this.props.navigation }
                                 results={ this.props.results }
                             />

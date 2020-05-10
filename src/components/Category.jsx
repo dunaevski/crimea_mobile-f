@@ -9,7 +9,7 @@ const Category = props => (
             <Ionicons
                 index={ props.index }
                 name={ props.icon }
-                size={ 37.5 }
+                size={ 35 }
                 color={ colors.white }
             />
         </IconView>
@@ -18,7 +18,7 @@ const Category = props => (
             <Subtitle>{ props.subtitle }</Subtitle>
         </View>
         <Next>
-            <Ionicons name='ios-arrow-forward' size={ 26 } color={ colors.textGray2 } style={ { marginRight: 100 } } />
+            <Ionicons name='ios-arrow-forward' size={ 26 } color={ colors.textGray2 } style={ { marginRight: 90 } } />
 
         </Next>
     </Container>
@@ -51,7 +51,7 @@ const Container = styled.View`
 `;
 
 const View = styled.View`
-  margin-left: 25px;
+  margin-left: 20px;
 `;
 
 const IconView = styled.View`
