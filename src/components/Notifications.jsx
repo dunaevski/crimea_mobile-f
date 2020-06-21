@@ -79,7 +79,7 @@ class Notifications extends React.Component {
                 <SafeAreaView>
                     <ScrollView style={ { padding: 20 } }>
                         <Wrapper>
-                            <Subtitle>New</Subtitle>
+                            <Subtitle>Новые</Subtitle>
                             { items.map((item, index) => (
                                 <AnimatedItem
                                     key={ index }
@@ -89,7 +89,7 @@ class Notifications extends React.Component {
                                     } }
                                 >
                                     <Header>
-                                        <Logo source={ { uri: item.logo } } resizeMode="contain" />
+                                        <Logo source={ item.logo } resizeMode="contain" />
                                         <Title>{ item.title }</Title>
                                         <DateContainer>
                                             <Date>{ item.date }</Date>

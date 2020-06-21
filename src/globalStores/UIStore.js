@@ -1,11 +1,10 @@
 import { action, observable } from 'mobx';
 
-
 class UIStore {
   @observable _isNotificationOpen = false;
   @observable isModalLoginOpen = false;
   @observable isMenuOpen = false;
-  @observable _name = "";
+  @observable _isUserLogin = false;
 
   @action toggleNotification() {
     this._isNotificationOpen = !this._isNotificationOpen;
@@ -19,16 +18,20 @@ class UIStore {
     this.isModalLoginOpen = !this.isModalLoginOpen;
   }
 
+  @action toggleIsLoginForm() {
+    this._isLoginForm = !this._isLoginForm;
+  }
+
   @action toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  @action setName(name) {
-    this._name = name;
+  get isUserLogin() {
+    return this._isUserLogin;
   }
 
-  get name() {
-    return this._name;
+  set isUserLogin(isLogin) {
+    return this._isUserLogin = isLogin;
   }
 }
 

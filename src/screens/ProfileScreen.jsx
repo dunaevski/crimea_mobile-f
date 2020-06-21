@@ -57,7 +57,7 @@ class ProfileScreen extends React.Component {
 
     render() {
         const { UserStore } = this.props;
-        const user = UserStore.getUser();
+        const user = UserStore.user;
         return (
             <ScrollView>
                 <Container>

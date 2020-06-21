@@ -23,7 +23,7 @@ export default class SearchBar extends Component {
             <SafeAreaView>
                 <Container>
                     <TextInput
-                        placeholder="Type Here..."
+                        placeholder="Поиск..."
                         onChangeText={ this.props.onChangeSearch }
                         value={ this.props.searchValue }
                     />

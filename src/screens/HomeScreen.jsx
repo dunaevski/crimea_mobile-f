@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import styled from 'styled-components';
 import mockData from '../mockData';
+import * as _ from 'lodash';
 import { action, observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import Logo from 'components/Logo';
@@ -21,6 +22,8 @@ import NotificationButton from 'components/NotificationButton';
 import Notifications from 'components/Notifications';
 import { colors, sizes } from 'constants/theme';
 import { fetchUserInfo } from 'helpers/actions/profile';
+import { fetchWeather } from 'helpers/actions/mainData';
+import AsyncStorage from '@react-native-community/async-storage';
 
 @inject('UIStore', 'UserStore')
 @observer
@@ -31,7 +34,8 @@ class HomeScreen extends React.Component {
     @observable loaded = false;
     @observable scale = new Animated.Value(1);
     @observable opacity = new Animated.Value(1);
-    data = mockData;
+    @observable data = null;
+
 
     componentDidMount() {
         StatusBar.setBarStyle('dark-content', true);
@@ -40,19 +44,43 @@ class HomeScreen extends React.Component {
             StatusBar.setBarStyle('light-content', true);
         }
 
-        fetchUserInfo().then((response) => {
+        this.fetchUser().catch();
+        this.data = _.cloneDeep(mockData);
+
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.fetchUser();
+        this.toggleMenu();
+    }
+
+    async fetchUser() {
+        if (this.props.UIStore.isUserLogin && !this.props.UserStore.user.isSign) {
+            const response = await fetchUserInfo();
             if (response && response.results) {
                 this.props.UserStore.setUser({
                     isSign: true,
                     ...response.results[0],
                 });
             }
-        });
 
-    }
+            // await AsyncStorage.removeItem('weatherInfo')
+            const weatherInfo = JSON.parse(await AsyncStorage.getItem('weatherInfo'));
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        this.toggleMenu();
+            if (!weatherInfo) {
+                const responseWeather = await fetchWeather();
+                if (responseWeather && responseWeather.now) {
+                    this.props.UserStore.setWeather(responseWeather);
+                    try {
+                        await AsyncStorage.setItem('weatherInfo', JSON.stringify(responseWeather));
+                    } catch(e) {
+                        console.error(e)
+                    }
+                }
+            } else {
+                this.props.UserStore.setWeather(weatherInfo);
+            }
+        }
     }
 
     toggleMenu = () => {
@@ -97,7 +125,7 @@ class HomeScreen extends React.Component {
     @action
     handleAvatar = () => {
         const { UIStore, UserStore } = this.props;
-        const user = UserStore.getUser();
+        const user = UserStore.user;
 
         if (user.isSign) {
             UIStore.toggleMenu();
@@ -107,9 +135,19 @@ class HomeScreen extends React.Component {
         }
     };
 
+    @action
+    handleCity(e) {
+        this.data.logos.forEach((item, index) => {
+            item.active = index === e;
+        });
+    };
+
     render() {
         const { UIStore, UserStore } = this.props;
-        const user = UserStore.getUser();
+        const user = UserStore.user;
+
+        if (_.isEmpty(this.data)) return null;
+        const datas = _.cloneDeep(this.data);
         return (
             <RootView>
                 <Menu navigation={ this.props.navigation } />
@@ -140,7 +178,7 @@ class HomeScreen extends React.Component {
                                     <Avatar source={ { uri: user.picture ? user.picture.medium : user.defaultPhoto } } />
                                 </TouchableOpacity>
                                 <Title>Добро пожаловать,</Title>
-                                <Name>{ UserStore.fullName }!</Name>
+                                <Name>{ UIStore.isUserLogin ? UserStore.fullName : 'Анонимый Пользователь' }!</Name>
                                 <TouchableOpacity
                                     activeOpacity={ 0.7 }
                                     onPress={ () => UIStore.toggleNotification() }
@@ -166,13 +204,11 @@ class HomeScreen extends React.Component {
                                 showsHorizontalScrollIndicator={ false }
                             >
                                 { !this.loading ? (
-                                    this.data.logos.map((logo, index) => (
+                                    datas.logos.map((logo, index) => (
                                         <TouchableOpacity
                                             key={ index }
                                             activeOpacity={ 0.7 }
-                                            onPress={ () => {
-                                                alert('qwe');
-                                            } }
+                                            onPress={ () => this.handleCity(index) }
                                         >
                                             <Logo image={ logo.image } text={ logo.text } color={ this.getStyle(logo.active) } />
                                         </TouchableOpacity>
@@ -188,7 +224,7 @@ class HomeScreen extends React.Component {
                                     activeOpacity={ 0.7 }
                                     onPress={ () => {
                                         this.props.navigation.push('All', {
-                                            section: this.data.cards,
+                                            section: datas.cards,
                                         });
                                     } }
                                 >
@@ -204,7 +240,7 @@ class HomeScreen extends React.Component {
                                 showsHorizontalScrollIndicator={ false }
                             >
                                 { !this.loading ? (
-                                    this.data.cards.map((card, index) => (
+                                    datas.cards.map((card, index) => (
                                         <TouchableOpacity
                                             key={ index }
                                             activeOpacity={ 0.7 }
@@ -237,7 +273,7 @@ class HomeScreen extends React.Component {
 
                             <CoursesContainer>
                                 { !this.loading ? (
-                                    this.data.courses.map((course, index) => (
+                                    datas.courses.map((course, index) => (
                                         <TouchableOpacity
                                             key={ index }
                                             activeOpacity={ 0.7 }
@@ -260,7 +296,7 @@ class HomeScreen extends React.Component {
                                         </TouchableOpacity>
                                     ))
                                 ) : (
-                                    <Message>Loading...</Message>
+                                    <Message>Загрузка...</Message>
                                 ) }
                             </CoursesContainer>
                         </ScrollView>

@@ -9,12 +9,19 @@ import {
 import { SafeAreaView } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, sizes } from 'constants/theme';
-import { cards, article } from '../mockData';
+import { cards, article, category } from '../mockData';
 import Results from 'components/Results';
+import { fetchHotelsInfo, fetchHotelsPhotoId, getHotelsPhoto } from 'helpers/actions/hotels';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+import * as _ from 'lodash';
+import LottieView from 'lottie-react-native';
+
 
 const { width, height } = Dimensions.get('window');
 
 
+@observer
 class RecordScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -43,7 +50,51 @@ class RecordScreen extends React.Component {
         };
     };
 
+    @observable hotels = [];
+
+    componentDidMount() {
+        const { category } = this.props.navigation.state.params;
+        if (this.hotels.length === 0 && category.title === 'Отели') this.animation.play();
+
+        if (category && category.title === 'Отели' && !this.hotels.length) {
+            this.fetchHotels();
+        }
+    }
+
+    componentDidUpdate() {
+        const { category } = this.props.navigation.state.params;
+        if (category && category.title === 'Отели' && !this.hotels.length) {
+            this.fetchHotels();
+        }
+        // if (this.hotels.length === 0 && category.title === 'Отели' ) this.animation.play();
+    }
+
+    async fetchHotels() {
+        const responseHotelsInfo = await fetchHotelsInfo();
+
+        if (responseHotelsInfo.status === 'ok') {
+            for (const hotel of responseHotelsInfo.results.hotels) {
+
+                const responseHotelsPhotos = await fetchHotelsPhotoId(hotel.id);
+                const photoIds = responseHotelsPhotos[hotel.id];
+
+                const mainPhoto = await getHotelsPhoto(photoIds[0]);
+                this.hotels.push({
+                    title: hotel.label,
+                    image: { uri: mainPhoto.url },
+                    subtitle: 'Отели',
+                    caption: `Ялта, ${ hotel.locationName }`,
+                    logo: require('../../assets/yalta-logo.png'),
+                    favorite: true,
+                });
+            }
+        }
+    }
+
     render() {
+        const { category } = this.props.navigation.state.params;
+        const data = _.cloneDeep(this.hotels);
+
         return (
             <ScrollView>
                 <Container>
@@ -52,19 +103,37 @@ class RecordScreen extends React.Component {
                             source={ { uri: article.preview } }
                         />
                         <TextView>
-                            <Title>{ article.title }</Title>
-                            <SubTitle>({ article.reviews } reviews)</SubTitle>
+                            <Title>{ category.title }</Title>
+                            <SubTitle>{ category.subtitle }</SubTitle>
                         </TextView>
                     </ImagesView>
 
                     <Container>
                         <ResultsContainer>
-                            <Results
-                                picture={require('./../../assets/notfound3.png')}
-                                text={'Попробуйте поискать по другому или удалить фильтр'}
-                                navigation={ this.props.navigation }
-                                results={ cards }
-                            />
+                            {
+                                category.title === 'Отели' && !data.length ?
+                                    (
+                                        <LottieView
+                                            source={ require('./../../assets/loader.json') }
+                                            style={ {
+                                                width: 200,
+                                                height: 600,
+                                            } }
+                                            loop={ true }
+                                            ref={ animation => {
+                                                this.animation = animation;
+                                            } }
+                                        />
+                                    ) :
+                                    (
+                                        <Results
+                                            picture={ require('./../../assets/notfound3.png') }
+                                            text={ 'Попробуйте поискать по другому или удалить фильтр' }
+                                            navigation={ this.props.navigation }
+                                            results={ this.hotels.length === 0 && category.title !== 'Отели' ? cards : data }
+                                        />
+                                    )
+                            }
                         </ResultsContainer>
                     </Container>
                 </Container>

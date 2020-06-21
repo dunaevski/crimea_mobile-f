@@ -33,6 +33,7 @@ const Card = props => (
                     height: 30,
                 } }
                 activeOpacity={ 0.7 }
+
             >
                 <Ionicons
                     name={ props.favorite ? 'ios-heart' : 'ios-heart-empty' }

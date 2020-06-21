@@ -34,88 +34,132 @@ const logos = [
 // Определенное место
 export const cards = [
   {
-    title: 'Набережная имени Ленина',
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    title: 'Набережная Ялты',
+    image: { uri: 'http://turizm.sputnik.ru/attachments/68171e5bf6ef39be83297bf67be9944297a71471/store/limit_progressive/860/570/b3fdf6f3ff626e8f6b28d5ab2c29539128deae7eaf480f5d517e72785b62/image.jpg' },
     subtitle: 'Достопримечатльность',
     caption: 'Ялта',
     logo: require('../assets/yalta-logo.png'),
     favorite: true,
+    delta: '200 метров',
     content: `
         <body>
-<h2>How To Use</h2>
+<h1>14 интересных мест в Ялте</h1>
 
-<p>To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:</p>
-
-
-<h2> Clone this repository </h2>
-<strong$ git clone </strong> <a href="https://vk.com/dunaevski_a">https://github.com/</a>
-
-<h2> # Go into the repository</h2>
-<strong$ cd electron-markdownify</strong>
-
-<h2># Install dependencies</h2>
-<strong$ npm install</strong>
-
-<h2> # Run the app</h2>
-<strong$ npm start </strong>
-
-<p>Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use \`node\` from the command prompt.</p>
+<p>Музей под открытым небом и популярнейший пляжный курорт — такие полярные характеристики весьма успешно совмещает в себе солнечный город на Южном берегу Крыма. Императорские дворцы, чеховская «Дама с собачкой», легендарный «Артек», «Бал хризантем» в Никитском ботаническом саду, пьянящая Массандра… Диапазон образов Ялты невероятно широк, что в сочетании с роскошной природой даёт безграничный простор для самых разных видов туризма — от познавательного до экстремального. О том, какие драгоценные подарки преподносит своим гостям жемчужина Крыма — красавица Ялта — в нашем обзоре.</p>
 
 
-<h2>## Download</h2>
+<h2> Набережная имени Ленина </h2>
+<p>Самой посещаемой улицей в Крыму считается Набережная Ялты, протянувшаяся на километр вдоль Чёрного моря. В летний сезон количество гостей, посещающих просторную и нарядную ялтинскую набережную, достигает миллиона.
 
-<p>You can <a href="https://github.com/amitmerchant1990/electron-markdownify/releases/tag/v1.2.0">download</a> the latest installable version of Markdownify for Windows, macOS and Linux. </p>
+Сегодня одна из старейших улиц в городе представляет собой прекрасную прогулочную зону, где живописные приморские пейзажи дополняет эффектное рукотворное оформление, а исторические достопримечательности сочетаются с последними достижениями в области курортной индустрии. Набережная является средоточием многочисленных аттракционов, кафе и ресторанов, магазинов и бутиков. Здесь находится легендарная гостиница «Таврида», в которой в разное время останавливались Некрасов, Чехов, Бунин, Маяковский, Станиславский, Шаляпин и другие выдающиеся деятели искусства и культуры.
+<img src="https://img.localway.ru/scaled/guide/460/655160/820x0.jpg" alt="img">
 
-<h2>## Emailware</h2>
+Архитектурный облик набережной отличается стилевым разнообразием. Современные и старинные постройки окружены пальмами. Под кронами тенистых деревьев установлены удобные лавочки. Особенно красива набережная в вечернее время, когда побережье заливает мягкий и приятный свет обрамляющих его фонарей.
 
-<img src="https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif" alt="img">
+У Набережной расположены причалы, от которых можно совершить увлекательное путешествие вдоль Южного берега Крыма. Отсюда начинается и канатная дорога «Ялта — Горка», ведущая на холм Дарсан. Со смотровой площадки холма открывается чудесный вид на город.</p>
+<a href="https://vk.com/dunaevski_a"><button class='button -salmon center'>Открть на карте</button></a>
+
+<h2> Собор Святого Александра Невского </h2>
+<p> Неподалёку от Набережной находится главный православный храм Ялты — собор святого Александра Невского. Строительство грандиозного культового сооружения приходится на рубеж XIX — XX веков. В закладке храма участвовала императрица Мария Фёдоровна, а его освещение состоялось уже при Николае II. Сам собор был посвящён памяти царя-освободителя Александра II, убитого народовольцами.
+
+Архитектурное сооружение напоминает лучшие московские храмы XVII столетия. Двухъярусный квадратный в плане храм и высокая трехъярусная колокольня обильно декорированы элементами, характерными для русского узорочья: порталами, пилястрами, сердечками и киотцами, шатровым крыльцом. Южный фасад собора украшает киот с мозаичной иконой Александра Невского, автором которой стал венецианский художник Антонио Сальвиати. Особую выразительность придаёт цветовая гамма фасадов — розовый (персиковый) с белым. Венчают собор пять золочёных луковичных глав. Восхищает и внутреннее убранство храма. Здесь можно увидеть золоченый резной иконостас, расписные купола и стены в византийском стиле, уникальные иконы, написанные владимирскими мастерами.
+<img src="https://img.localway.ru/scaled/guide/460/655161/820x0.jpg" alt="img">
+
+В настоящее время собор является действующим, в нём ежедневно совершаются богослужения. </p>
+<a href="https://vk.com/dunaevski_a"><button class='button -salmon center'>Открть на карте</button></a>
+
+
+<h2>Массандровский дворец</h2>
+<p> других крымских резиденций (Ливадийского и Воронцовского дворцов) Массандровский дворец, возведённый на рубеже XIX-XX веков, отличается прежде всего своей камерностью и своеобразным, поистине уникальным архитектурным решением. Фигурные островерхие крыши и башенки, открытые террасы, балюстрады, резные фронтоны формируют неповторимый романтический облик здания.
+
+Небольшой сказочный замок, до революции принадлежавший российским императорам, а во второй половине прошлого столетия являвшийся государственной дачей для высших руководителей страны, вот уже почти четверть века существует как музей. Сегодня любой желающий может не только наблюдать необычайно выразительные фасады Массандровского дворца, но и познакомиться с его интерьерами. Каждому из помещений соответствует определённый художественный образ. Переходя из зала в зал, попадаешь то в строгую приемную Императора, то в нарядную гостиную Императрицы, то в роскошную столовую, представляющую собой старинный рыцарский зал.
+<img src="https://img.localway.ru/scaled/guide/460/655162/820x0.jpg" alt="img">
+
+На первых двух этажах исторического здания находится постоянно действующая экспозиция, посвящённая дворцовому интерьеру второй половины XIX столетия. Посетители смогут осмотреть восстановленные элементы декоративного убранства — резьбу, лепнину, красочные изразцы, необычные техники росписи, а также сохранившиеся до наших дней зеркала и дворцовую мебель. На третьем этаже представлена художественная выставка. Вокруг Дворца располагается заложенный ещё в XIX веке пейзажный парк с цветниками и различными видами южных растений.
+
+Стоимость посещения основной экспозиции Дворца: для взрослых — 300 рублей, для детей — 150 рублей</p>
+<a href="https://vk.com/dunaevski_a"><button class='button -salmon center'>Открть на карте</button></a>
+
+
+<h2>Дом Чехова</h2>
+
+<p>Литературно-мемориальный музей располагается в здании, являющемся национальным памятником. Это бывшая дача Антона Павловича Чехова. Здесь великий русский драматург провёл последние годы своей жизни, здесь были написаны его знаменитые произведения — пьесы «Три сестры» и «Вишнёвый сад», рассказ «Дама с собачкой».
+
+Дача, включающая небольшой уютный особняк в стиле модерн и флигель, была построена в 1899 году при непосредственном участии писателя. Современники Чехова называли его светлый дом «Белой дачей». За период пребывания Антона Павловича в Ялте, у него в гостях бывали такие выдающиеся деятели своего времени, как В. Короленко М. Горький, И. Левитан, К. Станиславский, В. Немирович-Данченко, С. Рахманинов, Ф. Шаляпин и многие другие.
+<img src="https://img.localway.ru/scaled/guide/460/655163/820x0.jpg" alt="img">
+
+Своим существованием музей обязан сестре писателя Марии Павловне Чеховой, сыгравшей огромную роль в сохранении дома в его первозданном виде. Обстановка помещений — спальни, столовой, кабинета, наличие подлинных экспонатов помогают представить ту атмосферу, в которой жил и работал А.П. Чехов, атмосферу начала XX столетия. Сегодня здесь размещены экспозиции, раскрывающие подробности его биографии и творчества.
+
+Помимо экскурсий в музее проводятся выставки, литературно-музыкальные и театральные вечера, ежегодно проходит Международная научно-практическая конференция «Чеховские чтения в Ялте».
+
+Стоимость входного билета: 200 рублей, имеются льготы</p>
+
+<a href="https://vk.com/dunaevski_a"><button class='button -salmon center'>Открть на карте</button></a>
+
+<h2>Ласточкино гнездо</h2>
+
+<p>Неоготический замок на краю отвесной 40-метровой скалы стал одним из самых узнаваемых символов Крыма. Миниатюрный дворец, возведённый в 1912 году на месте своего деревянного предшественника, принадлежал немецкому нефтепромышленнику барону П. Штейнгелю, любившему отдыхать в Крыму. Проект каменной дачи выполнил столичный скульптор Леонид Шервуд, сын известного русского архитектора Владимира Шервуда.
+<img src="https://img.localway.ru/scaled/guide/460/655164/820x0.jpg" alt="img">
+
+Позднее здание было приспособлено под ресторан, радовавший своих посетителей великолепными панорамными видами. И только в 2011 году историко-архитектурный памятник стал культурным учреждением. Помещения замка были преобразованы в экспозиционные залы, где ныне проходят сменные выставки различных направлений — художественные, археологические, краеведческие. Традиционно здесь проводятся экскурсии, повествующие об истории замка и мыса Ай-Тодор, на котором он расположен. В летний период на территории «Ласточкиного гнезда» осуществляются различные культурные мероприятия — спектакли, концерты, вернисажи, мастер-классы. </p>
+
+<a href="https://vk.com/dunaevski_a"><button class='button -salmon center'>Открть на карте</button></a>
+
+<h2>Ливадийский дворец</h2>
+
+<p>Роскошный дворцовый комплекс с огромным ландшафтным парком является главной достопримечательностью ближайшего пригорода Ялты — Ливадии, которая в 1860-х годах приглянулась российскому императору Александру II. Именно с этого времени начинается история резиденции, куда ежегодно приезжали отдыхать семьи трех последних русских царей. Нельзя не отметить, что создание Ливадийского дворца стимулировало к развитию и город. Вслед за императорами в Крым потянулась аристократия. Так, к концу XIX столетия Ялта превратилась в престижный морской курорт.
+
+Сохранившееся до наших дней архитектурное сооружение — так называемый Белый дворец — был построен в 1911 году на месте обветшавшего Большого царского дворца, существовавшего с 1861 года. Белокаменное здание в стиле итальянского ренессанса знаменито не только своей архитектурой. Это последний дворец Романовых, а также место, где в феврале 1945 проходила Ялтинская конференция трёх союзных держав антигитлеровской коалиции — встреча Иосифа Сталина, Уинстона Черчилля и Франклина Рузвельта.
+<img src="https://img.localway.ru/scaled/guide/460/655165/820x0.jpg" alt="img">
+
+Сегодня бывшая императорская резиденция открыта для посещения. В двенадцати помещениях здания воссозданы дворцовые интерьеры. В музее размещены экспозиции, посвящённые отечественной истории и династии Романовых. Особый интерес представляет живописный Итальянский дворик с сохранившимися сооружениями периода царского имения.
+
+Стоимость обзорной экскурсии по Ливадийскому дворцу: 350 рублей, имеются льготы</p>
+
 </body>
         `,
   },
   {
-    title: 'Styled Components',
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
-    subtitle: 'React Native',
-    caption: '2 of 12 sections',
+    title: 'Ливодийский Дворец',
+    image: { uri: 'https://img.localway.ru/scaled/poi/322682/652269/544x286.jpg' },
+    subtitle: 'Достопримечатльность',
+    caption: 'Ялта',
     favorite: false,
     logo: require('../assets/yalta-logo.png'),
   },
   {
-    title: 'Props and Icons',
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
-    subtitle: 'React Native',
-    caption: '3 of 12 sections',
+    title: 'Ласточкино гнездо',
+    image: { uri: 'https://img.localway.ru/scaled/poi/322689/652735/544x286.jpg' },
+    subtitle: 'Достопримечатльность',
+    caption: 'Ялта',
     logo: require('../assets/yalta-logo.png'),
   },
   {
-    title: 'Static Data and Loop',
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
-    subtitle: 'React Native',
-    caption: '4 of 12 sections',
+    title: 'Массандровский пляж',
+    image: { uri: 'https://img.localway.ru/scaled/poi/322977/644280/544x286.jpg' },
+    subtitle: 'Пляж',
+    caption: 'Ялта',
     logo: require('../assets/yalta-logo.png'),
   },
-
   {
-    title: 'Static Data and Loop',
+    title: 'Винные погреба Массандровского завода',
     image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
-    subtitle: 'React Native',
-    caption: '4 of 12 sections',
+    subtitle: 'Достопримечатльность',
+    caption: 'Ялта',
     logo: require('../assets/yalta-logo.png'),
   },
-
   {
-    title: 'Static Data and Loop',
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
-    subtitle: 'React Native',
-    caption: '4 of 12 sections',
+    title: 'История',
+    image: { uri: 'https://img.localway.ru/scaled/poi/323350/694927/544x286.jpg' },
+    subtitle: 'Ночная жизнь',
+    caption: 'Ялта',
     logo: require('../assets/yalta-logo.png'),
   },
-
   {
-    title: 'Static Data and Loop',
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
-    subtitle: 'React Native',
-    caption: '4 of 12 sections',
+    title: 'Ялта-Интурист',
+    image: { uri: 'https://img.localway.ru/scaled/poi/324314/652078/544x286.jpg' },
+    subtitle: 'Отели',
+    caption: 'Ялта',
     logo: require('../assets/yalta-logo.png'),
   },
 ];
@@ -123,34 +167,34 @@ export const cards = [
 // Подборки определенных мест
 export const sections = [
   {
-    title: 'React Native for Designers',
+    title: '14 интересных мест в Ялте',
     progress: 0.2,
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    image: { uri: 'https://source.unsplash.com/1600x900/?sea' },
     category: 'Рестораны',
   },
   {
-    title: 'Styled Components',
+    title: '5 причин посетить лучшие места коктебеля',
     progress: 0.3,
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    image: { uri: 'https://source.unsplash.com/1600x900/?mount' },
     category: 'Достопримечательности',
     isFavorite: true,
   },
   {
-    title: 'Icons and SVG',
+    title: '17 мест в Крму где снимали известные кинофильмы',
     progress: 0.9,
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature' },
     category: 'Пляжи',
   },
   {
-    title: 'Props and Data',
+    title: '7 лучших мест Алушты',
     progress: 0.5,
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    image: { uri: 'https://source.unsplash.com/random' },
     category: 'Море',
   },
   {
-    title: 'States and Layout Animation',
+    title: '10 достопримечательностей и развлечений за один день в Ялте',
     progress: 0.1,
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    image: { uri: 'https://source.unsplash.com/random' },
     category: 'Крым',
   },
 ];
@@ -158,41 +202,41 @@ export const sections = [
 // Гиды
 export const courses = [
   {
+    title: '14 интересных мест в Ялте',
+    subtitle: 'Ялта',
+    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
+    logo: require('../assets/yalta-logo.png'),
+    author: 'Ирина Терешкова',
+    avatar: require('../assets/avatar.jpg'),
+    caption: 'Южный Берег Крыма за последние пару столетий заслужил репутацию прекрасного курорта. Климат и ландшафт являются основными лечебными факторами, которые использовали врачи за долгое время его существования и развития.',
+  },
+  {
     title: '7 лучших мест Алушты',
     subtitle: 'Алушта',
     image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
     logo: require('../assets/alushta-logo.png'),
     author: 'Ирина Терешкова',
     avatar: require('../assets/avatar.jpg'),
-    caption: 'Design and interactive prototype',
+    caption: 'Крым всегда был очень съемочным местом. В первую очередь из-за возможностей выбора натуры: от готических подвалов до высокогорных равнин, от лазурного моря до заснеженных лесов, от гламурных клубов до грязных трущоб.',
   },
   {
-    title: 'React for Designers',
-    subtitle: '12 sections',
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
-    logo: require('../assets/simf-logo.png'),
-    author: 'Meng To',
-    avatar: require('../assets/avatar.jpg'),
-    caption: 'Learn to design and code a React site',
-  },
-  {
-    title: 'Design and Code with Framer X',
-    subtitle: '10 sections',
+    title: '5 причин посетить лучшие места коктебеля',
+    subtitle: 'Крым',
     image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
     logo: require('../assets/evpatoria-logo.png'),
-    author: 'Meng To',
+    author: 'Ирина Терешкова',
     avatar: require('../assets/avatar.jpg'),
-    caption: 'Create powerful design and code components for your app',
+    caption: 'Лето в разгаре, погода стоит прекрасная и проводить свободное время в четырех стенах — настоящее преступление. Хорошо, что можно даже прием пищи перенести на опен-эйр, пикники любят и взрослые и дети — это прекрасная возможность отметить праздник или организовать свидание. Какое место хорошо подходит для шумной компании, а какое идеально для двоих, разобраться поможет наш гид.',
   },
   {
-    title: 'Design System in Figma',
-    subtitle: '10 sections',
+    title: '17 мест в Крму где снимали известные кинофильмы',
+    subtitle: 'Крым',
     image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
     logo: require('../assets/feodos-logo.png'),
-    author: 'Meng To',
+    author: 'Ирина Терешкова',
     avatar: require('../assets/avatar.jpg'),
     caption:
-        'Complete guide to designing a site using a collaborative design tool',
+        'Эта нестандартная экскурсия предполагает, что основные достопримечательности Ялты (Ласточкино гнездо, Ливадийский и Воронцовский дворцы) вы уже видели. Самые впечатляющие виды Большой Ялты можно уместить в один осенний день, если начать с восточных пригородов, поселков Никита, Гурзуф и Массандра.',
   },
 ];
 
@@ -223,56 +267,52 @@ export const menuItems = [
 // Уведомления
 export const notificationItems = [
   {
-    logo: 'https://cl.ly/a4d00a918f39/download/logo-vue.png',
-    title: 'Vue.js for Designers',
-    text:
-        'Make a dashboard web-app with a complete login system, dark mode, and animated charts for your data.',
-    date: '23 Jan',
+    logo: require('../assets/yalta-logo.png'),
+    title: 'Ялта',
+    text:  'Онлайн-викторина «Поляна сказок» КРЫМСКАЯ РЕСПУБЛИКАНСКАЯ УНИВЕРСАЛЬНАЯ НАУЧНАЯ БИБЛИОТЕКА ИМ. И. Я. ФРАНКО',
+    date: '26 ИЮН',
   },
   {
-    logo: 'https://cl.ly/5c470805a500/download/logo-invision.png',
-    title: 'InVision Studio',
+    logo: require('../assets/sevas-logo.png'),
+    title: 'Севастополь',
     text:
-        'Learn how to prototype interactions directly in the design tool in this 10-section course.',
-    date: '27 Nov',
+        'Виртуальная выставка «Наследие крымских болгар» КРЫМСКИЙ ЭТНОГРАФИЧЕСКИЙ МУЗЕ.',
+    date: '30 ИЮН',
   },
   {
-    logo: 'https://cl.ly/cc8368bef551/download/logo-framerx.png',
-    title: 'Framer X',
-    text: 'Create production-ready React components right in the design tool.',
-    date: '26 SEP',
+    logo: require('../assets/evpatoria-logo.png'),
+    title: 'Евпатория',
+    text: 'Виртуальная выставка «Наследие крымских болгар» КРЫМСКИЙ ЭТНОГРАФИЧЕСКИЙ МУЗЕЙ',
+    date: '4 ИЮЛ',
   },
   {
-    logo: 'https://cl.ly/c01bb29804bd/download/logo-figma.png',
-    title: 'Design System',
-    text:
-        'Complete guide to designing a site using a collaborative and powerful design system.',
-    date: '4 SEP',
+    logo:  require('../assets/yalta-logo.png'),
+    title: 'Ялта',
+    text: 'День города Ялта. Программа праздничных мероприятий 2020. Основные события пройдут 10 августа на набережной. Праздник начнется в 9 утра с торжественного марша спортсменов, который также приурочен ко Дню физкультурника',
+    date: '8 АВГ',
   },
 ];
 
 // Random
 export const projects = [
   {
-    title: 'Price Tag',
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
-    author: 'Liu Yi',
+    title: 'Ай-Петри',
+    image: { uri: 'https://img.localway.ru/scaled/poi/322676/651871/544x286.jpg' },
+    author: 'ДОСТОПРИМЕЧАТЕЛЬНОСТЬ',
     text:
-        'Thanks to Design+Code, I improved my design skill and learned to do animations for my app Price Tag, a top news app in China.Thanks to Design+Code, I improved my design skill and learned to do animations for my app Price Tag, a top news app in China.Thanks to Design+Code, I improved my design skill and learned to do animations for my app Price Tag, a top news app in China.',
+        'В 15 километрах от Ялты, неподалеку от поселка Кореиз возвышается одна из самых популярных среди туристов вершин Крыма — Ай-Петри — это южная точка Ай-Петринской яйлы. Среди причудливых зубцов скал различают три вершины — Главную, высотой 1231 метр над уровнем моря, Западную и Восточную. Ай-Петри считается самым ветреным местом полуострова, также вершина славится самым большим количеством туманных дней в году.',
   },
   {
-    title: 'The DM App - Ananoumous Chat',
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
-    author: 'Chad Goodman',
-    text:
-        'Design+Code was the first resource I used when breaking into software. I went from knowing nothing about design or code to building a production ready app from scratch. ',
+    title: 'Ливадийский дворец',
+    image: { uri: 'https://img.localway.ru/scaled/poi/322682/652269/544x286.jpg' },
+    author: 'ДОСТОПРИМЕЧАТЕЛЬНОСТЬ',
+    text: 'В трех километрах от Ялты, на берегу моря лежит поселок Левадия, главной достопримечательностью которого является бывшая летняя резиденция членов императорской семьи. История дворца берет свое начало в 1834 году, когда Ливадию выкупил у греков поляк Л. Потоцкий, который построил здесь богатый особняк, а вокруг него разбил парк. В 1860 году Ливадией владели уже Романовы, по желанию императрицы архитектор Монигетти начала перестраивать дворец Потоцкого, тогда же был возведен и Малый дворец, предназначавшийся для наследника и ряд других построек, в том числе Крестовоздвиженская церковь.'
   },
   {
-    title: 'Nikhiljay',
-    image: { uri: 'https://source.unsplash.com/1600x900/?nature,sea,mount' },
-    author: 'Nikhil D\'Souza',
-    text:
-        'Recently finished the React course by @Mengto, and I 10/10 would recommend. I already rewrote my personal website in @reactjs and I\'m very excited with it.',
+    title: 'Воронцовский дворец',
+    image: { uri: 'https://img.localway.ru/scaled/poi/322681/652234/544x286.jpg' },
+    author: 'ДОСТОПРИМЕЧАТЕЛЬНОСТЬ',
+    text: 'Около 12 километров разделяют Ялту и Алупку, где у подножия горы Ай-Петри располагается великолепный дворец генерал-губернатора Новороссийского края графа М.С. Воронцова. Он был построен в 1828–1848 годах по проекту известного английского архитектора Эдварда Блора. Бытует мнение, что сам Блор никогда не приезжал в Крым, а столь удачный проект, идеально подошедший под горный рельеф, называли «озарением зодчего». Однако этому факту нет ни подтверждения, ни опровержения, предполагается, что проектировщик все-таки был на месте будущего строительства. Руководил работами другой архитектор — Уильям Гунт.'
   },
 ];
 
@@ -344,20 +384,19 @@ export const article = {
     avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
   },
   saved: true,
-  location: 'Santorini, Greece',
+  location: 'Набережная Ялты, Ялта',
   temperature: 34,
-  title: 'Santorini',
+  title: 'Набережная Ялты',
   description:
-      'Santorini is one of the Cyclades islands in the Aegean Sea. It was devastated by a volcanic eruption in the 16th century BC, forever shaping its rugged landscape. The whitewashed, cubiform houses of its 2 principal towns, Fira and Oia, cling to cliffs above an underwater caldera (crater). They overlook the sea, small islands to the west and beaches made up of black, red and white lava pebbles.',
+      '«Главная по прогулкам» в городе, набережная Ялты протянулась на километр вдоль живописного берега Чёрного моря. Это одна из старейших улиц города, что свидетельствует о том, что ялтинцы и гости города уже не первый век предпочитают дышать свежим морским воздухом. Свою историю ялтинская набережная ведёт с 1886 года, на ней было построено множество достопримечательностей, отсюда же начинается канатная дорога на холм Дарсан. Айседора Дункан, Некрасов, Бунини, Чехов, Горький — вот лишь немногие известные люди, запечатлевшие набережную Ялты в своих произведениях — и своей жизни. Наконец, лучшие рестораны и дискотеки также располагаются на ялтинской набережной.',
   rating: 4.3,
   reviews: 3212,
   preview:
       'https://images.unsplash.com/photo-1507501336603-6e31db2be093?auto=format&fit=crop&w=800&q=80',
   images: [
-    'https://source.unsplash.com/1600x900/?nature,water',
-    'https://source.unsplash.com/1600x900/?nature,water',
-    'https://source.unsplash.com/1600x900/?nature,water',
-    'https://source.unsplash.com/1600x900/?nature,water',
+    'https://images.unsplash.com/photo-1578088564082-b971246231f4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=900&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=1600',
+    'https://anashina.com/wp-content/uploads/2018/11/IMG_3882-1400x600.jpg',
+    'https://source.unsplash.com/user/catherinla/1600x901',
   ],
 };
 

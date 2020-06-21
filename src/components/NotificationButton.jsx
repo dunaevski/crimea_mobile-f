@@ -7,7 +7,7 @@ const NotificationButton = () => (
     <Container>
         <NotificationIcon />
         <Bubble>
-            <Text>3</Text>
+            <Text>4</Text>
         </Bubble>
     </Container>
 );

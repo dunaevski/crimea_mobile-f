@@ -34,7 +34,6 @@ const randColor = (itemIndex) => {
     else {
         colorIndex = itemIndex;
     }
-    console.log(randomColor[colorIndex]);
     return randomColor[colorIndex];
 };
 

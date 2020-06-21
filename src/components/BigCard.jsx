@@ -53,8 +53,8 @@ class BigCard extends React.Component {
                 </Cover>
                 <Content>
                     <Avatar source={ this.props.avatar } />
-                    <Caption>{ this.props.caption }</Caption>
-                    <Author>Автор: { this.props.author }</Author>
+                    <Caption>{ this.props.caption.length > 60 ? this.props.caption.slice(0, 60) + '...' : this.props.caption}</Caption>
+                    <Author> { this.props.author ? 'Автор:' + this.props.author : this.props.delta }</Author>
                 </Content>
             </Container>
         );
@@ -121,6 +121,7 @@ const Subtitle = styled.Text`
 
 const Content = styled.View`
   padding-left: 67px;
+  padding-right: 10px;
   justify-content: center;
   height: 75px;
 `;

@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from 'screens/HomeScreen';
 import SectionScreen from 'screens/SectionScreen';
-import CoursesScreen from 'screens/CoursesScreen';
+import FavoriteScreen from 'screens/FavoriteScreen';
 import SwipeScreen from 'screens/SwipeScreen';
 import VideoScreen from 'screens/VideoScreen';
 import SearchScreen from 'screens/SearchScreen';
@@ -71,14 +71,14 @@ SearchStack.navigationOptions = {
 };
 
 const CoursesStack = createStackNavigator({
-    Courses: CoursesScreen,
+    Courses: FavoriteScreen,
 });
 
 CoursesStack.navigationOptions = {
     tabBarLabel: 'Courses',
     tabBarIcon: ({ focused }) => (
         <Ionicons
-            name="ios-folder"
+            name="ios-heart"
             size={ 28 }
             color={ focused ? activeColor : inactiveColor }
         />

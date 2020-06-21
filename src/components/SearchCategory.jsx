@@ -78,7 +78,7 @@ export default class SearchCategory extends Component {
                             activeOpacity={ 0.7 }
                             onPress={ () => {
                                 this.props.navigation.push('Category', {
-                                    article,
+                                    category: item
                                 });
                             } }
                         >

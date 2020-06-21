@@ -53,7 +53,6 @@ class SectionScreen extends Component {
   render() {
     const { navigation } = this.props;
     const section = sections[0];
-
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
         <Container>
@@ -110,16 +109,23 @@ const htmlStyles = `
       padding: 0;
       font-size: 30px;
       font-weight: normal;
-      color: ${ colors.textGray };
+      color: ${colors.textGray};
       line-height: 40px;
     }
     body {
-          background-color: ${ colors.white };
+          background-color: ${colors.white};
+    }
+     h1 {
+      font-size: 50px;
+      text-transform: uppercase;
+      color: ${colors.black};
+      font-weight: bold;
+      margin-top: 50px;
     }
     h2 {
       font-size: 40px;
       text-transform: uppercase;
-      color: ${ colors.textGray2 };
+      color: ${colors.textGray2};
       font-weight: 600;
       margin-top: 50px;
     }
@@ -129,7 +135,7 @@ const htmlStyles = `
     }
   
     a {
-      color: ${ colors.blue };
+      color: ${colors.blue};
       font-weight: 600;
       text-decoration: none;
     }
@@ -142,11 +148,43 @@ const htmlStyles = `
       border-radius: 10px;
       margin-top: 20px;
     }
+    
+    .button {
+      display: flex;
+      overflow: hidden;
+      
+      color: #FFFFFF;
+      background: #F32C52;
+    
+      margin: 20px;
+      padding: 22px 22px;
+    
+      cursor: pointer;
+      user-select: none;
+      transition: all 150ms linear;
+      text-align: center;
+      white-space: nowrap;
+      text-decoration: none !important;
+    
+      border: 0 none;
+      border-radius: 36px;
+    
+      font-size: 43px;
+      font-weight: 500;
+      line-height: 2;
+    
+     
+      justify-content: center;
+      align-items: center;
+      
+      box-shadow: 2px 5px 10px #e4e4e4;
+   
+    }
     </style>
 `;
 
 const Content = styled.View`
-  height: 1000px;
+  height: 10000px;
   padding: 20px;
 `;
 
